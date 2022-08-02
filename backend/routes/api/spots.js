@@ -1,6 +1,6 @@
 const express = require('express');
 const { JsonWebTokenError } = require('jsonwebtoken');
-const { Spot, User } = require('../../db/models');
+const { Spot, User, Review } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 
 const router = express.Router();
@@ -34,6 +34,25 @@ router.get('/:spotId', async (req, res) => {
     }
     res.status(200);
     return res.json(spot);
+});
+
+router.get('/:spotId/reviews', async (req, res) => {
+    const id = req.params.spotId;
+    const reviews = await Review.findAll({
+        include: [{ model: User, attributes: ['id', 'username'] }],
+        where: {
+            spotId: id
+        }
+    });
+    if (!reviews) {
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        });
+    }
+    res.status(200);
+    return res.json({ "Reviews": reviews });
 })
 
 
