@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
       Spot.belongsToMany(
         models.User, { through: models.Review }
       );
+      Spot.belongsToMany(
+        models.User, { through: models.Image }
+      );
     }
   }
   Spot.init({
