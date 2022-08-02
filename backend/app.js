@@ -47,6 +47,15 @@ const routes = require('./routes');
 
 app.use(routes); // Connect all the routes
 
+app.use('/users', require('./routes/api/users'));
+app.use('/spots', require('./routes/api/spots'));
+
+app.get('/', (req, res) => {
+    res.status(200)
+    res.json({
+        "message": "api server is running"
+    });
+});
 
 
 // Catch unhandled requests and forward to error handler.
