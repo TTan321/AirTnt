@@ -20,21 +20,23 @@ router.get('/', async (req, res) => {
         group: ['spot.id']
     });
 
-    // lazy loading
-    // const spots = await Spot.findAll({
-    //     attributes: {
-    //         include: [
-    //             [sequelize.fn("AVG", sequelize.col("Reviews.stars")), 'avgRating']
-    //         ]
-    //     }
-    // })
-
     res.status(200);
     return res.json({ "Spots": spots });
 })
 
 router.get('/current', requireAuth, async (req, res) => {
     const spots = await Spot.findAll({
+        attributes: {
+            include: [
+                [Sequelize.literal('Images.url'), 'previewImage'],
+                [Sequelize.fn('avg', Sequelize.col('Reviews.stars')), 'avgRating']
+            ]
+        },
+        include: [
+            { model: Review, attributes: [] },
+            { model: Image, attributes: [] }
+        ],
+        group: ['spot.id'],
         where: {
             ownerId: req.user.id
         }
