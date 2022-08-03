@@ -22,17 +22,14 @@ module.exports = {
       city: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
       },
       state: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
       },
       country: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
       },
       lat: {
         type: Sequelize.DECIMAL,

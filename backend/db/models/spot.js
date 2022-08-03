@@ -43,17 +43,14 @@ module.exports = (sequelize, DataTypes) => {
     city: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
     },
     state: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
     },
     country: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
     },
     lat: {
       type: DataTypes.DECIMAL,
