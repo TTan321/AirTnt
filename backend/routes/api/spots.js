@@ -100,6 +100,106 @@ router.post('/', requireAuth, async (req, res) => {
     return res.json(newSpot);
 });
 
+router.post('/:spotId/images', requireAuth, async (req, res) => {
+    const spot = await Spot.findByPk(req.params.spotId);
+    if (!spot) {
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        });
+    }
+    else if (req.user.id !== spot.ownerId) {
+        res.status(403);
+        return res.json({
+            "message": "Forbidden",
+            "statusCode": 403
+        });
+    }
+    const reviewsId = await Review.findOne({
+        where: { spotId: req.params.spotId }
+    })
+    const usersId = req.user.id;
+    const spotId = parseInt(req.params.spotId);
+    const { url } = req.body;
+
+    // const newImage = await Image.create({
+    //     url, previewImage: true, spotId: spotId, reviewId: reviewsId.spotId, userId: usersId
+    // });
+    const image = await Image.findAll();
+    res.status(200)
+    return res.json(image.id)
+});
+
+// edit a spot
+router.put('/:spotId', requireAuth, async (req, res) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const spot = await Spot.findByPk(req.params.spotId);
+    if (!spot) {
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        });
+    }
+    else if (req.user.id !== spot.ownerId) {
+        res.status(403);
+        return res.json({
+            "message": "Forbidden",
+            "statusCode": 403
+        });
+    }
+    if (!address || !city || !state || !country || !lat || !lng || !name || !description || !price) {
+        res.status(400);
+        return res.json({
+            "message": "Validation Error",
+            "statusCode": 400,
+            "errors": {
+                "address": "Street address is required",
+                "city": "City is required",
+                "state": "State is required",
+                "country": "Country is required",
+                "lat": "Latitude is not valid",
+                "lng": "Longitude is not valid",
+                "name": "Name must be less than 50 characters",
+                "description": "Description is required",
+                "price": "Price per day is required"
+            }
+        });
+    }
+
+    spot.update({
+        address, city, state, country, lat, lng, name, description, price
+    })
+
+    res.status(200);
+    return res.json(spot);
+});
+
+router.delete('/:spotId', requireAuth, async (req, res) => {
+    const spot = await Spot.findByPk(req.params.spotId);
+    if (!spot) {
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        });
+    }
+    else if (req.user.id !== spot.ownerId) {
+        res.status(403);
+        return res.json({
+            "message": "Forbidden",
+            "statusCode": 403
+        });
+    }
+    await spot.destroy();
+    res.status(200);
+    return res.json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+    });
+});
+
 router.get('/:spotId/reviews', async (req, res) => {
     const id = req.params.spotId;
     const reviews = await Review.findAll({
