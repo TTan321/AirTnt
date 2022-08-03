@@ -16,27 +16,33 @@ module.exports = {
       },
       address: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
       },
       city: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
       },
       state: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
       },
       country: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
       },
       lat: {
         type: Sequelize.DECIMAL,
-        allowNull: false
+        allowNull: false,
+        unique: true
       },
       lng: {
         type: Sequelize.DECIMAL,
-        allowNull: false
+        allowNull: false,
+        unique: true
       },
       name: {
         type: Sequelize.STRING,

@@ -69,6 +69,17 @@ router.get('/:spotId', async (req, res) => {
     return res.json(spot);
 });
 
+router.post('/', requireAuth, async (req, res) => {
+    const ownersId = req.user.id;
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const newSpot = await Spot.create({
+        ownerId: ownersId, address, city, state, country, lat, lng, name, description, price
+    })
+
+    res.status(201);
+    return res.json(newSpot)
+})
+
 router.get('/:spotId/reviews', async (req, res) => {
     const id = req.params.spotId;
     const reviews = await Review.findAll({
