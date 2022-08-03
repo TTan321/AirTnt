@@ -72,13 +72,33 @@ router.get('/:spotId', async (req, res) => {
 router.post('/', requireAuth, async (req, res) => {
     const ownersId = req.user.id;
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+    if (!address || !city || !state || !country || !lat || !lng || !name || !description || !price) {
+        res.status(400);
+        return res.json({
+            "message": "Validation Error",
+            "statusCode": 400,
+            "errors": {
+                "address": "Street address is required",
+                "city": "City is required",
+                "state": "State is required",
+                "country": "Country is required",
+                "lat": "Latitude is not valid",
+                "lng": "Longitude is not valid",
+                "name": "Name must be less than 50 characters",
+                "description": "Description is required",
+                "price": "Price per day is required"
+            }
+        });
+    }
+
     const newSpot = await Spot.create({
         ownerId: ownersId, address, city, state, country, lat, lng, name, description, price
     })
 
     res.status(201);
-    return res.json(newSpot)
-})
+    return res.json(newSpot);
+});
 
 router.get('/:spotId/reviews', async (req, res) => {
     const id = req.params.spotId;
