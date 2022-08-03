@@ -1,6 +1,6 @@
 const express = require('express');
 const { JsonWebTokenError } = require('jsonwebtoken');
-const { Spot, User, Review, Image, Sequelize } = require('../../db/models');
+const { Spot, User, Review, Image, Sequelize, sequelize } = require('../../db/models');
 const { requireAuth, restoreUser } = require('../../utils/auth');
 
 const router = express.Router();
@@ -49,19 +49,15 @@ router.get('/current', requireAuth, async (req, res) => {
 router.get('/:spotId', async (req, res) => {
     const id = req.params.spotId;
     const spot = await Spot.findOne({
-        // include: [
-        //     { model: Image, attributes: ['id', "url"] },
-        //     { model: User, attributes: ['id', 'username'] }],
+        include: [
+            { model: Image, attributes: ['id', [sequelize.literal('Images.id'), 'imageableId'], 'url',] },
+            { model: User, as: 'Owner', attributes: ['id', 'firstName', 'lastName'] }
+        ],
         where: {
             id: id
         }
     });
-    const owner = User.findOne({
-        attributes: ['id', 'username'],
-        where: {
-            id: id
-        }
-    })
+
     if (!spot) {
         res.status(404);
         return res.json({
@@ -70,7 +66,7 @@ router.get('/:spotId', async (req, res) => {
         });
     }
     res.status(200);
-    return res.json(owner);
+    return res.json(spot);
 });
 
 router.get('/:spotId/reviews', async (req, res) => {
