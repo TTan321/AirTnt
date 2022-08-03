@@ -60,6 +60,14 @@ module.exports = (sequelize, DataTypes) => {
 
   User.init(
     {
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -77,7 +85,16 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: [3, 256],
-          isEmail: true
+          isEmail: true,
+          emailExists(value) {
+            if (User.email === value) {
+              const err = new Error('User already exists');
+              err.status = 403;
+              err.title = 'User already exists';
+              err.errors = ['User already exists with the specified email'];
+              return next(err);
+            }
+          }
         }
       },
       hashedPassword: {

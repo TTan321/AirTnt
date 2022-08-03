@@ -21,6 +21,24 @@ module.exports = {
         userId: 1,
         spotId: 3
       },
+      {
+        review: 'The condo is very modern.',
+        stars: 5,
+        userId: 5,
+        spotId: 1
+      },
+      {
+        review: 'The house is very cliche',
+        stars: 3,
+        userId: 4,
+        spotId: 2
+      },
+      {
+        review: 'The house is very old.',
+        stars: 2,
+        userId: 5,
+        spotId: 3
+      },
     ], {});
   },
 

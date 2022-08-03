@@ -1,30 +1,49 @@
 const express = require('express');
 const { JsonWebTokenError } = require('jsonwebtoken');
-const { Spot, User, Review } = require('../../db/models');
-const { requireAuth } = require('../../utils/auth');
+const { Spot, User, Review, Image, Sequelize } = require('../../db/models');
+const { requireAuth, restoreUser } = require('../../utils/auth');
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const spots = await Spot.findAll();
+    const spots = await Spot.findAll({
+        include: [
+            { model: Image, attributes: ['url'] },
+            // { model: Review, attributes: [[Sequelize.fn('avg', Sequelize.col('stars')), 'avgRating']], where: { spotId: Spot.id } }
+        ]
+    });
 
     res.status(200);
     return res.json({ "Spots": spots });
 })
 
-// router.get('/current', requireAuth, async (req, res) => {
-//     const spots = await Spot.findAll({
-//         where: {
-//             ownerId:
-//         }
-//     });
-//     res.status(200);
-//     res.json(spots);
-// })
+router.get('/current', requireAuth, async (req, res) => {
+    const spots = await Spot.findAll({
+        where: {
+            ownerId: req.user.id
+        }
+    });
+
+    res.status(200);
+    res.json(spots);
+});
 
 router.get('/:spotId', async (req, res) => {
     const id = req.params.spotId;
-    const spot = await Spot.findByPk(id);
+    const spot = await Spot.findOne({
+        // include: [
+        //     { model: Image, attributes: ['id', "url"] },
+        //     { model: User, attributes: ['id', 'username'] }],
+        where: {
+            id: id
+        }
+    });
+    const owner = User.findOne({
+        attributes: ['id', 'username'],
+        where: {
+            id: id
+        }
+    })
     if (!spot) {
         res.status(404);
         return res.json({
@@ -33,7 +52,7 @@ router.get('/:spotId', async (req, res) => {
         });
     }
     res.status(200);
-    return res.json(spot);
+    return res.json(owner);
 });
 
 router.get('/:spotId/reviews', async (req, res) => {
