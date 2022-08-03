@@ -7,11 +7,27 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     const spots = await Spot.findAll({
+        attributes: {
+            include: [
+                [Sequelize.literal('Images.url'), 'previewImage'],
+                [Sequelize.fn('avg', Sequelize.col('Reviews.stars')), 'avgRating']
+            ]
+        },
         include: [
-            { model: Image, attributes: ['url'] },
-            // { model: Review, attributes: [[Sequelize.fn('avg', Sequelize.col('stars')), 'avgRating']], where: { spotId: Spot.id } }
-        ]
+            { model: Review, attributes: [] },
+            { model: Image, attributes: [] }
+        ],
+        group: ['spot.id']
     });
+
+    // lazy loading
+    // const spots = await Spot.findAll({
+    //     attributes: {
+    //         include: [
+    //             [sequelize.fn("AVG", sequelize.col("Reviews.stars")), 'avgRating']
+    //         ]
+    //     }
+    // })
 
     res.status(200);
     return res.json({ "Spots": spots });
