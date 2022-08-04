@@ -2,6 +2,7 @@ const express = require('express');
 const { JsonWebTokenError } = require('jsonwebtoken');
 const { Spot, User, Review, Image, Sequelize, sequelize } = require('../../db/models');
 const { requireAuth, restoreUser } = require('../../utils/auth');
+const { Op } = require('sequelize')
 
 const router = express.Router();
 
@@ -22,7 +23,7 @@ router.get('/', async (req, res) => {
 
     res.status(200);
     return res.json({ "Spots": spots });
-})
+});
 
 router.get('/current', requireAuth, async (req, res) => {
     const spots = await Spot.findAll({
@@ -100,6 +101,7 @@ router.post('/', requireAuth, async (req, res) => {
     return res.json(newSpot);
 });
 
+// Add image to a spot at the specific spodId
 router.post('/:spotId/images', requireAuth, async (req, res) => {
     const spot = await Spot.findByPk(req.params.spotId);
     if (!spot) {
@@ -123,12 +125,17 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     const spotId = parseInt(req.params.spotId);
     const { url } = req.body;
 
-    // const newImage = await Image.create({
+    // const newImage = await Image.build({
     //     url, previewImage: true, spotId: spotId, reviewId: reviewsId.spotId, userId: usersId
     // });
-    const image = await Image.findAll();
+    // await newImage.save();
+    const image = await Image.findOne({
+        attributes: ['id', ['spotId', 'imageableId'], 'url'],
+        // where: { id: [sequelize.fn('max', sequelize.col('id'))] }
+        where: { id: await Image.max('id') }
+    });
     res.status(200)
-    return res.json(image.id)
+    return res.json(image);
 });
 
 // edit a spot
@@ -176,6 +183,7 @@ router.put('/:spotId', requireAuth, async (req, res) => {
     return res.json(spot);
 });
 
+//Delete a spot
 router.delete('/:spotId', requireAuth, async (req, res) => {
     const spot = await Spot.findByPk(req.params.spotId);
     if (!spot) {
@@ -200,10 +208,15 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     });
 });
 
+// Get reviews with a spot's id
 router.get('/:spotId/reviews', async (req, res) => {
     const id = req.params.spotId;
     const reviews = await Review.findAll({
-        include: [{ model: User, attributes: ['id', 'username'] }],
+        attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
+        include: [
+            { model: User, attributes: ['id', 'firstName', 'lastName'] },
+            { model: Image, as: 'Images' }
+        ],
         where: {
             spotId: id
         }
@@ -217,7 +230,7 @@ router.get('/:spotId/reviews', async (req, res) => {
     }
     res.status(200);
     return res.json({ "Reviews": reviews });
-})
+});
 
 
 module.exports = router;

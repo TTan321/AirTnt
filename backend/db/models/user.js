@@ -46,6 +46,9 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(
         models.Spot, { foreignKey: 'ownerId' }
       );
+      User.hasMany(
+        models.Image, { foreignKey: 'userId' }
+      );
       User.belongsToMany(
         models.Spot, { through: models.Review }
       );
