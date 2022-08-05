@@ -11,30 +11,36 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Image.belongsTo(
-        models.Review, { foreignKey: 'reviewId' }
+        models.Review, { foreignKey: 'reviewId', onDelete: 'CASCADE' }
       );
       Image.belongsTo(
-        models.User, { foreignKey: 'userId' }
+        models.User, { foreignKey: 'userId', onDelete: 'CASCADE' }
       );
       Image.belongsTo(
-        models.Spot, { foreignKey: 'spotId' }
+        models.Spot, { foreignKey: 'spotId', onDelete: 'CASCADE' }
       );
     }
   }
   Image.init({
-    url: DataTypes.STRING,
-    previewImage: DataTypes.BOOLEAN,
-    spotId: {
+    url: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    previewImage: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
+    },
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
     reviewId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true
     },
-    userId: {
+    spotId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false
     },
   }, {
     sequelize,

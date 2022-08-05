@@ -11,35 +11,32 @@ module.exports = {
       ownerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Users' },
+        references: { model: 'Users', key: 'id' },
         onDelete: 'CASCADE'
       },
       address: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
       },
       city: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       state: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       country: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       lat: {
         type: Sequelize.DECIMAL,
-        allowNull: false,
-        unique: true
+        allowNull: false
       },
       lng: {
         type: Sequelize.DECIMAL,
-        allowNull: false,
-        unique: true
+        allowNull: false
       },
       name: {
         type: Sequelize.STRING,

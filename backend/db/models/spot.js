@@ -10,23 +10,17 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Spot.hasMany(
+        models.Review, { foreignKey: 'spotId', onDelete: 'CASCADE' }
+      );
+      Spot.hasMany(
+        models.Image, { foreignKey: 'spotId', onDelete: 'CASCADE' }
+      );
+      Spot.hasMany(
+        models.Booking, { foreignKey: 'spotId', onDelete: 'CASCADE' }
+      );
       Spot.belongsTo(
         models.User, { foreignKey: 'ownerId', as: 'Owner' }
-      );
-      Spot.belongsToMany(
-        models.User, { through: models.Review }
-      );
-      Spot.belongsToMany(
-        models.User, { through: models.Image }
-      );
-      Spot.belongsToMany(
-        models.User, { through: models.Booking }
-      );
-      Spot.hasMany(
-        models.Image, { foreignKey: 'spotId' }
-      );
-      Spot.hasMany(
-        models.Review, { foreignKey: 'spotId' }
       );
     }
   }
@@ -64,17 +58,20 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     price: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
   }, {
+    scopes: {
+      noTimes: { attributes: { exclude: ['createdAt', 'updatedAt'] } }
+    },
     sequelize,
     modelName: 'Spot',
   });

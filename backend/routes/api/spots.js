@@ -20,9 +20,27 @@ router.get('/', async (req, res) => {
         ],
         group: ['spot.id']
     });
+    // let payload = [];
+    // const spots = await User.findAll();
+    // const owner = await spots[0].getSpot();
+    // for (let i = 0; i < spots.length; i++) {
+    //     let spot = spots[i];
+    //     // const image = await spot.getImage({ attributes: [['url', 'previewImage']] });
+    //     // const avgStars = await spot.getReview();
+    //     const user = await spot.getUser();
+    //     const spotData = {
+    //         id: spot.id,
+    //         name: spot.name,
+    //         user: user,
+    //         previewImage: image,
+    //         avgRating: avgStars
+    //     }
+    //     payload.push(spotData)
+    // }
+
 
     res.status(200);
-    return res.json({ "Spots": spots });
+    return res.json(spots);
 });
 
 router.get('/current', requireAuth, async (req, res) => {
@@ -120,22 +138,25 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     }
     const reviewsId = await Review.findOne({
         where: { spotId: req.params.spotId }
-    })
+    });
+    let reviewId = null;
+    if (reviewsId) {
+        reviewId = reviewsId.spotId;
+    };
+
     const usersId = req.user.id;
-    const spotId = parseInt(req.params.spotId);
     const { url } = req.body;
 
-    // const newImage = await Image.build({
-    //     url, previewImage: true, spotId: spotId, reviewId: reviewsId.spotId, userId: usersId
-    // });
-    // await newImage.save();
-    const image = await Image.findOne({
-        attributes: ['id', ['spotId', 'imageableId'], 'url'],
-        // where: { id: [sequelize.fn('max', sequelize.col('id'))] }
-        where: { id: await Image.max('id') }
+    const newImage = await Image.create({
+        url, previewImage: true, spotId: req.params.spotId, reviewId, userId: usersId
     });
+
     res.status(200)
-    return res.json(image);
+    return res.json({
+        "id": newImage.id,
+        "imageableId": req.params.spotId,
+        "url": newImage.url
+    });
 });
 
 // edit a spot
@@ -210,26 +231,71 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
 
 // Get reviews with a spot's id
 router.get('/:spotId/reviews', async (req, res) => {
-    const id = req.params.spotId;
-    const reviews = await Review.findAll({
-        attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
-        include: [
-            { model: User, attributes: ['id', 'firstName', 'lastName'] },
-            { model: Image, as: 'Images' }
-        ],
-        where: {
-            spotId: id
-        }
-    });
-    if (!reviews) {
+    const spot = await Spot.findByPk(req.params.spotId);
+    if (!spot) {
         res.status(404);
         return res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404
         });
     }
+    const reviews = await Review.findAll({
+        attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
+        include: [
+            { model: User, attributes: ['id', 'firstName', 'lastName'] },
+            { model: Image, attributes: ['id', ['spotId', 'imageableId'], 'url'] }
+        ],
+        where: {
+            spotId: req.params.spotId
+        }
+    });
     res.status(200);
     return res.json({ "Reviews": reviews });
+});
+
+// Create a review for a spot from the spotId
+router.post('/:spotId/reviews', requireAuth, async (req, res) => {
+    const spot = await Spot.findByPk(req.params.spotId);
+    if (!spot) {
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        });
+    };
+    // console.log(spot)
+    const reviewExists = await Review.findOne({
+        attributes: { exclude: ['reviewId'] },
+        where: {
+            userId: req.user.id,
+            spotId: req.params.spotId
+        }
+    });
+    console.log(reviewExists)
+    if (reviewExists) {
+        res.status(403);
+        return res.json({
+            "message": "User already has a review for this spot",
+            "statusCode": 403
+        });
+    };
+    const { review, stars } = req.body;
+    if (!review || !stars) {
+        res.status(400);
+        return res.json({
+            "message": "Validation error",
+            "statusCode": 400,
+            "errors": {
+                "review": "Review text is required",
+                "stars": "Stars must be an integer from 1 to 5",
+            }
+        });
+    };
+    const newReview = await Review.create({
+        review, stars, spotId: req.params.spotId, userId: req.user.id
+    });
+    res.status(201);
+    return res.json(newReview)
 });
 
 
