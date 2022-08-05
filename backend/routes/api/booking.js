@@ -6,6 +6,7 @@ const { Op } = require('sequelize');
 
 const router = express.Router();
 
+// Get all current user's bookings
 router.get('/current', requireAuth, async (req, res) => {
     let payload = [];
     const bookings = await Booking.findAll({
@@ -38,7 +39,6 @@ router.get('/current', requireAuth, async (req, res) => {
             id: booking.id,
             spotId: booking.spotId,
             Spot: spotData,
-            // previewImage: images[i].url,
             userId: booking.userId,
             startDate: booking.startDate,
             endDate: booking.endDate,

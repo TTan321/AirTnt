@@ -1,8 +1,9 @@
 const express = require('express');
 const { JsonWebTokenError } = require('jsonwebtoken');
-const { Spot, User, Review, Image, Sequelize, sequelize } = require('../../db/models');
+const { Spot, User, Review, Image, Sequelize, sequelize, Booking } = require('../../db/models');
 const { requireAuth, restoreUser } = require('../../utils/auth');
-const { Op } = require('sequelize')
+const { Op } = require('sequelize');
+
 
 const router = express.Router();
 
@@ -137,6 +138,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
         });
     }
     const reviewsId = await Review.findOne({
+        attributes: { exclude: ['reviewId'] },
         where: { spotId: req.params.spotId }
     });
     let reviewId = null;
@@ -296,6 +298,34 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     });
     res.status(201);
     return res.json(newReview)
+});
+
+// Get all Bookings for a Spot based on the Spot's id
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+    const spot = await Spot.findByPk(req.params.spotId);
+    if (!spot) {
+        res.status(404);
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        });
+    };
+    if (spot.ownerId !== req.user.id) {
+        const bookings = await Booking.findAll({
+            attributes: [['spotId', 'startDate', 'endDate']],
+            where: { spotId: req.params.spotId }
+        });
+        res.status(200);
+        return res.json({ "Bookings": bookings });
+    };
+    if (spot.ownerId === req.user.id) {
+        const bookings = await Booking.findAll({
+            include: { model: User, attributes: ['id', 'firstName', 'lastName'] },
+            where: { spotId: req.params.spotId }
+        });
+        res.status(200);
+        return res.json({ "Bookings": bookings });
+    };
 });
 
 
