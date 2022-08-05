@@ -20,7 +20,7 @@ module.exports = {
         references: { model: 'Spots', key: 'id' },
         onDelete: 'CASCADE'
       },
-      StartDate: {
+      startDate: {
         type: Sequelize.DATE,
         allowNull: false
       },
