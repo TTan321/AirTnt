@@ -8,6 +8,33 @@ const { Op } = require('sequelize');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
+    let { size, page } = req.query
+    if (!page) page = 0
+    if (!size) size = 20
+
+    page = parseInt(page)
+    size = parseInt(size)
+
+    let limitSize;
+    let offsetSize;
+    if (page >= 1 && size >= 1) {
+        limitSize = size
+        offsetSize = size * (page - 1)
+    }
+
+    // let { size, page } = req.query
+    // if (!page) page = 0
+    // if (!size) size = 20
+
+    // page = parseInt(page)
+    // size = parseInt(size)
+
+    // let where = {}
+    // if (page >= 1 && size >= 1) {
+    //     where.limit = size
+    //     where.offset = size * (page - 1)
+    // }
+
     const spots = await Spot.findAll({
         attributes: {
             include: [
@@ -19,29 +46,111 @@ router.get('/', async (req, res) => {
             { model: Review, attributes: [] },
             { model: Image, attributes: [] }
         ],
-        group: ['spot.id']
+        // where: {
+        group: ['spot.id'],
+        // limit: limitSize,
+        // offset: offsetSize,
+        // },
+        // limit: 10,
+        // offset: 20
+        // ...where
+        // seperate: true
     });
+
     // let payload = [];
-    // const spots = await User.findAll();
-    // const owner = await spots[0].getSpot();
+    // const spots = await Spot.findAll();
     // for (let i = 0; i < spots.length; i++) {
+    //     let spotData = {};
     //     let spot = spots[i];
-    //     // const image = await spot.getImage({ attributes: [['url', 'previewImage']] });
-    //     // const avgStars = await spot.getReview();
-    //     const user = await spot.getUser();
-    //     const spotData = {
+    //     const image = await Image.findAll({
+    //         where: { spotId: spot.id }
+    //     });
+    //     const review = await Review.findAll({
+    //         attributes: {
+    //             include: [
+    //                 sequelize.fn("AVG", sequelize.col("stars"))
+    //             ], exclude: ['reviewId']
+    //         },
+    //         where: { spotId: spot.id }
+    //     });
+    // if (!image && !review) {
+    //     spotData = {
     //         id: spot.id,
+    //         ownerId: spot.ownerId,
+    //         address: spot.address,
+    //         city: spot.city,
+    //         state: spot.state,
+    //         country: spot.country,
+    //         lat: spot.lat,
+    //         lng: spot.lng,
     //         name: spot.name,
-    //         user: user,
+    //         description: spot.description,
+    //         createdAt: spot.createdAt,
+    //         updatedAt: spot.updatedAt,
     //         previewImage: image,
-    //         avgRating: avgStars
+    //         avgRating: review
     //     }
-    //     payload.push(spotData)
+    //     payload.push(spotData);
+    // }
+    // if (!image) {
+    //     spotData = {
+    //         id: spot.id,
+    //         ownerId: spot.ownerId,
+    //         address: spot.address,
+    //         city: spot.city,
+    //         state: spot.state,
+    //         country: spot.country,
+    //         lat: spot.lat,
+    //         lng: spot.lng,
+    //         name: spot.name,
+    //         description: spot.description,
+    //         createdAt: spot.createdAt,
+    //         updatedAt: spot.updatedAt,
+    //         previewImage: image,
+    //         avgRating: review[i].stars
+    //     }
+    //     payload.push(spotData);
+    // }
+    // if (!review) {
+    //     spotData = {
+    //         id: spot.id,
+    //         ownerId: spot.ownerId,
+    //         address: spot.address,
+    //         city: spot.city,
+    //         state: spot.state,
+    //         country: spot.country,
+    //         lat: spot.lat,
+    //         lng: spot.lng,
+    //         name: spot.name,
+    //         description: spot.description,
+    //         createdAt: spot.createdAt,
+    //         updatedAt: spot.updatedAt,
+    //         previewImage: image[i].url,
+    //         avgRating: review
+    //     }
+    //     payload.push(spotData);
+    // }
+    //     spotData = {
+    //         id: spot.id,
+    //         ownerId: spot.ownerId,
+    //         address: spot.address,
+    //         city: spot.city,
+    //         state: spot.state,
+    //         country: spot.country,
+    //         lat: spot.lat,
+    //         lng: spot.lng,
+    //         name: spot.name,
+    //         description: spot.description,
+    //         createdAt: spot.createdAt,
+    //         updatedAt: spot.updatedAt,
+    //         previewImage: image.url,
+    //         avgRating: review[0].stars
+    //     }
+    //     payload.push(spotData);
     // }
 
-
     res.status(200);
-    return res.json(spots);
+    return res.json({ "Spots": spots });
 });
 
 router.get('/current', requireAuth, async (req, res) => {
