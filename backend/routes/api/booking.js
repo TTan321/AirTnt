@@ -12,6 +12,10 @@ router.get('/current', requireAuth, async (req, res) => {
     const bookings = await Booking.findAll({
         where: { userId: req.user.id }
     });
+    if (!bookings) {
+        res.status(200);
+        return res.json({ "message": "No bookings have been made." })
+    }
     for (let i = 0; i < bookings.length; i++) {
         let booking = bookings[i];
         const spots = await Spot.findAll({
@@ -50,6 +54,7 @@ router.get('/current', requireAuth, async (req, res) => {
     res.status(200);
     return res.json({ "Bookings": payload });
 });
+
 
 
 
