@@ -22,19 +22,6 @@ router.get('/', async (req, res) => {
         offsetSize = size * (page - 1)
     }
 
-    // let { size, page } = req.query
-    // if (!page) page = 0
-    // if (!size) size = 20
-
-    // page = parseInt(page)
-    // size = parseInt(size)
-
-    // let where = {}
-    // if (page >= 1 && size >= 1) {
-    //     where.limit = size
-    //     where.offset = size * (page - 1)
-    // }
-
     const spots = await Spot.findAll({
         attributes: {
             include: [
@@ -46,16 +33,15 @@ router.get('/', async (req, res) => {
             { model: Review, attributes: [] },
             { model: Image, attributes: [] }
         ],
-        // where: {
         group: ['spot.id'],
         // limit: limitSize,
         // offset: offsetSize,
         // },
         // limit: 10,
         // offset: 20
-        // ...where
-        // seperate: true
     });
+    res.status(200);
+    return res.json({ "Spots": spots });
 
     // let payload = [];
     // const spots = await Spot.findAll();
@@ -149,8 +135,6 @@ router.get('/', async (req, res) => {
     //     payload.push(spotData);
     // }
 
-    res.status(200);
-    return res.json({ "Spots": spots });
 });
 
 router.get('/current', requireAuth, async (req, res) => {
