@@ -10,45 +10,77 @@ const router = express.Router();
 
 // Get all reviews of the current user
 router.get('/current', requireAuth, async (req, res) => {
+    // const reviews = await Review.findAll({
+    //     attributes: { exclude: ['reviewId'] },
+    //     include: [
+    //         { model: User, attributes: ['id', 'firstName', 'lastName'] },
+    //         { model: Spot, attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'] },
+    //         { model: Image, attributes: ['id', ['reviewId', 'imageableId'], 'url'] }
+    //     ],
+    //     where: {
+    //         userId: req.user.id
+    //     },
+    //     group: ['Review.id']
+    // });
+    let payload = [];
     const reviews = await Review.findAll({
         attributes: { exclude: ['reviewId'] },
-        include: [
-            { model: User, attributes: ['id', 'firstName', 'lastName'] },
-            { model: Spot, attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'] },
-            { model: Image, attributes: ['id', ['reviewId', 'imageableId'], 'url'] }
-        ],
-        where: {
-            userId: req.user.id
-        },
-        group: ['Review.id']
+        where: { userId: req.user.id },
     });
-    // const payload = [];
-    // const reviews = await Review.findAll({ attributes: ['id', 'review', 'stars', 'userId', 'spotId', 'createdAt', 'updatedAt'], where: { userId: req.user.id } });
-    // for (let i = 0; i < reviews.length; i++) {
-    //     let review = reviews[i];
 
-    //     const user = await review.getUser({ attributes: { exclude: ['username'] } });
-    //     const spot = await review.getSpot({ attributes: { exclude: ['createdAt', 'updatedAt'] } });
-    //     const image = await review.getImage({ attributes: ['id', ['reviewId', 'imageableId'], 'url'] });
-    //     const reviewData = {
-    //         id: review.id,
-    //         userId: review.userId,
-    //         spotId: review.spotId,
-    //         review: review.review,
-    //         stars: review.stars,
-    //         createdAt: review.createdAt,
-    //         updatedAt: review.updatedAt,
-    //         User: user,
-    //         Spot: spot,
-    //         Images: image
-    //     }
-    //     payload.push(reviewData)
-    // }
-    // const reviews = await Review.findAll({ attributes: { exclude: ['reviewId'] } });
-    // const reviews = await Review.findAll();
+    for (let i = 0; i < reviews.length; i++) {
+        let review = reviews[i];
+        const user = await User.findOne({ where: { id: review.userId } });
+        let userData = {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName
+        };
 
+        const spot = await Spot.findOne({ where: { id: review.spotId } });
+        let spotData = {
+            id: spot.id,
+            ownerId: spot.ownerId,
+            address: spot.address,
+            city: spot.city,
+            state: spot.state,
+            country: spot.country,
+            lat: spot.lat,
+            lng: spot.lng,
+            name: spot.name,
+            description: spot.description,
+        };
+
+        const images = await Image.findAll({ where: { reviewId: review.id } });
+        let imagesDataArray = [];
+        if (images[0]) {
+            let image = images[i];
+            let imageData = {
+                id: image.id,
+                imageableId: image.reviewId,
+                url: image.url
+            }
+            imagesDataArray.push(imageData);
+        } else {
+            imagesDataArray.push("No images for this review.")
+        }
+
+        let reviewData = {
+            id: review.id,
+            userId: review.userId,
+            spotId: review.spotId,
+            review: review.review,
+            stars: review.stars,
+            createdAt: review.createdAt,
+            updatedAt: review.updatedAt,
+            User: userData,
+            Spot: spotData,
+            Images: imagesDataArray
+        };
+        payload.push(reviewData);
+    };
     res.status(200);
-    return res.json({ "Reviews": reviews });
+    return res.json({ "Reviews": payload });
 });
 
 // Add an Image to a Review based on the Review's id
