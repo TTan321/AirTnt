@@ -8,12 +8,40 @@ const spot = require('../../db/models/spot');
 
 const router = express.Router();
 
+// Test for model query bugs
+// router.get('/', async (req, res) => {
+//     const review = await Review.findAll();
+//     const user = await User.findAll();
+//     const image = await Image.findAll();
+//     const booking = await Booking.findAll();
+//     res.json(review)
+// });
+
 // Get all spots
 // with pagination
 router.get('/', async (req, res) => {
     let { size, page } = req.query
     if (!page) page = 0
     if (!size) size = 20
+
+    // page maximum is 10 and size maximum is 20
+    if (page > 10 || size > 20) {
+        res.status(400);
+        res.json({
+            "message": "Validation Error",
+            "statusCode": 400,
+            "errors": {
+                "page": "Page must be greater than or equal to 0",
+                "size": "Size must be greater than or equal to 0",
+                "maxLat": "Maximum latitude is invalid",
+                "minLat": "Minimum latitude is invalid",
+                "minLng": "Maximum longitude is invalid",
+                "maxLng": "Minimum longitude is invalid",
+                "minPrice": "Maximum price must be greater than or equal to 0",
+                "maxPrice": "Minimum price must be greater than or equal to 0"
+            }
+        });
+    }
 
     page = parseInt(page)
     size = parseInt(size)
@@ -307,7 +335,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
         });
     }
     const reviewsId = await Review.findOne({
-        attributes: { exclude: ['reviewId'] },
+        // attributes: { exclude: ['reviewId'] },
         where: { spotId: req.params.spotId }
     });
     let reviewId = null;

@@ -10,21 +10,9 @@ const router = express.Router();
 
 // Get all reviews of the current user
 router.get('/current', requireAuth, async (req, res) => {
-    // const reviews = await Review.findAll({
-    //     attributes: { exclude: ['reviewId'] },
-    //     include: [
-    //         { model: User, attributes: ['id', 'firstName', 'lastName'] },
-    //         { model: Spot, attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'] },
-    //         { model: Image, attributes: ['id', ['reviewId', 'imageableId'], 'url'] }
-    //     ],
-    //     where: {
-    //         userId: req.user.id
-    //     },
-    //     group: ['Review.id']
-    // });
     let payload = [];
     const reviews = await Review.findAll({
-        attributes: { exclude: ['reviewId'] },
+        // attributes: { exclude: ['reviewId'] },
         where: { userId: req.user.id },
     });
 
@@ -86,7 +74,7 @@ router.get('/current', requireAuth, async (req, res) => {
 // Add an Image to a Review based on the Review's id
 router.post('/:reviewId/images', requireAuth, async (req, res) => {
     const review = await Review.findOne({
-        attributes: { exclude: ['reviewId'] },
+        // attributes: { exclude: ['reviewId'] },
         where: { id: req.params.reviewId }
     });
     if (!review) {
@@ -121,7 +109,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
 // Edit a review
 router.put('/:reviewId', requireAuth, async (req, res) => {
     const findReview = await Review.findOne({
-        attributes: { exclude: ['reviewId'] },
+        // attributes: { exclude: ['reviewId'] },
         where: { id: req.params.reviewId }
     });
     if (!findReview) {
@@ -161,7 +149,7 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 // Delete a review
 router.delete('/:reviewId', requireAuth, async (req, res) => {
     const review = await Review.findOne({
-        attributes: { exclude: ['reviewId'] },
+        // attributes: { exclude: ['reviewId'] },
         where: { id: req.params.reviewId }
     });
     if (!review) {

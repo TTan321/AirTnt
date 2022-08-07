@@ -19,23 +19,23 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Users', key: 'id' },
-        onDelete: 'CASCADE',
-        hooks: true
+        // references: { model: 'Users', key: 'id' },
+        // onDelete: 'CASCADE',
+        // hooks: true
       },
       reviewId: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        references: { model: 'Reviews', key: 'id' },
-        onDelete: 'CASCADE',
-        hooks: true
+        // references: { model: 'Reviews', key: 'id' },
+        // onDelete: 'CASCADE',
+        // hooks: true
       },
       spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Spots', key: 'id' },
-        onDelete: 'CASCADE',
-        hooks: true
+        // references: { model: 'Spots', key: 'id' },
+        // onDelete: 'CASCADE',
+        // hooks: true
       },
       createdAt: {
         allowNull: false,

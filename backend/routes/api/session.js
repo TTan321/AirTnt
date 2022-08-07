@@ -7,76 +7,6 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-// Log in
-router.post(
-    '/',
-    async (req, res, next) => {
-        const { credential, password } = req.body;
-
-        const user = await User.login({ credential, password });
-
-        if (!req.body.credential || !req.body.password) {
-            res.status(400);
-            return res.json({
-                "message": "Validation error",
-                "statusCode": 400,
-                "errors": {
-                    "credential": "Email or username is required",
-                    "password": "Password is required"
-                }
-            });
-        }
-        else if (!user) {
-            res.status(401);
-            return res.json({
-                "message": "Invalid credentials",
-                "status": 401
-            });
-        }
-
-        await setTokenCookie(res, user);
-
-        return res.json({
-            "id": user.id,
-            "email": user.email,
-            "username": user.username,
-            "token": req.cookies.token
-        });
-    }
-);
-
-// Log out
-router.delete(
-    '/',
-    (_req, res) => {
-        res.clearCookie('token');
-        return res.json({ message: 'success' });
-    }
-);
-
-// Restore session user
-router.get(
-    '/',
-    restoreUser,
-    (req, res) => {
-        const { user } = req;
-        if (user) {
-            res.status(200);
-            return res.json({
-                "id": user.id,
-                "email": user.email,
-                "username": user.username
-            });
-        } else {
-            res.status(401)
-            return res.json({
-                "message": "Authentication required",
-                "statusCode": 401
-            });
-        }
-    }
-);
-
 const validateLogin = [
     check('credential')
         .exists({ checkFalsy: true })
@@ -107,10 +37,51 @@ router.post(
         await setTokenCookie(res, user);
 
         return res.json({
-            user
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            username: user.username,
+            "token": req.cookies.token
         });
     }
 );
+
+
+// Log out
+router.delete(
+    '/',
+    (_req, res) => {
+        res.clearCookie('token');
+        return res.json({ message: 'success' });
+    }
+);
+
+// Restore session user
+router.get(
+    '/',
+    restoreUser,
+    (req, res) => {
+        const { user } = req;
+        if (user) {
+            res.status(200);
+            return res.json({
+                id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                username: user.username,
+            });
+        } else {
+            res.status(401)
+            return res.json({
+                "message": "Authentication required",
+                "statusCode": 401
+            });
+        }
+    }
+);
+
 
 
 module.exports = router;
