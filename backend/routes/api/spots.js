@@ -436,7 +436,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     };
 
     const reviewExists = await Review.findOne({
-        attributes: { exclude: ['reviewId'] },
+        // attributes: { exclude: ['reviewId'] },
         where: {
             userId: req.user.id,
             spotId: req.params.spotId
@@ -495,22 +495,6 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
         res.status(200);
         return res.json({ "Bookings": bookings });
     };
-    // const spot = await Spot.findByPk(req.params.spotId);
-    // if (!spot) {
-    //     res.status(404)
-    //     return res.json({
-    //         "message": "Spot couldn't be found",
-    //         "status": 404
-    //     })
-    // }
-    // if (spot.ownerId !== req.user.id) {
-    //         const bookings = await Booking.findAll({
-    //             attributes: [['spotId', 'startDate', 'endDate']],
-    //             where: { spotId: req.params.spotId }
-    //         });
-    //         res.status(200);
-    //         return res.json({ "Bookings": bookings });
-    //     };
 });
 
 // Create a Booking from a Spot based on the Spot's id
