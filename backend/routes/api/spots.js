@@ -100,38 +100,87 @@ router.get('/', async (req, res) => {
     res.json({ "Spots": payload });
 });
 
+// Get current user's spots
 router.get('/current', requireAuth, async (req, res) => {
+    let payload = [];
     const spots = await Spot.findAll({
-        attributes: {
-            include: [
-                [Sequelize.literal('Images.url'), 'previewImage'],
-                [Sequelize.fn('avg', Sequelize.col('Reviews.stars')), 'avgRating']
-            ]
-        },
-        include: [
-            { model: Review, attributes: [] },
-            { model: Image, attributes: [] }
-        ],
-        group: ['spot.id'],
-        where: {
-            ownerId: req.user.id
-        }
+        where: { ownerId: req.user.id }
     });
 
+    for (let i = 0; i < spots.length; i++) {
+        let spot = spots[i];
+        const image = await Image.findOne({ where: { spotId: spot.id } });
+        const reviewsStars = await Review.sum('stars', { where: { spotId: spot.id } });
+        const reviewStarCount = await Review.count({ where: { spotId: spot.id } });
+        const avgRating = reviewsStars / reviewStarCount
+
+        if (!image) {
+            let spotData = {
+                id: spot.id,
+                ownerId: spot.ownerId,
+                address: spot.address,
+                city: spot.city,
+                state: spot.state,
+                country: spot.country,
+                lat: spot.lat,
+                lng: spot.lng,
+                name: spot.name,
+                description: spot.description,
+                createdAt: spot.createdAt,
+                updatedAt: spot.updatedAt,
+                avgRating: avgRating,
+                previewImage: null
+            }
+            payload.push(spotData);
+        }
+        else if (!reviewsStars) {
+            let spotData = {
+                id: spot.id,
+                ownerId: spot.ownerId,
+                address: spot.address,
+                city: spot.city,
+                state: spot.state,
+                country: spot.country,
+                lat: spot.lat,
+                lng: spot.lng,
+                name: spot.name,
+                description: spot.description,
+                createdAt: spot.createdAt,
+                updatedAt: spot.updatedAt,
+                avgRating: null,
+                previewImage: image.url
+            }
+            payload.push(spotData);
+        }
+        else {
+            let spotData = {
+                id: spot.id,
+                ownerId: spot.ownerId,
+                address: spot.address,
+                city: spot.city,
+                state: spot.state,
+                country: spot.country,
+                lat: spot.lat,
+                lng: spot.lng,
+                name: spot.name,
+                description: spot.description,
+                createdAt: spot.createdAt,
+                updatedAt: spot.updatedAt,
+                avgRating: avgRating,
+                previewImage: image.url
+            }
+            payload.push(spotData);
+        }
+    };
     res.status(200);
-    res.json(spots);
+    res.json({ "Spots": payload });
 });
 
+// Get a spot's details by spotId
 router.get('/:spotId', async (req, res) => {
-    const id = req.params.spotId;
+    let payload = [];
     const spot = await Spot.findOne({
-        include: [
-            { model: Image, attributes: ['id', [sequelize.literal('Images.id'), 'imageableId'], 'url',] },
-            { model: User, as: 'Owner', attributes: ['id', 'firstName', 'lastName'] }
-        ],
-        where: {
-            id: id
-        }
+        where: { id: req.params.spotId }
     });
 
     if (!spot) {
@@ -141,10 +190,74 @@ router.get('/:spotId', async (req, res) => {
             "statusCode": 404
         });
     }
+
+    const image = await Image.findOne({ where: { spotId: spot.id } });
+    const reviewsStars = await Review.sum('stars', { where: { spotId: spot.id } });
+    const reviewStarCount = await Review.count({ where: { spotId: spot.id } });
+    const avgRating = reviewsStars / reviewStarCount
+
+    if (!image) {
+        let spotData = {
+            id: spot.id,
+            ownerId: spot.ownerId,
+            address: spot.address,
+            city: spot.city,
+            state: spot.state,
+            country: spot.country,
+            lat: spot.lat,
+            lng: spot.lng,
+            name: spot.name,
+            description: spot.description,
+            createdAt: spot.createdAt,
+            updatedAt: spot.updatedAt,
+            avgRating: avgRating,
+            previewImage: null
+        }
+        payload.push(spotData);
+    }
+    else if (!reviewsStars) {
+        let spotData = {
+            id: spot.id,
+            ownerId: spot.ownerId,
+            address: spot.address,
+            city: spot.city,
+            state: spot.state,
+            country: spot.country,
+            lat: spot.lat,
+            lng: spot.lng,
+            name: spot.name,
+            description: spot.description,
+            createdAt: spot.createdAt,
+            updatedAt: spot.updatedAt,
+            avgRating: null,
+            previewImage: image.url
+        }
+        payload.push(spotData);
+    }
+    else {
+        let spotData = {
+            id: spot.id,
+            ownerId: spot.ownerId,
+            address: spot.address,
+            city: spot.city,
+            state: spot.state,
+            country: spot.country,
+            lat: spot.lat,
+            lng: spot.lng,
+            name: spot.name,
+            description: spot.description,
+            createdAt: spot.createdAt,
+            updatedAt: spot.updatedAt,
+            avgRating: avgRating,
+            previewImage: image.url
+        }
+        payload.push(spotData);
+    };
     res.status(200);
-    return res.json(spot);
+    res.json({ "Spots": payload });
 });
 
+// Create a spot
 router.post('/', requireAuth, async (req, res) => {
     const ownersId = req.user.id;
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
@@ -321,7 +434,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
             "statusCode": 404
         });
     };
-    // console.log(spot)
+
     const reviewExists = await Review.findOne({
         attributes: { exclude: ['reviewId'] },
         where: {
