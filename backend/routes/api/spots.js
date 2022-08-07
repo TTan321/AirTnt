@@ -97,7 +97,7 @@ router.get('/', async (req, res) => {
         };
     }
     res.status(200);
-    res.json({ "Spots": payload });
+    res.json({ "Spots": payload, "page": page, "size": size });
 });
 
 // Get current user's spots
