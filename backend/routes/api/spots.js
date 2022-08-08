@@ -21,8 +21,8 @@ const router = express.Router();
 // with pagination
 router.get('/', async (req, res) => {
     let { size, page } = req.query
-    if (!page) page = 0
-    if (!size) size = 20
+    if (!page) page = 1;
+    if (!size) size = 20;
 
     // page maximum is 10 and size maximum is 20
     if (page > 10 || size > 20) {
@@ -490,9 +490,7 @@ router.get('/:spotId/reviews', async (req, res) => {
     res.status(200);
     return res.json({ "Reviews": payload });
 });
-res.status(200);
-return res.json({ "Reviews": reviews });
-});
+
 
 // Create a review for a spot from the spotId
 router.post('/:spotId/reviews', requireAuth, async (req, res) => {
