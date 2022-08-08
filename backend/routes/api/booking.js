@@ -59,7 +59,7 @@ router.get('/current', requireAuth, async (req, res) => {
 
     for (let i = 0; i < bookings.length; i++) {
         let booking = bookings[i];
-        const spot = await booking.getSpot();
+        const spot = await Spot.findOne({ where: { id: booking.spotId } });
         const image = await Image.findOne({ where: { spotId: spot.id } })
 
         let spotData = {
