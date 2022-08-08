@@ -437,19 +437,61 @@ router.get('/:spotId/reviews', async (req, res) => {
             "message": "Spot couldn't be found",
             "statusCode": 404
         });
-    }
+    };
+
+    let payload = [];
     const reviews = await Review.findAll({
-        attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
-        include: [
-            { model: User, attributes: ['id', 'firstName', 'lastName'] },
-            { model: Image, attributes: ['id', ['spotId', 'imageableId'], 'url'] }
-        ],
+        // attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
+        // include: [
+        //     { model: User, attributes: ['id', 'firstName', 'lastName'] },
+        //     { model: Image, attributes: ['id', ['spotId', 'imageableId'], 'url'] }
+        // ],
         where: {
             spotId: req.params.spotId
         }
     });
+
+    for (let i = 0; i < reviews.length; i++) {
+        let review = reviews[i];
+
+        const user = await User.findOne({ where: { id: review.userId } });
+        let userData = {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName
+        };
+
+        const images = await Image.findAll({ where: { reviewId: review.id } });
+        let imagesDataArray = [];
+        if (images[0]) {
+            for (let image of images) {
+                let imageData = {
+                    id: image.id,
+                    imageableId: image.reviewId,
+                    url: image.url
+                }
+                imagesDataArray.push(imageData);
+            }
+        };
+        let reviewData = {
+            id: review.id,
+            userId: review.userId,
+            spotId: review.spotId,
+            review: review.review,
+            stars: review.stars,
+            createdAt: review.createdAt,
+            updatedAt: review.updatedAt,
+            User: userData,
+            Images: imagesDataArray
+        }
+        payload.push(reviewData)
+    }
+
     res.status(200);
-    return res.json({ "Reviews": reviews });
+    return res.json({ "Reviews": payload });
+});
+res.status(200);
+return res.json({ "Reviews": reviews });
 });
 
 // Create a review for a spot from the spotId
