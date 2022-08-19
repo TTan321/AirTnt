@@ -72,13 +72,7 @@ router.get(
                 email: user.email,
                 username: user.username,
             });
-        } else {
-            res.status(401)
-            return res.json({
-                "message": "Authentication required",
-                "statusCode": 401
-            });
-        }
+        } else return res.json({})
     }
 );
 
