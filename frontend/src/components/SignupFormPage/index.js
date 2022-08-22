@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
+import { useHistory } from 'react-router-dom'
 
 function SignupFormPage() {
+    let history = useHistory();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const [firstName, setFirstName] = useState("");
@@ -20,8 +22,9 @@ function SignupFormPage() {
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors([]);
-            return dispatch(sessionActions.signup({ firstName, lastName, email, username, password }))
+            return (dispatch(sessionActions.signup({ firstName, lastName, email, username, password })), history.push("/"))
                 .catch(async (res) => {
+                    history.push("/")
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
                 });
