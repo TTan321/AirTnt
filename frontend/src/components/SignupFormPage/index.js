@@ -24,7 +24,6 @@ function SignupFormPage() {
             setErrors([]);
             return (dispatch(sessionActions.signup({ firstName, lastName, email, username, password })), history.push("/"))
                 .catch(async (res) => {
-                    history.push("/")
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
                 });

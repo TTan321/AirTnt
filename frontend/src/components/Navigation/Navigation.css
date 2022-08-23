@@ -1,3 +1,5 @@
-ul {
+.navBar {
+    display: flex;
+    justify-content: space-between;
     border: solid
 }

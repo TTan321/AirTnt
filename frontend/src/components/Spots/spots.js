@@ -15,11 +15,12 @@ function Spots() {
     return (
         <>
             <div className="Spots">
-                {allSpotsArray?.map(({ id, previewImage, city, state, avgRating }) => (
+                {allSpotsArray?.map(({ id, previewImage, city, state, avgRating, price }) => (
                     <div key={id}>
                         <div className="Spot">
                             {previewImage}
                             <p>{city}, {state} stars{avgRating}</p>
+                            <p>${price} night</p>
                         </div>
                     </div>
                 ))}
