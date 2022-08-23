@@ -1,0 +1,11 @@
+.Spots {
+    display: flex;
+    justify-content: space-evenly;
+    border: 3px Solid red
+}
+
+.Spot {
+    border: 3px dotted blue;
+    width: 200px;
+    height: 200px;
+}
