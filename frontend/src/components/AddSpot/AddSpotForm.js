@@ -38,10 +38,14 @@ function AddSpotForm() {
         const payload = {
             name, address, city, country, state, lat, lng, description, price, ownerId
         }
+        const previewImage = {
+            "url": previewImageUrl, "userId": ownerId,
+        }
         let newSpot;
 
-        newSpot = dispatch(createSpot(payload))
-        // return <Redirect to={`/spots/${newSpot.id}`} />
+        newSpot = dispatch(createSpot(payload));
+
+        // if (newSpot) history.push('/hostspot');
     }
 
 

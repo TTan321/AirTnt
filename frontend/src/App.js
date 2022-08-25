@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import Spots from "./components/Spots/spots";
 import SpotDetails from "./components/SpotDetails/SpotDetails";
 import AddSpotForm from "./components/AddSpot/AddSpotForm";
+import UserSpots from "./components/AddSpot/index";
 import EditSpot from './components/EditSpot/EditSpot';
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route exact path="/hostspot">
-            <AddSpotForm />
+            <UserSpots />
           </Route>
           <Route exact path="/spots/:spotId">
             <SpotDetails />

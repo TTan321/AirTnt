@@ -1,13 +1,14 @@
-.Spots {
+.container {
     display: flex;
-    justify-content: space-evenly;
-
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 50px;
+    column-gap: 20px;
 }
 
-.Spot {
-
+.spot-container {
     border-radius: 20px;
-    width: 400px;
+    width: 300px;
     height: 400px;
 }
 

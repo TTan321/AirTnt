@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { getAllSpots } from "../../store/spotsReducer";
-import SpotDetails from "../SpotDetails/SpotDetails";
 import './spots.css';
 
 function Spots() {
@@ -18,10 +17,10 @@ function Spots() {
 
     return (
         <>
-            <div className="Spots">
+            <div className="container">
                 {allSpotsArray?.map(({ id, previewImage, city, state, avgRating, price }) => (
-                    <NavLink to={`/spots/${id}`} key={id} className="Spot">
-                        <img src={previewImage} className="images" />
+                    <NavLink to={`/spots/${id}`} key={id} className="spot-container">
+                        <img src={previewImage} alt={""} className="images" />
                         <p>{city}, {state} stars{avgRating}</p>
                         <p>${price} night</p>
                     </NavLink>

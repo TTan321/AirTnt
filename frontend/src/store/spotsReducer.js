@@ -5,6 +5,7 @@ const GET_ALL_SPOTS = "spots/getAllSpots";
 const GET_A_SPOT = "spots/getASpot";
 const ADD_SPOT = "spots/addSpot";
 const UPDATE_SPOT = "spots/updateSpot";
+const DELETE_SPOT = "spots/deleteSpot";
 
 export const loadSpots = (spots) => {
     return {
@@ -34,6 +35,13 @@ export const updateSpot = (spot) => {
     };
 };
 
+export const deleteSpot = (id) => {
+    return {
+        type: DELETE_SPOT,
+        id
+    };
+};
+
 export const getAllSpots = () => async (dispatch) => {
     const response = await csrfFetch("/api/spots");
     if (response.ok) {
@@ -57,6 +65,23 @@ export const createSpot = spot => async (dispatch) => {
     return response;
 };
 
+export const deleteSpotAtId = (spotId) => async dispatch => {
+    console.log('spot to be deleted id ', spotId)
+    console.log("SPOT IS ABOUT TO BE DELETED")
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE',
+    });
+    console.log(response)
+
+    if (response.ok) {
+        const { id: deletedSpotId } = await response.json();
+        dispatch(deleteSpot(deletedSpotId));
+        console.log("SPOT HAS BEEN DELETED")
+        return deletedSpotId;
+    }
+
+};
+
 const initialState = {};
 
 const spotsReducer = (state = initialState, action) => {
@@ -74,6 +99,13 @@ const spotsReducer = (state = initialState, action) => {
         case ADD_SPOT: {
             state = state.spots;
             const newState = { ...state, ...action.spot }
+            return newState;
+        }
+        case DELETE_SPOT: {
+            state = state.spots;
+            console.log(state)
+            const newState = { ...state }
+            delete newState[action.id];
             return newState;
         }
         default:
