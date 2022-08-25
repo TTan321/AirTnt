@@ -1,5 +1,12 @@
 .navBar {
+    border: solid;
     display: flex;
-    justify-content: space-between;
-    border: solid
+    align-items: center;
+    justify-content: space-around;
+    height: 80px
+}
+
+.host-link {
+    border: 1px solid;
+    border-radius: 25%;
 }

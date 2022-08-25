@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { csrfFetch } from '../../store/csrf';
-import { getAllSpots, loadSpots } from "../../store/spotsReducer";
+import { NavLink, Route } from "react-router-dom";
+import { getAllSpots } from "../../store/spotsReducer";
+import SpotDetails from "../SpotDetails/SpotDetails";
 import './spots.css';
 
 function Spots() {
@@ -12,17 +13,18 @@ function Spots() {
     useEffect(() => {
         dispatch(getAllSpots())
     }, [dispatch])
+
+
+
     return (
         <>
             <div className="Spots">
                 {allSpotsArray?.map(({ id, previewImage, city, state, avgRating, price }) => (
-                    <div key={id}>
-                        <div className="Spot">
-                            {previewImage}
-                            <p>{city}, {state} stars{avgRating}</p>
-                            <p>${price} night</p>
-                        </div>
-                    </div>
+                    <NavLink to={`/spots/${id}`} key={id} className="Spot">
+                        <img src={previewImage} className="images" />
+                        <p>{city}, {state} stars{avgRating}</p>
+                        <p>${price} night</p>
+                    </NavLink>
                 ))}
             </div>
         </>

@@ -19,6 +19,15 @@ function LoginForm() {
         );
     };
 
+    const logInDemo = (e) => {
+        e.preventDefault();
+
+        setCredential("Demo-lition");
+        setPassword("password");
+        return dispatch(sessionActions.login({ credential, password }))
+
+    };
+
     return (
         <form onSubmit={handleSubmit}>
             <ul>
@@ -45,6 +54,7 @@ function LoginForm() {
                 />
             </label>
             <button type="submit">Log In</button>
+            <button onClick={logInDemo}>Demo User</button>
         </form>
     );
 }

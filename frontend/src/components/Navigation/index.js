@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
+import { addSpot } from '../../store/spotsReducer';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -24,8 +25,9 @@ function Navigation({ isLoaded }) {
 
     return (
         <ul className='navBar'>
-            <li>
-                <NavLink exact to="/">Home</NavLink>
+            <li className='nav-links'>
+                <NavLink exact to="/" className={"home"}>Home</NavLink>
+                <NavLink exact to="/hostspot" className={"host-link"}>Become a Host</NavLink>
                 {isLoaded && sessionLinks}
             </li>
         </ul>
