@@ -7,6 +7,10 @@ const ADD_SPOT = "spots/addSpot";
 const UPDATE_SPOT = "spots/updateSpot";
 const DELETE_SPOT = "spots/deleteSpot";
 
+const ADD_IMAGE = "images/add_image";
+
+
+
 export const loadSpots = (spots) => {
     return {
         type: GET_ALL_SPOTS,
@@ -35,6 +39,13 @@ export const updateSpot = (spot) => {
     };
 };
 
+export const addImage = (image) => {
+    return {
+        type: ADD_IMAGE,
+        image
+    };
+};
+
 export const deleteSpot = (id) => {
     return {
         type: DELETE_SPOT,
@@ -52,17 +63,35 @@ export const getAllSpots = () => async (dispatch) => {
 };
 
 export const createSpot = spot => async (dispatch) => {
+    const { name, address, city, state, country, lat, lng, description, price, ownerId, previewImageUrl } = spot;
+    console.log("spot ", spot)
     console.log("About to post new spot to server")
     const response = await csrfFetch("/api/spots", {
         method: "POST",
-        body: JSON.stringify(
-            spot
-        ),
+        body: JSON.stringify({
+            name, address, city, state, country, lat, lng, description, price, ownerId
+        }),
     });
     const data = await response.json();
     dispatch(addSpot(data));
+    console.log("DATA  ",)
     console.log("SPOT HAS BEEN CREATED")
+    dispatch(createImage({ ...data, previewImageUrl }))
     return response;
+};
+
+export const createImage = image => async (dispatch) => {
+    const { id, previewImageUrl, ownerId } = image;
+    console.log("type of ID ", typeof id)
+    console.log("image is: ", image)
+    console.log("ABOUT TO POST IMAGE TO SERVER")
+    const response = await csrfFetch(`/api/spots/${id}/images`, {
+        method: "POST",
+        body: JSON.stringify({
+            "url": previewImageUrl
+        }),
+    });
+    console.log("IMAGE HAS BEEN ADDED")
 };
 
 export const deleteSpotAtId = (spotId) => async dispatch => {
@@ -71,7 +100,6 @@ export const deleteSpotAtId = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE',
     });
-    console.log(response)
 
     if (response.ok) {
         const { id: deletedSpotId } = await response.json();

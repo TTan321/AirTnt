@@ -36,16 +36,19 @@ function AddSpotForm() {
         setOwnerId(sessionUser.id)
 
         const payload = {
-            name, address, city, country, state, lat, lng, description, price, ownerId
+            name, address, city, country, state, lat, lng, description, price, ownerId, previewImageUrl
         }
+
+        let newSpot = dispatch(createSpot(payload));
+
         const previewImage = {
-            "url": previewImageUrl, "userId": ownerId,
+            "url": previewImageUrl, "userId": ownerId, "spotId": newSpot.id
         }
-        let newSpot;
 
-        newSpot = dispatch(createSpot(payload));
+        // let newImage = dispatch(createImage(previewImage));
 
-        // if (newSpot) history.push('/hostspot');
+
+        if (newSpot) history.push('/hostspot');
     }
 
 
