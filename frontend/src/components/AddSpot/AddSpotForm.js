@@ -39,16 +39,23 @@ function AddSpotForm() {
             name, address, city, country, state, lat, lng, description, price, ownerId, previewImageUrl
         }
 
-        let newSpot = dispatch(createSpot(payload));
+        dispatch(createSpot(payload));
+        history.push(`/hostspot`)
+        // console.log("NEW SPOT IS :", newSpot)
 
-        const previewImage = {
-            "url": previewImageUrl, "userId": ownerId, "spotId": newSpot.id
-        }
-
-        // let newImage = dispatch(createImage(previewImage));
-
-
-        if (newSpot) history.push('/hostspot');
+        // const getNewSpot = async () => {
+        //     const spot = await newSpot;
+        //     console.log("SPOT IS :", spot)
+        //     console.log("Redirecting to new spot page")
+        //     if (spot) {
+        //     }
+        //     // return <Redirect to={`/spots/${spot?.id}`} />
+        //     // return spot;
+        // }
+        // getNewSpot();
+        // const spot = getNewSpot();
+        // if (spot) {
+        // }
     }
 
 

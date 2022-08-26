@@ -62,6 +62,15 @@ export const getAllSpots = () => async (dispatch) => {
     }
 };
 
+export const getASpot = (id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${id}`);
+    if (response.ok) {
+        const data = await response.json();
+        // dispatch(loadSpots(data))
+        return data;
+    }
+};
+
 export const createSpot = spot => async (dispatch) => {
     const { name, address, city, state, country, lat, lng, description, price, ownerId, previewImageUrl } = spot;
     console.log("spot ", spot)
@@ -76,8 +85,8 @@ export const createSpot = spot => async (dispatch) => {
     dispatch(addSpot(data));
     console.log("DATA  ",)
     console.log("SPOT HAS BEEN CREATED")
-    dispatch(createImage({ ...data, previewImageUrl }))
-    return response;
+    const imageData = dispatch(createImage({ ...data, previewImageUrl }))
+    return ({ ...data, ...imageData });
 };
 
 export const createImage = image => async (dispatch) => {
@@ -91,7 +100,9 @@ export const createImage = image => async (dispatch) => {
             "url": previewImageUrl
         }),
     });
+    const data = await response.json();
     console.log("IMAGE HAS BEEN ADDED")
+    return data;
 };
 
 export const deleteSpotAtId = (spotId) => async dispatch => {

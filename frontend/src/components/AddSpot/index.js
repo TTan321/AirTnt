@@ -13,12 +13,10 @@ function UserSpots() {
     const allSpots = useSelector((state) => (state.spots))
     const allSpotsArray = Object.values(allSpots)
     const userSpots = allSpotsArray.filter((spot) => spot.ownerId === sessionUser?.id)
-    console.log(userSpots)
-
 
     useEffect(() => {
         dispatch(getAllSpots())
-    }, [dispatch])
+    }, [dispatch,])
 
     if (!sessionUser) {
         return <LoginFormModal />

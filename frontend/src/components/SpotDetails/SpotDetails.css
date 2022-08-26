@@ -1,9 +1,15 @@
 .spot {
     padding: 0px 30%;
-    width: 90%;
+    width: 50vw;
 }
 
 .image {
     height: 600px;
     width: 500px;
+}
+
+.review {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid red;
 }
