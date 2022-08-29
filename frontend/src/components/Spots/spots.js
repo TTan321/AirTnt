@@ -1,27 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { csrfFetch } from '../../store/csrf';
-import { getAllSpots, loadSpots } from "../../store/spotsReducer";
+import { NavLink } from "react-router-dom";
+import { getAllSpots } from "../../store/spotsReducer";
 import './spots.css';
 
 function Spots() {
     const dispatch = useDispatch();
     const allSpots = useSelector((state) => (state.spots))
+    console.log("ALLSPOTS STATE: ", allSpots)
     const allSpotsArray = Object.values(allSpots)
+
 
     useEffect(() => {
         dispatch(getAllSpots())
     }, [dispatch])
+
+
+
     return (
         <>
-            <div className="Spots">
-                {allSpotsArray?.map(({ id, previewImage, city, state, avgRating }) => (
-                    <div key={id}>
-                        <div className="Spot">
-                            {previewImage}
-                            <p>{city}, {state} stars{avgRating}</p>
-                        </div>
-                    </div>
+            <div className="container">
+                {allSpotsArray?.map(({ id, previewImage, city, state, avgRating, price }) => (
+                    <NavLink to={`/spots/${id}`} key={id} className="spot-container">
+                        <img src={previewImage} alt={""} className="images" />
+                        <p>{city}, {state} stars{avgRating?.toFixed(2)}</p>
+                        <p>${price} night</p>
+                    </NavLink>
                 ))}
             </div>
         </>

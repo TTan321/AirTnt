@@ -1,0 +1,32 @@
+.spot {
+    padding: 0px 30%;
+}
+
+.image {
+    height: 600px;
+    width: 500px;
+}
+
+.reviews {
+    display: flex;
+    flex-direction: column;
+}
+
+.review {
+    display: flex;
+    justify-content: flex-start;
+
+    padding-bottom: 10px;
+}
+
+.user {
+    padding-right: 20px;
+}
+
+.time {
+    color: grey;
+}
+
+.description {
+    align-items: flex-end;
+}

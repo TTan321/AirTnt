@@ -1,11 +1,18 @@
-.Spots {
+.container {
     display: flex;
-    justify-content: space-evenly;
-    border: 3px Solid red
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 20px;
 }
 
-.Spot {
-    border: 3px dotted blue;
-    width: 200px;
-    height: 200px;
+.spot-container {
+    border-radius: 20px;
+    width: 320px;
+    height: 400px;
+}
+
+.images {
+    height: 65%;
+    width: 100%;
+    border-radius: 20px;
 }
