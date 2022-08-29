@@ -7,7 +7,9 @@ import './spots.css';
 function Spots() {
     const dispatch = useDispatch();
     const allSpots = useSelector((state) => (state.spots))
+    console.log("ALLSPOTS STATE: ", allSpots)
     const allSpotsArray = Object.values(allSpots)
+
 
     useEffect(() => {
         dispatch(getAllSpots())
@@ -21,7 +23,7 @@ function Spots() {
                 {allSpotsArray?.map(({ id, previewImage, city, state, avgRating, price }) => (
                     <NavLink to={`/spots/${id}`} key={id} className="spot-container">
                         <img src={previewImage} alt={""} className="images" />
-                        <p>{city}, {state} stars{avgRating}</p>
+                        <p>{city}, {state} stars{avgRating?.toFixed(2)}</p>
                         <p>${price} night</p>
                     </NavLink>
                 ))}
