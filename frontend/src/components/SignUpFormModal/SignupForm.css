@@ -2,7 +2,6 @@
     display: flex;
     width: 100%;
     border-bottom: 1px solid black;
-    padding-bottom: 10px;
     justify-content: flex-start;
     gap: 38%;
 }
@@ -75,6 +74,7 @@
     width: 90%;
     margin-right: 9%;
     color: red;
+    font-weight: bold;
 }
 
 .submit-button {

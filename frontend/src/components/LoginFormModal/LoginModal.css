@@ -9,7 +9,8 @@
 
 .header-div {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 38%;
     border-bottom: 1px solid black;
     width: 100%
 }
@@ -41,8 +42,15 @@
     width: 90%;
 }
 
+.login-errors-container {
+    width: 89%;
+    margin-right: 9%;
+    color: red;
+    font-weight: bold;
+}
+
 .submit {
-    margin-top: 5%;
+    margin-top: 10%;
     align-self: flex-start;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
