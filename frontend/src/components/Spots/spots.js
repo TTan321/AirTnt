@@ -23,8 +23,11 @@ function Spots() {
                 {allSpotsArray?.map(({ id, previewImage, city, state, avgRating, price }) => (
                     <NavLink to={`/spots/${id}`} key={id} className="spot-container">
                         <img src={previewImage} alt={""} className="images" />
-                        <p>{city}, {state} stars{avgRating?.toFixed(2)}</p>
-                        <p>${price} night</p>
+                        <div className="spotsDescription">
+                            <p className="allSpotsP1">{city}, {state}</p>
+                            <p className="allSpotsP2">stars{avgRating?.toFixed(2)}</p>
+                        </div>
+                        <p className="allSpotsP3">${price} night</p>
                     </NavLink>
                 ))}
             </div>

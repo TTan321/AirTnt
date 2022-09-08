@@ -6,9 +6,19 @@
 }
 
 .spot-container {
+    display: flex;
+    flex-direction: column;
     border-radius: 20px;
     width: 320px;
     height: 400px;
+    color: black;
+}
+
+.spotsDescription {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .images {
