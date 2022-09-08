@@ -2,8 +2,9 @@
     border: solid;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    height: 80px
+    justify-content: space-between;
+    height: 80px;
+    width: 100%;
 }
 
 .host-link {
