@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { useHistory } from 'react-router-dom'
 
-function SignupFormPage() {
+function SignUpForm() {
     let history = useHistory();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
@@ -95,4 +95,4 @@ function SignupFormPage() {
     );
 }
 
-export default SignupFormPage;
+export default SignUpForm;
