@@ -1,37 +1,28 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { getAllSpots } from "../../store/spotsReducer";
+import React from "react";
+import { useHistory } from "react-router-dom";
+import star from '../../images/star-favicon.png'
 import './spots.css';
 
-function Spots() {
-    const dispatch = useDispatch();
-    const allSpots = useSelector((state) => (state.spots))
-    console.log("ALLSPOTS STATE: ", allSpots)
-    const allSpotsArray = Object.values(allSpots)
+function Spots({ spots }) {
+    const history = useHistory();
 
-
-    useEffect(() => {
-        dispatch(getAllSpots())
-    }, [dispatch])
-
-
+    const redirect = (id) => {
+        history.push(`/spots/${id}`)
+    }
 
     return (
-        <>
-            <div className="container">
-                {allSpotsArray?.map(({ id, previewImage, city, state, avgRating, price }) => (
-                    <NavLink to={`/spots/${id}`} key={id} className="spot-container">
-                        <img src={previewImage} alt={""} className="images" />
-                        <div className="spotsDescription">
-                            <p className="allSpotsP1">{city}, {state}</p>
-                            <p className="allSpotsP2">stars{avgRating?.toFixed(2)}</p>
-                        </div>
-                        <p className="allSpotsP3">${price} night</p>
-                    </NavLink>
-                ))}
-            </div>
-        </>
+        <div className="all-spots-container">
+            {spots.map(({ id, previewImage, city, state, avgRating, price }) => (
+                <div onClick={() => redirect(id)} key={id} className="spot-container">
+                    <img src={previewImage} alt={"Preview Spot"} className="images" />
+                    <div className="spotsDescription">
+                        <p className="allSpotsP1">{city}, {state}</p>
+                        <p className="allSpotsP2"><span className="all-spots-star"><img src={star} alt="Stars" /> </span> {!!avgRating ? avgRating.toFixed(2) : "0"} </p>
+                    </div>
+                    <p className="allSpotsP3"><span className="price">${price}</span> night</p>
+                </div>
+            ))}
+        </div>
     )
 }
 

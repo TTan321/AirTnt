@@ -1,10 +1,9 @@
-.container {
+.all-spots-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     column-gap: 20px;
-    border: 2px solid red;
-    margin: 1%;
+    padding-top: 7%;
 }
 
 .spot-container {
@@ -16,15 +15,31 @@
     color: black;
 }
 
+.images {
+    height: 65%;
+    width: 100%;
+    border-radius: 20px;
+}
+
 .spotsDescription {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+    font-size: 18;
 }
 
-.images {
-    height: 65%;
-    width: 100%;
-    border-radius: 20px;
+.allSpotsP2 {
+    display: flex;
+    align-items: center;
+}
+
+.all-spots-star {
+    padding-bottom: 3;
+    padding-right: 3;
+}
+
+
+.price {
+    font-weight: bold;
 }
