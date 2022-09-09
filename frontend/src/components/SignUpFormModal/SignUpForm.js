@@ -95,7 +95,6 @@ function SignUpForm({ setShowModal }) {
                 </div>
                 <button className="submit-button" type="submit">Submit</button>
             </form>
-            <LoginFormModal />
         </>
     );
 }
