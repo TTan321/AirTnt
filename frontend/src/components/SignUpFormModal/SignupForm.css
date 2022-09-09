@@ -22,6 +22,15 @@
     width: 32px;
 }
 
+.SignUp-button {
+    align-self: flex-start;
+    border-radius: 10px;
+    height: 13%;
+    width: 90%;
+    background-color: rgb(227, 28, 95);
+    color: white;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+}
 
 .first-name {
     border: 2px solid black;

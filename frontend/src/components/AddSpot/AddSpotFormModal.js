@@ -7,7 +7,7 @@ function AddSpotFormModal() {
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>New Listing</button>
+            <p onClick={() => setShowModal(true)}>Become a Host</p>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <AddSpotForm />

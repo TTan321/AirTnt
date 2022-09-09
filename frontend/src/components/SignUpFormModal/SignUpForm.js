@@ -5,8 +5,9 @@ import * as sessionActions from "../../store/session";
 import { useHistory } from 'react-router-dom'
 import xfavicon from '../../images/X-favicon.ico'
 import './SignupForm.css'
+import LoginFormModal from "../LoginFormModal/LoginModal";
 
-function SignUpForm(setShowModal) {
+function SignUpForm({ setShowModal }) {
     let history = useHistory();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
@@ -92,8 +93,9 @@ function SignUpForm(setShowModal) {
                 <div className="error-container">
                     {errors.map((error, idx) => <p className="errors" key={idx}>! {error}</p>)}
                 </div>
-                <button className="submit-button" type="submit">Sign Up</button>
+                <button className="submit-button" type="submit">Submit</button>
             </form>
+            <LoginFormModal />
         </>
     );
 }

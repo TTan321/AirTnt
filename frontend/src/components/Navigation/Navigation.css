@@ -1,13 +1,24 @@
 .navBar {
-    border: solid;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    position: fixed;
     height: 80px;
     width: 100%;
+    background-color: white;
+    border-bottom: 1px solid black;
 }
 
-.host-link {
-    border: 1px solid;
-    border-radius: 25%;
+.navBar-Children {
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 88%;
+    gap: 83%;
+}
+
+.sessionLinks {
+    display: flex;
+    width: 100%;
+    gap: 20px;
 }

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal/LoginModal';
 import SignUpFormModel from '../SignUpFormModal/SignUpFormModel';
+import AddSpotFormModal from '../AddSpot/AddSpotFormModal';
 import airtnt from '../../images/airtnt-logo.png';
 import './Navigation.css';
 
@@ -13,23 +14,28 @@ function Navigation({ isLoaded }) {
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
-            < ProfileButton user={sessionUser} />
+            <div className='sessionLinks'>
+                <AddSpotFormModal /> <ProfileButton user={sessionUser} />
+            </div>
         );
     } else {
         sessionLinks = (
-            <>
+            <div className='sessionLinks'>
+                <AddSpotFormModal />
                 <LoginFormModal />
                 <SignUpFormModel />
-            </>
+            </div>
         );
     }
 
     return (
         <div className='navBar'>
-            <NavLink exact to="/" className={"nav-links home"} ><img src={airtnt} alt="Home" /></NavLink>
-            <div className='nav-links'>
-                <NavLink exact to="/hostspot" className={"nav-links host-link"}>Become a Host</NavLink>
-                {isLoaded && sessionLinks}
+            <div className='navBar-Children'>
+                <NavLink exact to="/" className="home" ><img src={airtnt} alt="Home" /></NavLink>
+
+                <div className='nav-links'>
+                    {isLoaded && sessionLinks}
+                </div>
             </div>
         </div>
     );

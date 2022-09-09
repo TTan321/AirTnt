@@ -7,12 +7,14 @@ function SignUpFormModel() {
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Sign Up</button>
-            {showModal && (
-                <Modal onClose={() => setShowModal(false)}>
-                    <SignUpForm closeModal={setShowModal} />
-                </Modal>
-            )}
+            <p onClick={() => setShowModal(true)} >Sign Up</p>
+            {
+                showModal && (
+                    <Modal onClose={() => setShowModal(false)}>
+                        <SignUpForm setShowModal={setShowModal} />
+                    </Modal>
+                )
+            }
         </>
     );
 }
