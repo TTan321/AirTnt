@@ -8,14 +8,14 @@ import AddSpotFormModal from '../AddSpot/AddSpotFormModal';
 import airtnt from '../../images/airtnt-logo.png';
 import './Navigation.css';
 
-function Navigation({ isLoaded }) {
-    const sessionUser = useSelector(state => state.session.user);
+function Navigation({ isLoaded, user }) {
+    // const sessionUser = useSelector(state => state.session.user);
 
     let sessionLinks;
-    if (sessionUser) {
+    if (user) {
         sessionLinks = (
             <div className='sessionLinks'>
-                <AddSpotFormModal /> <ProfileButton user={sessionUser} />
+                <AddSpotFormModal /> <ProfileButton user={user} />
             </div>
         );
     } else {

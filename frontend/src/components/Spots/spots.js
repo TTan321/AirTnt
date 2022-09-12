@@ -3,8 +3,10 @@ import { useHistory } from "react-router-dom";
 import star from '../../images/star-favicon.png'
 import './spots.css';
 
-function Spots({ spots }) {
+function Spots({ spots, user }) {
     const history = useHistory();
+
+    console.log(user)
 
     const redirect = (id) => {
         history.push(`/spots/${id}`)

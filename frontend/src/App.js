@@ -6,15 +6,14 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Spots from "./components/Spots/spots";
 import SpotDetails from "./components/SpotDetails/SpotDetails";
-import AddSpotForm from "./components/AddSpot/AddSpotForm";
 import UserSpots from "./components/AddSpot/index";
 import EditSpot from './components/EditSpot/EditSpot';
 import { getAllSpots } from './store/spotsReducer';
 
 function App() {
   const dispatch = useDispatch();
-
   const [isLoaded, setIsLoaded] = useState(false);
+  const currentUser = useSelector(state => state.session.user);
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
@@ -29,11 +28,11 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <Navigation isLoaded={isLoaded} user={currentUser} />
       {isLoaded && (
         <Switch>
           <Route exact path='/'>
-            <Spots spots={allSpotsArray} />
+            <Spots spots={allSpotsArray} user={currentUser} />
           </Route>
           <Route exact path="/hostspot">
             <UserSpots />
