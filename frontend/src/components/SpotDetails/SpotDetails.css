@@ -1,11 +1,78 @@
-.spot {
-    padding: 0px 30%;
+.page-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding-top: 5%;
 }
 
-.image {
-    height: 600px;
-    width: 500px;
+.spot {
+    height: 100%;
+    width: 75%;
+    border: 2px solid yellow;
 }
+
+.header {
+    align-self: flex-start;
+}
+
+.description-container {
+    align-self: flex-start;
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid red;
+    width: 100%;
+}
+
+.image-container {
+    align-self: flex-start;
+    display: flex;
+    height: 385px;
+    width: 100%;
+    gap: 5px
+}
+
+.i1 {
+    width: 50%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.other-image-container {
+    height: 385px;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+.i2 {
+    height: 50%;
+    width: 100%;
+}
+
+.i3 {
+    height: 50%;
+    width: 100%;
+}
+
+.i4 {
+    height: 50%;
+    width: 100%;
+    border-top-right-radius: 20px;
+}
+
+.i5 {
+    height: 50%;
+    width: 100%;
+    border-bottom-right-radius: 20px;
+}
+
+.bottom-container {
+    align-self: flex-start;
+}
+
 
 .reviews {
     display: flex;

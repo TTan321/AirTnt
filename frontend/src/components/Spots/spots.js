@@ -18,7 +18,7 @@ function Spots({ spots, user }) {
                     <img src={previewImage} alt={"Preview Spot"} className="images" />
                     <div className="spotsDescription">
                         <p className="allSpotsP1">{city}, {state}</p>
-                        <p className="allSpotsP2"><span className="all-spots-star"><i class="fas fa-star" /> </span> {!!avgRating ? avgRating.toFixed(2) : "0"} </p>
+                        <p className="allSpotsP2"><span className="all-spots-star"><i className="fas fa-star" /> </span> {!!avgRating ? avgRating.toFixed(2) : "0"} </p>
                     </div>
                     <p className="allSpotsP3"><span className="price">${price}</span> night</p>
                 </div>

@@ -4,8 +4,8 @@ import { csrfFetch } from './csrf'
 const GET_ALL_SPOTS = "spots/getAllSpots";
 const GET_A_SPOT = "spots/getASpot";
 const ADD_SPOT = "spots/addSpot";
+const EDIT_SPOT = "spot/editSpot";
 const DELETE_SPOT = "spots/deleteSpot";
-
 const ADD_IMAGE = "images/add_image";
 
 
@@ -17,10 +17,10 @@ export const loadSpots = (spots) => {
     };
 };
 
-export const loadASpot = (id) => {
+export const loadASpot = (spot) => {
     return {
         type: GET_A_SPOT,
-        id
+        spot
     };
 };
 
@@ -35,6 +35,13 @@ export const addImage = (image) => {
     return {
         type: ADD_IMAGE,
         image
+    };
+};
+
+export const editSpot = (spot) => {
+    return {
+        type: EDIT_SPOT,
+        spot
     };
 };
 
@@ -60,7 +67,7 @@ export const getASpot = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${id}`);
     if (response.ok) {
         const data = await response.json();
-        // dispatch(loadSpots(data))
+        dispatch(loadASpot(data))
         return data;
     }
 };
@@ -112,10 +119,10 @@ export const updateSpot = spot => async (dispatch) => {
         }),
     });
     const data = await response.json();
-    dispatch(addSpot(data));
     console.log("DATA  ",)
     console.log("SPOT HAS BEEN CREATED")
     const imageData = dispatch(createImage({ ...data, previewImageUrl }))
+    dispatch(editSpot({ ...data, ...imageData }));
     return ({ ...data, ...imageData });
 };
 
@@ -145,29 +152,28 @@ const spotsReducer = (state = initialState, action) => {
             action.spots.Spots.forEach((spot) => (newState[spot.id] = spot))
             return newState;
         }
-        // not in use
-        // case GET_A_SPOT: {
-        //     const newState = {};
-        //     action.spots.Spots.find((spot) => (newState[spot.id] === action.id))
-        //     return newState;
-        // }
+        case GET_A_SPOT: {
+            const newState = {};
+            console.log(action.spot)
+            action.spot.Spots.forEach((spot) => (newState[spot.id] = action.spot.Spots[0]))
+            return newState;
+        }
         case ADD_SPOT: {
             state = Object.values(state);
             console.log('STATE.SPOTS: ', state.spots)
             console.log('JUST STATE : ', state)
             console.log('ACTION.SPOT: ', action.spot)
             console.log("ADD_SPOT ACTION TYPE OF STATE", typeof state, state)
-            if (!state.includes(action.spot)) {
-                // For CREATING a new spot
-                const newState = { ...state, ...action.spot };
-                return newState;
-            }
-            else {
-                // For UPDATING an existing spot
-                state = state.map(spot => spot.id = action.spot);
-                const newState = { ...state };
-                return newState;
-            }
+
+            // For CREATING a new spot
+            const newState = { ...state, ...action.spot };
+            return newState;
+        }
+        case EDIT_SPOT: {
+            // For UPDATING an existing spot
+            state = Object.values(state);
+            const newState = { ...state.map(spot => spot.id = action.spot) };
+            return newState;
         }
         case DELETE_SPOT: {
             state = state.spots;

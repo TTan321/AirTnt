@@ -8,7 +8,8 @@ import Spots from "./components/Spots/spots";
 import SpotDetails from "./components/SpotDetails/SpotDetails";
 import UserSpots from "./components/AddSpot/index";
 import EditSpot from './components/EditSpot/EditSpot';
-import { getAllSpots } from './store/spotsReducer';
+import { getAllSpots, getASpot } from './store/spotsReducer';
+import NoUserSpotDetails from "./components/SpotDetails/NoSessionUser";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ function App() {
             <UserSpots />
           </Route>
           <Route exact path="/spots/:spotId">
-            <SpotDetails />
+            <NoUserSpotDetails />
           </Route>
           <Route exact path="/spots/:spotId/edit">
             <EditSpot />
