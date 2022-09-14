@@ -9,6 +9,7 @@ import UserSpots from "./components/AddSpot/index";
 import EditSpot from './components/EditSpot/EditSpot';
 import NoUserSpotDetails from "./components/SpotDetails/NoSessionUser";
 import { getAllSpots } from './store/spotsReducer';
+import LoginForm from "./components/LoginFormPage/index";
 
 
 function App() {
@@ -34,6 +35,9 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Spots spots={allSpotsArray} user={currentUser} />
+          </Route>
+          <Route exact path="/login">
+            <LoginForm />
           </Route>
           <Route exact path="/hostspot">
             <UserSpots />

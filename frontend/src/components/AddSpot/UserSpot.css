@@ -1,0 +1,31 @@
+.user-spots-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 5%;
+}
+
+.ushead1 {
+    padding-top: 30px;
+}
+
+.ushead2 {
+    border-bottom: 1px solid black;
+}
+
+.listing-name {
+    font-size: 22;
+}
+
+.container {
+    display: flex;
+    column-gap: 20px;
+}
+
+.listing-body {
+    display: flex;
+    justify-content: space-between;
+}
+
+.listing-price {
+    font-weight: bold;
+}

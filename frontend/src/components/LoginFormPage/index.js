@@ -1,56 +1,75 @@
-import React, { useState } from 'react';
-import * as sessionActions from '../../store/session';
-import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import './LoginForm.css';
+import React, { useState } from "react";
+import * as sessionActions from "../../store/session";
+import { useDispatch } from "react-redux";
+import xfavicon from '../../images/X-favicon.ico'
+import '../LoginFormModal/LoginModal.css';
+import { useHistory } from "react-router-dom";
 
-function LoginFormPage() {
+function LoginForm({ setShowModal }) {
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
-    const [credential, setCredential] = useState('');
-    const [password, setPassword] = useState('');
+    const history = useHistory();
+    const [credential, setCredential] = useState("");
+    const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
-
-    if (sessionUser) return (
-        <Redirect to="/" />
-    );
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.login({ credential, password }))
-            .catch(async (res) => {
+        return dispatch(sessionActions.login({ credential, password })).catch(
+            async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
-            });
-    }
+            }
+        );
+    };
+
+    const logInDemo = (e) => {
+        e.preventDefault();
+
+        dispatch(sessionActions.login({ "credential": "Demo-lition", "password": "password" }))
+        return history.push('/hostspot')
+    };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <label>
-                Username or Email
-                <input
-                    type="text"
-                    value={credential}
-                    onChange={(e) => setCredential(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Password
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-            </label>
-            <button type="submit">Log In</button>
-        </form>
+        <>
+            <div className="header-div">
+                <button className="cancel-button" onClick={() => setShowModal(false)}> <img src={xfavicon} alt="cancel" /></button>
+                <h1 className="h1">Log In</h1>
+            </div>
+            <form className="form" onSubmit={handleSubmit}>
+                <h2 className="h2">Welcome to AirTnT</h2>
+                <div className="login-input-container">
+                    {!!errors.length && (
+                        <div className="login-errors-container">
+                            {errors.map((error, idx) => (
+                                <p className="login-errors" key={idx}>! {error}</p>
+                            ))}
+                        </div>
+                    )}
+                    <input
+                        className="login"
+                        type="text"
+                        value={credential}
+                        onChange={(e) => setCredential(e.target.value)}
+                        placeholder="Username or Email"
+                        required
+                    />
+                    <input
+                        className="password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                        required
+                    />
+                </div>
+                <div className="login-button-container">
+                    <button className="submit" type="submit" >Log In</button>
+                    <button className="demo-user" onClick={logInDemo} >Demo User</button>
+                </div>
+            </form>
+        </>
     );
 }
 
-export default LoginFormPage;
+export default LoginForm;

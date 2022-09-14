@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal/LoginModal';
@@ -8,20 +8,20 @@ import AddSpotFormModal from '../AddSpot/AddSpotFormModal';
 import airtnt from '../../images/airtnt-logo.png';
 import './Navigation.css';
 
-function Navigation({ isLoaded, user }) {
-    // const sessionUser = useSelector(state => state.session.user);
+function Navigation({ isLoaded }) {
+    const sessionUser = useSelector(state => state.session.user);
+    const history = useHistory();
 
     let sessionLinks;
-    if (user) {
+    if (!!sessionUser) {
         sessionLinks = (
             <div className='sessionLinks'>
-                <AddSpotFormModal /> <ProfileButton user={user} />
+                <ProfileButton user={sessionUser} />
             </div>
         );
     } else {
         sessionLinks = (
             <div className='sessionLinks'>
-                <AddSpotFormModal />
                 <LoginFormModal />
                 <SignUpFormModel />
             </div>
@@ -30,10 +30,12 @@ function Navigation({ isLoaded, user }) {
 
     return (
         <div className='navBar'>
-            <div className='navBar-Children'>
-                <NavLink exact to="/" className="home" ><img src={airtnt} alt="Home" /></NavLink>
-
-                <div className='nav-links'>
+            <div className='inner-nav-container'>
+                <div className='home-container'>
+                    <NavLink exact to="/" className="home" ><img src={airtnt} alt="Home" /></NavLink>
+                </div>
+                <div className='profile-container'>
+                    <p onClick={() => history.push(sessionUser ? "/hostspot" : "/login")}>Become a host</p>
                     {isLoaded && sessionLinks}
                 </div>
             </div>

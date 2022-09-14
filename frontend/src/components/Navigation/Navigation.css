@@ -8,17 +8,23 @@
     border-bottom: 1px solid black;
 }
 
-.navBar-Children {
-
+.inner-nav-container {
+    width: 88%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    width: 88%;
-    gap: 83%;
+}
+
+.home-container {
+    width: 50%;
+}
+
+.profile-container {
+    width: 50%;
+    display: flex;
 }
 
 .sessionLinks {
     display: flex;
     width: 100%;
-    gap: 20px;
+    justify-content: flex-end;
 }

@@ -89,7 +89,7 @@ function NoUserSpotDetails() {
                                     <div className='review' key={review.id} >
                                         <div className='review-user'>
                                             <div className='profile'>
-                                                <i class="fas fa-user-circle fa-2x" />
+                                                <i className="fas fa-user-circle fa-2x" />
                                             </div>
                                             <div className='user-name'>
                                                 <p className='review-username'>{review.User.firstName} {review.User.lastName}</p>
