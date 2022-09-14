@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import star from '../../images/star-favicon.png'
 import './spots.css';
 
 function Spots({ spots, user }) {
@@ -19,7 +18,7 @@ function Spots({ spots, user }) {
                     <img src={previewImage} alt={"Preview Spot"} className="images" />
                     <div className="spotsDescription">
                         <p className="allSpotsP1">{city}, {state}</p>
-                        <p className="allSpotsP2"><span className="all-spots-star"><img src={star} alt="Stars" /> </span> {!!avgRating ? avgRating.toFixed(2) : "0"} </p>
+                        <p className="allSpotsP2"><span className="all-spots-star"><i class="fas fa-star" /> </span> {!!avgRating ? avgRating.toFixed(2) : "0"} </p>
                     </div>
                     <p className="allSpotsP3"><span className="price">${price}</span> night</p>
                 </div>
