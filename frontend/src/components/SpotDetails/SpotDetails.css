@@ -77,8 +77,12 @@
     padding-top: 5%;
 }
 
-.spot-description {
+.spot-description-container {
     width: 50%
+}
+
+.spot-description {
+    margin: 0;
 }
 
 .bookings {
@@ -133,10 +137,22 @@
 .review-user {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
 }
 
 .profile {
     height: 32px;
     width: 32px;
+}
+
+.review-username {
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 2px;
+}
+
+.review-time {
+    color: grey;
+    margin: 0;
+    margin-top: 2px;
 }

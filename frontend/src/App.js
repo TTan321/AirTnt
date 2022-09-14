@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-
 import * as sessionActions from "./store/session";
+
 import Navigation from "./components/Navigation";
 import Spots from "./components/Spots/spots";
-import SpotDetails from "./components/SpotDetails/SpotDetails";
 import UserSpots from "./components/AddSpot/index";
 import EditSpot from './components/EditSpot/EditSpot';
-import { getAllSpots, getASpot } from './store/spotsReducer';
 import NoUserSpotDetails from "./components/SpotDetails/NoSessionUser";
+import { getAllSpots } from './store/spotsReducer';
+
 
 function App() {
   const dispatch = useDispatch();

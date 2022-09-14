@@ -46,8 +46,8 @@ function NoUserSpotDetails() {
                             </div>
                         </div>
                         <div className='bottom-container'>
-                            <div className='spot-description'>
-                                <p>{spot.description} by { }</p>
+                            <div className='spot-description-container'>
+                                <p className='spot-description'>{spot.description} </p>
                             </div>
                             <div className='bookings'>
                                 <div className='booking-description'>
@@ -92,8 +92,8 @@ function NoUserSpotDetails() {
                                                 <i class="fas fa-user-circle fa-2x" />
                                             </div>
                                             <div className='user-name'>
-                                                <p className='b-p'>{review.User.firstName} {review.User.lastName}</p>
-                                                <p className='b-p'>{review.createdAt.slice(0, 10)}</p>
+                                                <p className='review-username'>{review.User.firstName} {review.User.lastName}</p>
+                                                <p className='review-time'>{review.createdAt.slice(0, 10)}</p>
                                             </div>
                                         </div>
                                         <div className='review-description'>
