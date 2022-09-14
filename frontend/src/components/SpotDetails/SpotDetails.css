@@ -9,19 +9,20 @@
 
 .spot {
     height: 100%;
+    max-width: 1105px;
     width: 75%;
-    border: 2px solid yellow;
 }
 
 .header {
     align-self: flex-start;
+    margin: 0;
+    padding-top: 35px;
 }
 
 .description-container {
     align-self: flex-start;
     display: flex;
-    justify-content: space-between;
-    border: 2px solid red;
+    gap: 25px;
     width: 100%;
 }
 
@@ -71,29 +72,71 @@
 
 .bottom-container {
     align-self: flex-start;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5%;
 }
 
+.spot-description {
+    width: 50%
+}
 
-.reviews {
+.bookings {
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    width: 25%;
+    padding: 0 5%;
+}
+
+.booking-description {
+    display: flex;
+    justify-content: space-between;
+}
+
+.calculation {
+    display: flex;
+}
+
+.left {
+    width: 50%;
     display: flex;
     flex-direction: column;
 }
 
-.review {
+.right {
+    width: 50%;
     display: flex;
-    justify-content: flex-start;
-
-    padding-bottom: 10px;
-}
-
-.user {
-    padding-right: 20px;
-}
-
-.time {
-    color: grey;
-}
-
-.description {
+    flex-direction: column;
     align-items: flex-end;
+}
+
+.b-p {
+    margin: 5 0;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid black;
+}
+
+
+.review-grid {
+    display: flex;
+    padding-top: 10px;
+}
+
+.review {
+    width: 50%;
+}
+
+.review-user {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.profile {
+    height: 32px;
+    width: 32px;
 }
