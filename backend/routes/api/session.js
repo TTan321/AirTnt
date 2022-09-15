@@ -72,7 +72,7 @@ router.get(
                 email: user.email,
                 username: user.username,
             });
-        } else return res.json({})
+        } else return res.json(null)
     }
 );
 
