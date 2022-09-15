@@ -18,13 +18,9 @@
     width: 50%;
 }
 
-.profile-container {
-    width: 50%;
-    display: flex;
-}
-
 .sessionLinks {
     display: flex;
     width: 100%;
     justify-content: flex-end;
+    align-items: center;
 }

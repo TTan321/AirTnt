@@ -22,8 +22,7 @@ function Navigation({ isLoaded }) {
     } else {
         sessionLinks = (
             <div className='sessionLinks'>
-                <LoginFormModal />
-                <SignUpFormModel />
+                <ProfileButton user={sessionUser} />
             </div>
         );
     }
@@ -35,7 +34,6 @@ function Navigation({ isLoaded }) {
                     <NavLink exact to="/" className="home" ><img src={airtnt} alt="Home" /></NavLink>
                 </div>
                 <div className='profile-container'>
-                    <p onClick={() => history.push(sessionUser ? "/hostspot" : "/Login")}>Become a host</p>
                     {isLoaded && sessionLinks}
                 </div>
             </div>
