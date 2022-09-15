@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
-import xfavicon from '../../images/X-favicon.ico'
 import '../LoginFormModal/LoginModal.css';
 import { useHistory } from "react-router-dom";
 
@@ -33,7 +32,7 @@ function LoginForm({ setShowModal }) {
     return (
         <>
             <div className="header-div">
-                <button className="cancel-button" onClick={() => setShowModal(false)}> <img src={xfavicon} alt="cancel" /></button>
+                <p className="cancel-button" onClick={() => setShowModal(false)}> <i className="fas fa-times" /></p>
                 <h1 className="h1">Log In</h1>
             </div>
             <form className="form" onSubmit={handleSubmit}>

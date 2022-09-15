@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { getAllSpots } from "../../store/spotsReducer";
 import './spots.css';
 
-function Spots({ spots }) {
+function Spots() {
     const history = useHistory();
+    const dispatch = useDispatch();
+
+    const allSpots = useSelector((state) => (state.spots));
+    const spots = Object.values(allSpots);
+
+    useEffect(() => {
+        dispatch(getAllSpots())
+    }, [dispatch])
 
     return (
         <div className="outer-spots-container">

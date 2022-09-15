@@ -125,6 +125,15 @@
     border-top: 1px solid black;
 }
 
+.reviews-header {
+    display: flex;
+    flex-direction: column;
+    gap: 35%;
+    margin-bottom: 30px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+
+}
 
 .review-grid {
     display: flex;

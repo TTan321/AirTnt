@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import AddSpotFormModal from "./AddSpotFormModal";
-import { getAllSpots } from "../../store/spotsReducer";
+import { getAUsersSpots } from "../../store/spotsReducer";
 import EditSpotFormModal from "../EditSpot/EditSpotFromModal";
+import { deleteSpotAtId } from "../../store/spotsReducer";
 import './UserSpot.css'
 
 
@@ -11,18 +12,24 @@ function UserSpots() {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
-    const allSpots = useSelector((state) => (state.spots))
-    const allSpotsArray = Object.values(allSpots)
-    const userSpots = allSpotsArray.filter((spot) => spot.ownerId === sessionUser?.id)
+
+    const allSpots = useSelector((state) => (state.spots));
+    const userSpots = Object.values(allSpots);
+
+    if (Object.keys(sessionUser).length === 0) history.push('/');
 
     useEffect(() => {
-        dispatch(getAllSpots())
-    }, [dispatch,])
+        dispatch(getAUsersSpots());
+    }, [dispatch]);
+
+    const deleteSpot = (spotId) => {
+        dispatch(deleteSpotAtId(spotId));
+    }
 
 
     return (
         <>
-            {userSpots && (
+            {userSpots && sessionUser && (
                 <div className="user-spots-container">
                     <div>
                         <h1 className="users-spot-header ushead1">Hello {sessionUser.firstName}, welcome to AirTnt!</h1>
@@ -43,7 +50,7 @@ function UserSpots() {
                                     </div>
                                     <div className="buttons-container">
                                         <EditSpotFormModal />
-                                        <button className="delete">Delete</button>
+                                        <button className="delete" onClick={() => deleteSpot(id)} >Delete</button>
                                     </div>
                                 </div>
                             ))}

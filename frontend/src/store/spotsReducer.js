@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf'
 
 const GET_ALL_SPOTS = "spots/getAllSpots";
 const GET_A_SPOT = "spots/getASpot";
+const GET_A_USERS_SPOTS = "spots/getAUsersSpots"
 const ADD_SPOT = "spots/addSpot";
 const EDIT_SPOT = "spot/editSpot";
 const DELETE_SPOT = "spots/deleteSpot";
@@ -21,6 +22,13 @@ export const loadASpot = (spot) => {
     return {
         type: GET_A_SPOT,
         spot
+    };
+};
+
+export const loadAUsersSPot = (spots) => {
+    return {
+        type: GET_A_USERS_SPOTS,
+        spots
     };
 };
 
@@ -68,6 +76,16 @@ export const getASpot = (id) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(loadASpot(data))
+        return data;
+    }
+};
+
+// GET A USER'S SPOTS THUNK
+export const getAUsersSpots = () => async (dispatch) => {
+    const response = await csrfFetch('/api/spots/current');
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(loadAUsersSPot(data))
         return data;
     }
 };
@@ -154,8 +172,12 @@ const spotsReducer = (state = initialState, action) => {
         }
         case GET_A_SPOT: {
             const newState = {};
-            console.log(action.spot)
             action.spot.Spots.forEach((spot) => (newState[spot.id] = action.spot.Spots[0]))
+            return newState;
+        }
+        case GET_A_USERS_SPOTS: {
+            const newState = {};
+            action.spots.Spots.forEach((spot) => (newState[spot.id] = spot))
             return newState;
         }
         case ADD_SPOT: {

@@ -1,0 +1,9 @@
+.Submit-Review {
+    height: 30px;
+    width: 10%;
+    border-radius: 20px;
+    background-color: rgb(227, 28, 95);
+    color: white;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    padding-bottom: 5px;
+}

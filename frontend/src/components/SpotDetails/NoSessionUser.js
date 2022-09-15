@@ -2,22 +2,26 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getSpotsReviews } from '../../store/ReviewsReducer';
-import { getAllSpots, getASpot } from '../../store/spotsReducer';
+import { getASpot } from '../../store/spotsReducer';
+import AddReviewModal from '../AddReview/AddReviewModal';
 import './SpotDetails.css'
 
 function NoUserSpotDetails() {
     const dispatch = useDispatch();
     const { spotId } = useParams();
-    const spot = useSelector((state) => (state.spots[spotId]));
+    const spotObject = useSelector((state) => (state.spots));
+    const spot = Object.values(spotObject)[0];
+
+    const user = useSelector(state => state.session.user)
 
     const allReviews = useSelector((state) => (state.reviews))
     const reviews = Object.values(allReviews);
 
-    console.log(spot)
-    console.log(reviews)
+    // console.log(spot)
+    // console.log(reviews)
 
     useEffect(() => {
-        dispatch(getAllSpots());
+        dispatch(getASpot(spotId));
         dispatch(getSpotsReviews(spotId));
     }, [dispatch, spotId])
 
@@ -80,10 +84,13 @@ function NoUserSpotDetails() {
                             </div>
                         </div>
                         <div className='reviews-container'>
-                            <h3 className='reviews-header'>
-                                <span className="all-spots-star"><i className="fas fa-star" /> </span>
-                                {!!spot.avgRating ? spot.avgRating.toFixed(2) : "0"} - {reviews.length} Reviews
-                            </h3>
+                            <div className='reviews-header'>
+                                <h3>
+                                    <span className="all-spots-star"><i className="fas fa-star" /> </span>
+                                    {!!spot.avgRating ? spot.avgRating.toFixed(2) : "0"} - {reviews.length} Reviews
+                                </h3>
+                                {user && (<AddReviewModal />)}
+                            </div>
                             <div className='review-grid'>
                                 {reviews.map(review => (
                                     <div className='review' key={review.id} >

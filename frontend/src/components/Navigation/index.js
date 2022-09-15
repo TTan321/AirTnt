@@ -9,11 +9,11 @@ import airtnt from '../../images/airtnt-logo.png';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
-    const sessionUser = useSelector(state => state.session.user);
+    const sessionUser = useSelector((state) => (state.session.user));
     const history = useHistory();
 
     let sessionLinks;
-    if (!!sessionUser) {
+    if (sessionUser) {
         sessionLinks = (
             <div className='sessionLinks'>
                 <ProfileButton user={sessionUser} />
@@ -35,7 +35,7 @@ function Navigation({ isLoaded }) {
                     <NavLink exact to="/" className="home" ><img src={airtnt} alt="Home" /></NavLink>
                 </div>
                 <div className='profile-container'>
-                    <p onClick={() => history.push(sessionUser ? "/hostspot" : "/login")}>Become a host</p>
+                    <p onClick={() => history.push(sessionUser ? "/hostspot" : "/Login")}>Become a host</p>
                     {isLoaded && sessionLinks}
                 </div>
             </div>

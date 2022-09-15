@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { useHistory } from 'react-router-dom'
-import xfavicon from '../../images/X-favicon.ico'
 import './SignupForm.css'
 import LoginFormModal from "../LoginFormModal/LoginModal";
 
@@ -37,7 +36,7 @@ function SignUpForm({ setShowModal }) {
     return (
         <>
             <div className="signup-header">
-                <button className="cancel-button" onClick={() => setShowModal(false)} ><img src={xfavicon} alt="cancel" /></button>
+                <p className="cancel-button" onClick={() => setShowModal(false)} ><i className="fas fa-times" /></p>
                 <h1 className="h1-signup">Sign Up</h1>
             </div>
             <h2 className="h2-signup">Welcome to AirTnT</h2>

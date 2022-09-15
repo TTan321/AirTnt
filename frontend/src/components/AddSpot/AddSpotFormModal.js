@@ -10,7 +10,7 @@ function AddSpotFormModal() {
             <button className="add-spot-button" onClick={() => setShowModal(true)}>Add New Listing</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <AddSpotForm />
+                    <AddSpotForm setShowModal={setShowModal} />
                 </Modal>
             )}
         </>

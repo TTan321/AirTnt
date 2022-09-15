@@ -3,11 +3,12 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
-import { addAReview } from '../../store/ReviewsReducer';
+import { addAReview, getSpotsReviews } from '../../store/ReviewsReducer';
+import { getASpot } from '../../store/spotsReducer';
+import './AddReview.css'
 
 
-
-function AddReview() {
+function AddReview({ setShowModal }) {
     const [review, setReview] = useState('');
     const [stars, setStars] = useState('');
     const { spotId } = useParams();
@@ -23,7 +24,10 @@ function AddReview() {
             review, stars, spotId
         }
 
-        dispatch(addAReview(payload))
+        dispatch(addAReview(payload));
+        dispatch(getSpotsReviews(payload.spotId));
+        dispatch(getASpot(payload.spotId))
+        setShowModal(false)
         history.push(`/spots/${spotId}`);
     }
 
