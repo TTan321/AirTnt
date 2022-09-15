@@ -31,12 +31,13 @@ function ProfileButton({ user }) {
     const logout = (e) => {
         e.preventDefault();
         dispatch(sessionActions.logout());
+        setShowMenu(showMenu === false ? true : false);
     };
 
     if (user) {
         return (
             <div className="profile-container">
-                <p onClick={() => history.push(user ? "/hostspot" : "/Login")}>Become a host</p>
+                <p onClick={() => history.push(user ? "/hostspot" : "/login")}>Become a host</p>
                 <button className="profile-button" onClick={() => setShowMenu(showMenu === false ? true : false)}>
                     <i className="fas fa-bars" />
                     <i className="fas fa-user-circle fa-2x" />
@@ -55,15 +56,15 @@ function ProfileButton({ user }) {
     } else {
         return (
             <div className="profile-container">
-                <p onClick={() => history.push(user ? "/hostspot" : "/Login")}>Become a host</p>
+                <p onClick={() => history.push(user ? "/hostspot" : "/login")}>Become a host</p>
                 <button className="profile-button" onClick={() => setShowMenu(showMenu === false ? true : false)}>
                     <i className="fas fa-bars" />
                     <i className="fas fa-user-circle fa-2x" />
                 </button>
                 {showMenu && (
                     <ul className="profile-dropdown">
-                        <li><LoginFormModal /></li>
-                        <li><SignUpFormModel /></li>
+                        <li><LoginFormModal setShowMenu={setShowMenu} /></li>
+                        <li><SignUpFormModel setShowMenu={setShowMenu} /></li>
                     </ul>
                 )}
             </div>

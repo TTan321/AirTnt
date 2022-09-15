@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom'
 import './SignupForm.css'
 import LoginFormModal from "../LoginFormModal/LoginModal";
 
-function SignUpForm({ setShowModal }) {
+function SignUpForm({ setShowModal, setShowMenu }) {
     let history = useHistory();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
@@ -22,6 +22,7 @@ function SignUpForm({ setShowModal }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setShowMenu(false)
         if (password === confirmPassword) {
             setErrors([]);
             return (dispatch(sessionActions.signup({ firstName, lastName, email, username, password })), history.push("/"))

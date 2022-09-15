@@ -12,10 +12,10 @@ export const loadReviews = (reviews) => {
     };
 };
 
-export const addReview = (reviews) => {
+export const addReview = (review) => {
     return {
         type: ADD_REVIEW,
-        reviews
+        review
     };
 };
 
@@ -73,8 +73,13 @@ const reviewsReducer = (state = initialState, action) => {
             return newState;
         }
         case ADD_REVIEW: {
-            state = state.reviews;
-            const newState = { ...state, ...action.review }
+            console.log("case ADD REVIEW")
+            console.log("PREVIOUS STATE - state: ", state)
+            console.log("action.review: ", action.review)
+            const newReview = {};
+            newReview[action.review.id] = { ...action.review }
+            const newState = { ...state, ...newReview }
+            console.log("newState: ", newState)
             return newState;
         }
         case DELETE_REVIEW: {

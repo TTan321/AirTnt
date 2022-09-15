@@ -5,7 +5,7 @@ import './LoginModal.css';
 import SignUpFormModel from "../SignUpFormModal/SignUpFormModel";
 import SignUpForm from "../SignUpFormModal/SignUpForm";
 
-function LoginForm({ setShowModal }) {
+function LoginForm({ setShowModal, setShowMenu }) {
     const dispatch = useDispatch();
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
@@ -13,6 +13,7 @@ function LoginForm({ setShowModal }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setShowMenu(false)
         setErrors([]);
         return dispatch(sessionActions.login({ credential, password })).catch(
             async (res) => {
@@ -24,7 +25,7 @@ function LoginForm({ setShowModal }) {
 
     const logInDemo = (e) => {
         e.preventDefault();
-
+        setShowMenu(false)
         return dispatch(sessionActions.login({ "credential": "Demo-lition", "password": "password" }))
     };
 

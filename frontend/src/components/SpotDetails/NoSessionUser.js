@@ -21,8 +21,8 @@ function NoUserSpotDetails() {
     // console.log(reviews)
 
     useEffect(() => {
-        dispatch(getASpot(spotId));
         dispatch(getSpotsReviews(spotId));
+        dispatch(getASpot(spotId));
     }, [dispatch, spotId])
 
     return (
@@ -99,7 +99,7 @@ function NoUserSpotDetails() {
                                                 <i className="fas fa-user-circle fa-2x" />
                                             </div>
                                             <div className='user-name'>
-                                                <p className='review-username'>{review.User.firstName} {review.User.lastName}</p>
+                                                <p className='review-username'>{review.User?.firstName} {review.User?.lastName}</p>
                                                 <p className='review-time'>{review.createdAt.slice(0, 10)}</p>
                                             </div>
                                         </div>

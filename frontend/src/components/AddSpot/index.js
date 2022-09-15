@@ -16,7 +16,6 @@ function UserSpots() {
     const allSpots = useSelector((state) => (state.spots));
     const userSpots = Object.values(allSpots);
 
-    if (Object.keys(sessionUser).length === 0) history.push('/');
 
     useEffect(() => {
         dispatch(getAUsersSpots());
@@ -24,8 +23,11 @@ function UserSpots() {
 
     const deleteSpot = (spotId) => {
         dispatch(deleteSpotAtId(spotId));
+        dispatch(getAUsersSpots());
+        history.push('/hostspot')
     }
 
+    if (!sessionUser) return (history.push('/'));
 
     return (
         <>

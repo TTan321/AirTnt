@@ -3,9 +3,11 @@ import { useState } from "react";
 import { createSpot, getAUsersSpots } from "../../store/spotsReducer";
 import LoginFormModal from "../LoginFormModal/LoginForm";
 import './AddSpotForm.css'
+import { useHistory } from "react-router-dom";
 
 function AddSpotForm({ setShowModal }) {
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
 
     const [name, setName] = useState('');
@@ -35,8 +37,9 @@ function AddSpotForm({ setShowModal }) {
         }
 
         dispatch(createSpot(payload));
-        dispatch(getAUsersSpots())
-        setShowModal(false)
+        setShowModal(false);
+        dispatch(getAUsersSpots());
+        history.push('/hostspot');
         // console.log("NEW SPOT IS :", newSpot)
 
         // const getNewSpot = async () => {

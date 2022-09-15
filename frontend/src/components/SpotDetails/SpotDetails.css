@@ -137,6 +137,7 @@
 
 .review-grid {
     display: flex;
+    flex-wrap: wrap;
     padding-top: 10px;
 }
 
@@ -148,6 +149,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    padding-top: 5px;
 }
 
 .profile {
