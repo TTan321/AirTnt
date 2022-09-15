@@ -87,6 +87,7 @@
 }
 
 .submit-button {
+    border: none;
     margin-top: 5%;
     align-self: flex-start;
     border-radius: 10px;
