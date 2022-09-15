@@ -64,9 +64,6 @@ function ProfileButton({ user }) {
                     <ul className="profile-dropdown">
                         <li><LoginFormModal /></li>
                         <li><SignUpFormModel /></li>
-                        <li>
-                            <button onClick={logout}>Log Out</button>
-                        </li>
                     </ul>
                 )}
             </div>
