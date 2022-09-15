@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import LoginFormModal from "../LoginFormModal/LoginModal";
 import SignUpFormModel from "../SignUpFormModal/SignUpFormModel";
+import UserReviews from "../UserReviews/UserReviews";
 import './ProfileButton.css'
 
 function ProfileButton({ user }) {
@@ -28,6 +29,18 @@ function ProfileButton({ user }) {
     //     return () => document.removeEventListener("click", closeMenu);
     // }, [showMenu]);
 
+    const reviews = (e) => {
+        e.preventDefault();
+        setShowMenu(showMenu === false ? true : false);
+        return history.push('/reviews')
+    }
+
+    const hostspot = (e) => {
+        e.preventDefault();
+        setShowMenu(showMenu === false ? true : false);
+        return history.push('/hostspot')
+    }
+
     const logout = (e) => {
         e.preventDefault();
         dispatch(sessionActions.logout());
@@ -45,9 +58,11 @@ function ProfileButton({ user }) {
                 {showMenu && (
                     <ul className="profile-dropdown">
                         <li>{user.username}</li>
-                        <li>{user.email}</li>
+                        <li className="user-email">{user.email}</li>
+                        <li onClick={reviews}>Your Reviews</li>
+                        <li onClick={hostspot}>Your Active Listings</li>
                         <li>
-                            <button onClick={logout}>Log Out</button>
+                            <button className="logout-button" onClick={logout}>Log Out</button>
                         </li>
                     </ul>
                 )}

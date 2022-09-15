@@ -1,9 +1,66 @@
-.Submit-Review {
+.Add-Review {
     height: 30px;
-    width: 10%;
+    width: 12%;
     border-radius: 20px;
     background-color: rgb(227, 28, 95);
     color: white;
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
-    padding-bottom: 5px;
+}
+
+.review-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 240px;
+    width: 400px;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.review-form-header {
+    display: flex;
+    align-items: center;
+    height: 50%;
+    width: 100%;
+    gap: 60px;
+}
+
+.cancel-button {
+    padding-bottom: 40px;
+}
+
+.star-container {
+    display: inline-block;
+}
+
+.star-container * {
+    float: left;
+}
+
+.star-inputs {
+    display: none;
+}
+
+.star-inputs:checked~label {
+    color: rgb(227, 28, 95);
+}
+
+.star-label {
+    font-size: 20px;
+}
+
+.review-textbox {
+    height: 100px;
+    width: 100%;
+    padding-bottom: 80px;
+}
+
+.Submit-Review {
+    margin-top: 25px;
+    height: 30px;
+    width: 100%;
+    border-radius: 20px;
+    background-color: rgb(227, 28, 95);
+    color: white;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
