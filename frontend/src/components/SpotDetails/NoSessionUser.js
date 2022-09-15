@@ -89,7 +89,7 @@ function NoUserSpotDetails() {
                                     <span className="all-spots-star"><i className="fas fa-star" /> </span>
                                     {!!spot.avgRating ? spot.avgRating.toFixed(2) : "0"} - {reviews.length} Reviews
                                 </h3>
-                                {user && (<AddReviewModal />)}
+                                {user && user.id !== spot.ownerId && (<AddReviewModal />)}
                             </div>
                             <div className='review-grid'>
                                 {reviews.map(review => (
