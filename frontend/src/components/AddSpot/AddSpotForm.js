@@ -27,7 +27,7 @@ function AddSpotForm({ setShowModal }) {
     }
 
 
-    const onSumbit = (e) => {
+    const onSumbit = async (e) => {
         e.preventDefault();
 
         setOwnerId(sessionUser.id)
@@ -36,9 +36,9 @@ function AddSpotForm({ setShowModal }) {
             name, address, city, country, state, lat, lng, description, price, ownerId, previewImageUrl
         }
 
-        dispatch(createSpot(payload));
+        await dispatch(createSpot(payload));
         setShowModal(false);
-        dispatch(getAUsersSpots());
+        await dispatch(getAUsersSpots());
         history.push('/hostspot');
         // console.log("NEW SPOT IS :", newSpot)
 

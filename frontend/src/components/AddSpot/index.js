@@ -21,9 +21,9 @@ function UserSpots() {
         dispatch(getAUsersSpots());
     }, [dispatch]);
 
-    const deleteSpot = (spotId) => {
-        dispatch(deleteSpotAtId(spotId));
-        dispatch(getAUsersSpots());
+    const deleteSpot = async (spotId) => {
+        await dispatch(deleteSpotAtId(spotId));
+        await dispatch(getAUsersSpots());
         history.push('/hostspot')
     }
 
@@ -31,7 +31,7 @@ function UserSpots() {
 
     return (
         <>
-            {userSpots && sessionUser && (
+            {allSpots && sessionUser && (
                 <div className="user-spots-container">
                     <div>
                         <h1 className="users-spot-header ushead1">Hello {sessionUser.firstName}, welcome to AirTnt!</h1>

@@ -101,17 +101,18 @@ export const createSpot = spot => async (dispatch) => {
             name, address, city, state, country, lat, lng, description, price, ownerId
         }),
     });
-    const data = await response.json();
-    dispatch(addSpot(data));
+    const spotData = await response.json();
+    const imageData = await dispatch(createImage({ ...spotData, previewImageUrl }));
     console.log("DATA  ",)
+    dispatch(addSpot({ ...spotData, ...imageData }));
     console.log("SPOT HAS BEEN CREATED")
-    const imageData = dispatch(createImage({ ...data, previewImageUrl }))
-    return ({ ...data, ...imageData });
+    return ({ ...spotData, ...imageData });
 };
 
 // THUNK TO ADD IMAGE TO DB - CALLBACK FOR CREATE SPOT THUNK AND UPDATE SPOT THUNK
 export const createImage = image => async (dispatch) => {
-    const { id, previewImageUrl, ownerId } = image;
+    console.log("Data param passed to createImage: ", image)
+    const { id, previewImageUrl } = image;
     console.log("type of ID ", typeof id)
     console.log("image is: ", image)
     console.log("ABOUT TO POST IMAGE TO SERVER")
@@ -181,14 +182,14 @@ const spotsReducer = (state = initialState, action) => {
             return newState;
         }
         case ADD_SPOT: {
-            state = Object.values(state);
-            console.log('STATE.SPOTS: ', state.spots)
-            console.log('JUST STATE : ', state)
-            console.log('ACTION.SPOT: ', action.spot)
-            console.log("ADD_SPOT ACTION TYPE OF STATE", typeof state, state)
+            console.log('Previous spot state - state : ', state)
+            console.log('New Spot - ACTION.SPOT: ', action.spot)
 
             // For CREATING a new spot
-            const newState = { ...state, ...action.spot };
+            const newSpot = {};
+            newSpot[action.spot.id] = action.spot
+            const newState = { ...state, ...newSpot };
+            console.log('NEW SPOT HAS BEEN MADE - newState: ', newState)
             return newState;
         }
         case EDIT_SPOT: {
