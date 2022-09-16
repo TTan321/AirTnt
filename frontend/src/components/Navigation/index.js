@@ -2,9 +2,6 @@ import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import LoginFormModal from '../LoginFormModal/LoginModal';
-import SignUpFormModel from '../SignUpFormModal/SignUpFormModel';
-import AddSpotFormModal from '../AddSpot/AddSpotFormModal';
 import airtnt from '../../images/airtnt-logo.png';
 import './Navigation.css';
 

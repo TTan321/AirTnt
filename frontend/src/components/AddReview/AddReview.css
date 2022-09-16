@@ -20,7 +20,7 @@
 .review-form-header {
     display: flex;
     align-items: center;
-    height: 50%;
+    height: 30%;
     width: 100%;
     gap: 60px;
 }
@@ -30,7 +30,8 @@
 }
 
 .star-container {
-    display: inline-block;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .star-container * {

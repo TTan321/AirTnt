@@ -25,7 +25,6 @@ function UserReviews() {
     }
 
 
-
     if (!userReviews) return null;
     // else if (reviewsArray && !reviewsArray[0].Spot) return null;
     return (

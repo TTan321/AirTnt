@@ -16,7 +16,6 @@ function UserSpots() {
     const allSpots = useSelector((state) => (state.spots));
     const userSpots = Object.values(allSpots);
 
-
     useEffect(() => {
         dispatch(getAUsersSpots());
     }, [dispatch]);
@@ -51,7 +50,7 @@ function UserSpots() {
                                         </div>
                                     </div>
                                     <div className="buttons-container">
-                                        <EditSpotFormModal />
+                                        <EditSpotFormModal userSpot={userSpots.find(spot => spot.id === id)} />
                                         <button className="delete" onClick={() => deleteSpot(id)} >Delete</button>
                                     </div>
                                 </div>

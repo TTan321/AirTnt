@@ -81,6 +81,7 @@
     align-items: center;
     height: 15%;
     width: 100%;
+    gap: 1px;
 }
 
 .edit {

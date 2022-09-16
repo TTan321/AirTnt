@@ -129,20 +129,27 @@ export const createImage = image => async (dispatch) => {
 
 // UPDATE SPOT THUNK
 export const updateSpot = spot => async (dispatch) => {
-    const { name, address, city, state, country, lat, lng, description, price, ownerId, previewImageUrl } = spot;
+    const { name, address, city, state, country, lat, lng, description, price, ownerId, previewImageUrl, imageId } = spot;
     console.log(`About to UPDATE spot with id ${spot.id} to server`)
-    const response = await csrfFetch(`/api/spots/${spot.id}`, {
-        method: "PUT",
-        body: JSON.stringify({
-            name, address, city, state, country, lat, lng, description, price, ownerId
-        }),
+    const deleteImageRes = await csrfFetch(`/api/images/${imageId}`, {
+        method: "Delete",
     });
-    const data = await response.json();
-    console.log("DATA  ",)
-    console.log("SPOT HAS BEEN CREATED")
-    const imageData = dispatch(createImage({ ...data, previewImageUrl }))
-    dispatch(editSpot({ ...data, ...imageData }));
-    return ({ ...data, ...imageData });
+    if (deleteImageRes.ok) {
+        console.log("Preview Image HAS BEEN DELETED")
+        const deletedImageData = await deleteImageRes.json();
+        const editSpotResponse = await csrfFetch(`/api/spots/${spot.id}`, {
+            method: "PUT",
+            body: JSON.stringify({
+                name, address, city, state, country, lat, lng, description, price, ownerId
+            }),
+        });
+        const editSpotData = await editSpotResponse.json();
+        console.log("DATA  ",)
+        console.log("SPOT HAS BEEN CREATED")
+        const imageData = await dispatch(createImage({ ...editSpotData, previewImageUrl }))
+        dispatch(editSpot({ ...editSpotData, ...imageData }));
+        return ({ ...editSpotData, ...imageData });
+    }
 };
 
 // DELETE SPOT THUNK
@@ -194,8 +201,11 @@ const spotsReducer = (state = initialState, action) => {
         }
         case EDIT_SPOT: {
             // For UPDATING an existing spot
-            state = Object.values(state);
-            const newState = { ...state.map(spot => spot.id = action.spot) };
+            console.log('Previous spot state - state : ', state);
+            console.log('New Spot - ACTION.SPOT: ', action.spot);
+
+            const newState = { ...state };
+            newState[action.spot.id] = action.spot
             return newState;
         }
         case DELETE_SPOT: {

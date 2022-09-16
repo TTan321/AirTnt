@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { createSpot, getAUsersSpots } from "../../store/spotsReducer";
 import LoginFormModal from "../LoginFormModal/LoginForm";
 import './AddSpotForm.css'
-import { useHistory } from "react-router-dom";
 
 function AddSpotForm({ setShowModal }) {
     const dispatch = useDispatch();
