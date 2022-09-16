@@ -1,0 +1,106 @@
+.user-spots-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 5%;
+}
+
+.ushead1 {
+    padding-top: 30px;
+}
+
+.listing-mid-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.add-spot-button {
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(227, 28, 95);
+    color: white;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+}
+
+.container {
+    display: flex;
+    column-gap: 20px;
+}
+
+.listings-spot-container {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    width: 320px;
+    height: 400px;
+    padding: 0 10px;
+}
+
+.listing-details {
+    height: 85%;
+    margin: 0;
+}
+
+.listing-name {
+    font-size: 22;
+    margin-top: 5px;
+}
+
+.listing-images {
+    height: 250px;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.listing-body {
+    display: flex;
+    justify-content: space-between;
+}
+
+.listing-price {
+    font-weight: bold;
+}
+
+.l-p {
+    margin: 0;
+    margin-top: 10;
+}
+
+.listing-avgRating {
+    margin: 0;
+    margin-top: 10;
+}
+
+.buttons-container {
+    display: flex;
+    align-items: center;
+    height: 15%;
+    width: 100%;
+    gap: 1px;
+}
+
+.edit {
+    height: 50%;
+    width: 50%;
+    border: none;
+    border-right: white;
+    border-radius: 10px;
+    background-color: rgb(227, 28, 95);
+    color: white;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+}
+
+.delete {
+    height: 50%;
+    width: 50%;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(227, 28, 95);
+    color: white;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+}

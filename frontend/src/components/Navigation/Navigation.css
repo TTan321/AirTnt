@@ -1,12 +1,30 @@
 .navBar {
-    border: solid;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    height: 80px
+    justify-content: center;
+    position: fixed;
+    height: 80px;
+    width: 100%;
+    background-color: white;
+    border-bottom: 1px solid black;
 }
 
-.host-link {
-    border: 1px solid;
-    border-radius: 25%;
+.inner-nav-container {
+    width: 88%;
+    display: flex;
+    align-items: center;
+}
+
+.home-container {
+    width: 50%;
+}
+
+.sessionLinks {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.host-button {
+    cursor: pointer;
 }

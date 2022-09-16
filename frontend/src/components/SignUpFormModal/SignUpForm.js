@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { useHistory } from 'react-router-dom'
+import './SignupForm.css'
+import LoginFormModal from "../LoginFormModal/LoginModal";
 
-function SignupFormPage() {
+function SignUpForm({ setShowModal, setShowMenu }) {
     let history = useHistory();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
@@ -20,6 +22,7 @@ function SignupFormPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setShowMenu(false)
         if (password === confirmPassword) {
             setErrors([]);
             return (dispatch(sessionActions.signup({ firstName, lastName, email, username, password })), history.push("/"))
@@ -32,67 +35,68 @@ function SignupFormPage() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <label>
-                First Name
+        <>
+            <div className="signup-header">
+                <p className="cancel-button" onClick={() => setShowModal(false)} ><i className="fas fa-times" /></p>
+                <h1 className="h1-signup">Sign Up</h1>
+            </div>
+            <h2 className="h2-signup">Welcome to AirTnT</h2>
+            <form className="form" onSubmit={handleSubmit}>
                 <input
+                    className="first-name"
                     type="text"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
+                    placeholder="First Name"
                     required
                 />
-            </label>
-            <label>
-                Last Name
                 <input
+                    className="last-name"
                     type="text"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
+                    placeholder="Last Name"
                     required
                 />
-            </label>
-            <label>
-                Email
                 <input
-                    type="text"
+                    className="email"
+                    type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    placeholder="email"
                     required
                 />
-            </label>
-            <label>
-                Username
                 <input
+                    className="username"
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Username"
                     required
                 />
-            </label>
-            <label>
-                Password
                 <input
+                    className="signup-password"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Password"
                     required
                 />
-            </label>
-            <label>
-                Confirm Password
                 <input
+                    className="confirm-password"
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Confirm Password"
                     required
                 />
-            </label>
-            <button type="submit">Sign Up</button>
-        </form>
+                <div className="error-container">
+                    {errors.map((error, idx) => <p className="errors" key={idx}>! {error}</p>)}
+                </div>
+                <button className="submit-button" type="submit">Submit</button>
+            </form>
+        </>
     );
 }
 
-export default SignupFormPage;
+export default SignUpForm;

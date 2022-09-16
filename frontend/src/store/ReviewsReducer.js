@@ -1,9 +1,17 @@
 
 import { csrfFetch } from "./csrf";
 
+const GET_USER_REVIEWS = "reviews/getUserReviews";
 const GET_REVIEWS = "reviews/getReviews";
 const ADD_REVIEW = "review/addReview";
 const DELETE_REVIEW = "review/deleteReview";
+
+export const loadUserReviews = (reviews) => {
+    return {
+        type: GET_USER_REVIEWS,
+        reviews
+    };
+};
 
 export const loadReviews = (reviews) => {
     return {
@@ -12,10 +20,10 @@ export const loadReviews = (reviews) => {
     };
 };
 
-export const addReview = (reviews) => {
+export const addReview = (review) => {
     return {
         type: ADD_REVIEW,
-        reviews
+        review
     };
 };
 
@@ -26,6 +34,13 @@ export const deleteReview = (review) => {
     };
 };
 
+export const getUserReviews = () => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/current`)
+    const data = await response.json();
+    console.log("REVIEWS DATA: ", data)
+    dispatch(loadReviews(data));
+    return data;
+};
 
 export const getSpotsReviews = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
@@ -67,18 +82,27 @@ const initialState = {};
 
 const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case GET_USER_REVIEWS: {
+            const newState = {};
+            action.reviews.Reviews.forEach((review) => (newState[review.id] = review))
+            return newState;
+        }
         case GET_REVIEWS: {
             const newState = {};
             action.reviews.Reviews.forEach((review) => (newState[review.id] = review))
             return newState;
         }
         case ADD_REVIEW: {
-            state = state.reviews;
-            const newState = { ...state, ...action.review }
+            console.log("case ADD REVIEW")
+            console.log("PREVIOUS STATE - state: ", state)
+            console.log("action.review: ", action.review)
+            const newReview = {};
+            newReview[action.review.id] = { ...action.review }
+            const newState = { ...state, ...newReview }
+            console.log("newState: ", newState)
             return newState;
         }
         case DELETE_REVIEW: {
-            state = state.reviews;
             const newState = { ...state }
             delete newState[action.review];
             return newState;

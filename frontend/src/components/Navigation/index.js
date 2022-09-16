@@ -1,35 +1,40 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import LoginFormModal from '../LoginFormModal';
+import airtnt from '../../images/airtnt-logo.png';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
-    const sessionUser = useSelector(state => state.session.user);
+    const sessionUser = useSelector((state) => (state.session.user));
+    const history = useHistory();
 
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
-            < ProfileButton user={sessionUser} />
+            <div className='sessionLinks'>
+                <ProfileButton user={sessionUser} />
+            </div>
         );
     } else {
         sessionLinks = (
-            <>
-                <LoginFormModal />
-                <NavLink to="/signup">Sign Up</NavLink>
-            </>
+            <div className='sessionLinks'>
+                <ProfileButton user={sessionUser} />
+            </div>
         );
     }
 
     return (
-        <ul className='navBar'>
-            <li className='nav-links'>
-                <NavLink exact to="/" className={"nav-links home"} >Home</NavLink>
-                <NavLink exact to="/hostspot" className={"nav-links host-link"}>Become a Host</NavLink>
-                {isLoaded && sessionLinks}
-            </li>
-        </ul>
+        <div className='navBar'>
+            <div className='inner-nav-container'>
+                <div className='home-container'>
+                    <NavLink exact to="/" className="home" ><img src={airtnt} alt="Home" /></NavLink>
+                </div>
+                <div className='profile-container'>
+                    {isLoaded && sessionLinks}
+                </div>
+            </div>
+        </div>
     );
 }
 

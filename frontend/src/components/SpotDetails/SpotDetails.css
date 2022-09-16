@@ -1,32 +1,170 @@
+.page-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding-top: 5%;
+}
+
 .spot {
-    padding: 0px 30%;
+    height: 100%;
+    max-width: 1105px;
+    width: 75%;
 }
 
-.image {
-    height: 600px;
-    width: 500px;
+.header {
+    align-self: flex-start;
+    margin: 0;
+    padding-top: 35px;
 }
 
-.reviews {
+.description-container {
+    align-self: flex-start;
+    display: flex;
+    gap: 25px;
+    width: 100%;
+}
+
+.image-container {
+    align-self: flex-start;
+    display: flex;
+    height: 395px;
+    width: 100%;
+    gap: 5px;
+}
+
+.i1 {
+    height: 390px;
+    width: 50%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.other-image-container {
+    height: 390px;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+.i2 {
+    height: 50%;
+    width: 100%;
+}
+
+.i3 {
+    height: 50%;
+    width: 100%;
+}
+
+.i4 {
+    height: 50%;
+    width: 100%;
+    border-top-right-radius: 20px;
+}
+
+.i5 {
+    height: 50%;
+    width: 100%;
+    border-bottom-right-radius: 20px;
+}
+
+.bottom-container {
+    align-self: flex-start;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5%;
+}
+
+.spot-description-container {
+    width: 50%
+}
+
+.spot-description {
+    margin: 0;
+}
+
+.bookings {
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    width: 25%;
+    padding: 0 5%;
+}
+
+.booking-description {
+    display: flex;
+    justify-content: space-between;
+}
+
+.calculation {
+    display: flex;
+}
+
+.left {
+    width: 50%;
     display: flex;
     flex-direction: column;
 }
 
-.review {
+.right {
+    width: 50%;
     display: flex;
-    justify-content: flex-start;
-
-    padding-bottom: 10px;
-}
-
-.user {
-    padding-right: 20px;
-}
-
-.time {
-    color: grey;
-}
-
-.description {
+    flex-direction: column;
     align-items: flex-end;
+}
+
+.b-p {
+    margin: 5 0;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid black;
+}
+
+.reviews-header {
+    display: flex;
+    flex-direction: column;
+    gap: 35%;
+    margin-bottom: 30px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+
+}
+
+.review-grid {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 10px;
+}
+
+.review {
+    width: 50%;
+}
+
+.review-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 5px;
+}
+
+.profile {
+    height: 32px;
+    width: 32px;
+}
+
+.review-username {
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 2px;
+}
+
+.review-time {
+    color: grey;
+    margin: 0;
+    margin-top: 2px;
 }

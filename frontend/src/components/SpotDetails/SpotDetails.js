@@ -34,9 +34,7 @@ const SpotDetails = () => {
 
     if (sessionUser && sessionUser?.id === spot?.ownerId) {
 
-
         const edit = <EditSpotFormModal />
-
 
         const deleteSpot = (e) => {
             e.preventDefault();
@@ -111,29 +109,6 @@ const SpotDetails = () => {
             noReview = "No"
         }
 
-        let reviewsDiv;
-        if (reviews) {
-            reviewsDiv = <div className="reviews">
-                <h2>{noReview} Stars {spot?.avgRating?.toFixed(2)} - {count} Reviews</h2>
-                {AddReview}
-                {reviews?.map(({ id, User, createdAt, review, stars }) => (
-                    <div key={id} className="review">
-                        <div className="user">
-                            <div>{User?.firstName} {User?.lastName}</div>
-                            <div className="time"> {createdAt?.slice(0, 10)}</div>
-                        </div>
-                        <div className="description">
-                            <div>Rating {stars}</div>
-                            <div>{review}</div>
-                        </div>
-                        <div>
-                            {deleteReview}
-                        </div>
-                    </div>
-                ))}
-            </div>
-        }
-
         return (
             <>
                 <div className="spot">
@@ -142,7 +117,27 @@ const SpotDetails = () => {
                         <img src={spot?.previewImage} className="image" alt={"Spot preview"} />
                         <p>{spot?.description} ${spot?.price} night Rating {spot?.avgRating?.toFixed(2)}</p>
                     </div>
-                    {reviewsDiv}
+                    {!!reviews && (
+                        <div className="reviews">
+                            <h2>{noReview} Stars {spot?.avgRating?.toFixed(2)} - {count} Reviews</h2>
+                            {AddReview}
+                            {reviews?.map(({ id, User, createdAt, review, stars }) => (
+                                <div key={id} className="review">
+                                    <div className="user">
+                                        <div>{User?.firstName} {User?.lastName}</div>
+                                        <div className="time"> {createdAt?.slice(0, 10)}</div>
+                                    </div>
+                                    <div className="description">
+                                        <div>Rating {stars}</div>
+                                        <div>{review}</div>
+                                    </div>
+                                    <div>
+                                        {deleteReview}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </>
         )

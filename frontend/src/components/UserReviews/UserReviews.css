@@ -1,0 +1,74 @@
+.user-reviews-page {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5%;
+}
+
+.reviews-title {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgb(227, 28, 95);
+    ;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.user-review-header {
+    margin-bottom: 10px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.spot-name {
+    margin: 0;
+    margin-top: 10px;
+}
+
+.review-address {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.user-reviews {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.review-container {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    width: 300px;
+    height: 225px;
+    padding: 0 10px;
+    border: 1px solid lightgrey;
+}
+
+.review-rating {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-body {
+    margin-top: 10px;
+    height: 42%;
+}
+
+.delete-review-container {
+    display: flex;
+    justify-content: center;
+    height: 8%;
+}
+
+.delete-review-button {
+    height: 100%;
+    width: 50%;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(227, 28, 95);
+    color: white;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+}

@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
+
 import Navigation from "./components/Navigation";
 import Spots from "./components/Spots/spots";
-import SpotDetails from "./components/SpotDetails/SpotDetails";
-import AddSpotForm from "./components/AddSpot/AddSpotForm";
 import UserSpots from "./components/AddSpot/index";
 import EditSpot from './components/EditSpot/EditSpot';
+import NoUserSpotDetails from "./components/SpotDetails/NoSessionUser";
+import LoginForm from "./components/LoginFormPage/index";
+import UserReviews from "./components/UserReviews/UserReviews";
+
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -25,14 +28,17 @@ function App() {
           <Route exact path='/'>
             <Spots />
           </Route>
-          <Route exact path="/signup">
-            <SignupFormPage />
+          <Route exact path="/login">
+            <LoginForm />
           </Route>
           <Route exact path="/hostspot">
             <UserSpots />
           </Route>
+          <Route exact path="/reviews">
+            <UserReviews />
+          </Route>
           <Route exact path="/spots/:spotId">
-            <SpotDetails />
+            <NoUserSpotDetails />
           </Route>
           <Route exact path="/spots/:spotId/edit">
             <EditSpot />
