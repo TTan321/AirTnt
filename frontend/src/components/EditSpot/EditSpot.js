@@ -34,11 +34,11 @@ function EditSpotForm({ userSpot, setShowModal }) {
 
     return (
         <form className='spot-form' onSubmit={onSubmit}>
+            <i className="fas fa-times cancel" onClick={() => setShowModal(false)} />
             <div className='edit-spot-form-container'>
                 <div className='edit-spot-header'>
                     <h1 className='spot-header'>Edit listing for {userSpot.name}</h1>
                 </div>
-
                 <label className="spot-labels" htmlFor="name">Name:</label><br />
                 <input
                     className='edit-spot-inputs'
@@ -138,7 +138,6 @@ function EditSpotForm({ userSpot, setShowModal }) {
                 </div>
                 <div className='edit-spot-buttons'>
                     <button className='listing-submit' type="submit">Submit Changes</button>
-                    <button className='cancel-submit' onClick={() => setShowModal(false)}>Cancel</button>
                 </div>
             </div>
         </form>

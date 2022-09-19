@@ -1,24 +1,32 @@
-.spot-form {
+.add-spot-form {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     height: 550px;
     width: 450px;
     padding: 10px;
     font-style: sans-serif;
 }
 
-.edit-spot-form-container {
+.cancel {
+    align-self: flex-start;
+}
+
+.add-spot-form-container {
     width: 90%;
 }
 
-.edit-spot-header {
+.add-spot-header {
+    align-self: flex-start;
     border-bottom: 1px solid black;
     width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 
-.spot-header {
+.h1 {
     font-size: x-large;
+    display: flex;
+    justify-content: center;
     margin: 0;
     margin-top: 10px;
     margin-bottom: 5px;
@@ -62,7 +70,7 @@
 
 .lat {
     width: 49%;
-    height: 5%;
+    height: 10%;
 }
 
 .long {
@@ -83,7 +91,7 @@
 
 .edit-spot-inputs {
     align-self: flex-start;
-    height: 5%;
+    height: 20;
     width: 100%;
     margin-bottom: 5px;
 }
@@ -93,24 +101,16 @@
     width: 100%;
 }
 
-.edit-spot-buttons {
-    padding-top: 15px;
+.add-spot-button-div {
+    height: 15%;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
 }
 
-.listing-submit {
+.add-spot-submit {
     height: 35px;
-    width: 49.5%;
-    border: none;
-    border-radius: 20px;
-    background-color: rgb(227, 28, 95);
-    color: white;
-}
-
-.cancel-submit {
-    height: 35px;
-    width: 49.5%;
+    width: 60%;
     border: none;
     border-radius: 20px;
     background-color: rgb(227, 28, 95);
