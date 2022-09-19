@@ -131,24 +131,24 @@ export const createImage = image => async (dispatch) => {
 export const updateSpot = spot => async (dispatch) => {
     const { name, address, city, state, country, lat, lng, description, price, ownerId, previewImageUrl, imageId } = spot;
     console.log(`About to UPDATE spot with id ${spot.id} to server`)
-    const deleteImageRes = await csrfFetch(`/api/images/${imageId}`, {
-        method: "Delete",
+    // const deleteImageRes = await csrfFetch(`/api/images/${imageId}`, {
+    //     method: "Delete",
+    // });
+    const editSpotResponse = await csrfFetch(`/api/spots/${spot.id}`, {
+        method: "PUT",
+        body: JSON.stringify({
+            name, address, city, state, country, lat, lng, description, price, ownerId
+        }),
     });
-    if (deleteImageRes.ok) {
+    if (editSpotResponse.ok) {
         console.log("Preview Image HAS BEEN DELETED")
-        const deletedImageData = await deleteImageRes.json();
-        const editSpotResponse = await csrfFetch(`/api/spots/${spot.id}`, {
-            method: "PUT",
-            body: JSON.stringify({
-                name, address, city, state, country, lat, lng, description, price, ownerId
-            }),
-        });
+        // const deletedImageData = await deleteImageRes.json();
         const editSpotData = await editSpotResponse.json();
         console.log("DATA  ",)
         console.log("SPOT HAS BEEN CREATED")
-        const imageData = await dispatch(createImage({ ...editSpotData, previewImageUrl }))
-        dispatch(editSpot({ ...editSpotData, ...imageData }));
-        return ({ ...editSpotData, ...imageData });
+        // const imageData = await dispatch(createImage({ ...editSpotData, previewImageUrl }))
+        dispatch(editSpot({ ...editSpotData }));
+        return ({ ...editSpotData });
     }
 };
 
