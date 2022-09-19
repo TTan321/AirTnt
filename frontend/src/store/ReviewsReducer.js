@@ -38,7 +38,7 @@ export const getUserReviews = () => async (dispatch) => {
     const response = await csrfFetch(`/api/reviews/current`)
     const data = await response.json();
     console.log("REVIEWS DATA: ", data)
-    dispatch(loadReviews(data));
+    dispatch(loadUserReviews(data));
     return data;
 };
 
@@ -89,7 +89,7 @@ const reviewsReducer = (state = initialState, action) => {
         }
         case GET_REVIEWS: {
             const newState = {};
-            action.reviews.Reviews.forEach((review) => (newState[review.id] = review))
+            action.reviews.Reviews.forEach((review) => (newState[review.id] = { ...review, ["Spot"]: {} }))
             return newState;
         }
         case ADD_REVIEW: {
