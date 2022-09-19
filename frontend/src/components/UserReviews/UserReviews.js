@@ -20,8 +20,9 @@ function UserReviews() {
 
     if (!user) return history.push('/');
 
-    const deleteReview = (id) => {
-        dispatch(deleteAReview(id));
+    const deleteReview = async (id) => {
+        await dispatch(deleteAReview(id));
+        await dispatch(getUserReviews());
     }
 
 
