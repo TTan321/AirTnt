@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateSpot } from '../../store/spotsReducer';
+import { updateSpot, getAUsersSpots } from '../../store/spotsReducer';
 import "./EditSpot.css"
 
 
@@ -19,7 +19,7 @@ function EditSpotForm({ userSpot, setShowModal }) {
     const [price, setPrice] = useState(userSpot.price);
     const [previewImageUrl, setPreviewImageUrl] = useState(userSpot.previewImage);
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
 
         const ownerId = sessionUser.id;
@@ -27,8 +27,9 @@ function EditSpotForm({ userSpot, setShowModal }) {
             "id": userSpot.id, name, address, city, country, state, lat, lng, description, price, ownerId, previewImageUrl
         }
 
-        const editedSpot = dispatch(updateSpot(payload));
-        console.log("EDITED SPOT DATA ", editedSpot)
+        const editedSpot = await dispatch(updateSpot(payload));
+        console.log("EDITED SPOT DATA ", editedSpot);
+        await dispatch(getAUsersSpots());
         setShowModal(false);
     }
 

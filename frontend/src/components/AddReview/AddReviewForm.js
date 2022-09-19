@@ -17,16 +17,16 @@ function AddReview({ setShowModal }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
 
         const payload = {
             review, stars, spotId
         }
 
-        dispatch(addAReview(payload));
-        dispatch(getSpotsReviews(payload.spotId));
-        dispatch(getASpot(payload.spotId))
+        await dispatch(addAReview(payload));
+        await dispatch(getSpotsReviews(payload.spotId));
+        await dispatch(getASpot(payload.spotId));
         setShowModal(false)
         history.push(`/spots/${spotId}`);
     }

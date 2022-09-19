@@ -37,24 +37,9 @@ function AddSpotForm({ setShowModal }) {
         }
 
         await dispatch(createSpot(payload));
+        await dispatch(getAUsersSpots());
         setShowModal(false);
-        // await dispatch(getAUsersSpots());
-        history.push('/hostspot');
         // console.log("NEW SPOT IS :", newSpot)
-
-        // const getNewSpot = async () => {
-        //     const spot = await newSpot;
-        //     console.log("SPOT IS :", spot)
-        //     console.log("Redirecting to new spot page")
-        //     if (spot) {
-        //     }
-        //     // return <Redirect to={`/spots/${spot?.id}`} />
-        //     // return spot;
-        // }
-        // getNewSpot();
-        // const spot = getNewSpot();
-        // if (spot) {
-        // }
     }
 
 
