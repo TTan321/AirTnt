@@ -1,7 +1,16 @@
-.user-spots-container {
+.user-spots-page-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     padding-top: 5%;
+    width: 100%;
+}
+
+.user-spots-header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
 }
 
 .ushead1 {
@@ -9,8 +18,9 @@
 }
 
 .listing-mid-div {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     border-bottom: 1px solid black;
     padding-bottom: 10px;
@@ -23,22 +33,28 @@
     border-radius: 10px;
     background-color: rgb(227, 28, 95);
     color: white;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    font-family: sans-serif;
 }
 
-.container {
+.user-spots-container {
     display: flex;
-    column-gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 15px;
+    padding: 0 5%;
+    padding-top: 2%;
 }
+
 
 .listings-spot-container {
-    padding-top: 10px;
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
     border-radius: 20px;
     width: 320px;
     height: 400px;
     padding: 0 10px;
+    font-family: sans-serif;
 }
 
 .listing-details {
@@ -92,7 +108,6 @@
     border-radius: 10px;
     background-color: rgb(227, 28, 95);
     color: white;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
 
 .delete {
@@ -102,5 +117,4 @@
     border-radius: 10px;
     background-color: rgb(227, 28, 95);
     color: white;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }

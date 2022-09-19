@@ -23,7 +23,6 @@ function UserSpots() {
     const deleteSpot = async (spotId) => {
         await dispatch(deleteSpotAtId(spotId));
         await dispatch(getAUsersSpots());
-        history.push('/hostspot')
     }
 
     if (!sessionUser) return (history.push('/'));
@@ -31,34 +30,35 @@ function UserSpots() {
     return (
         <>
             {allSpots && sessionUser && (
-                <div className="user-spots-container">
-                    <div>
+                <div className="user-spots-page-container">
+                    <div className="user-spots-header-container">
                         <h1 className="users-spot-header ushead1">Hello {sessionUser.firstName}, welcome to AirTnt!</h1>
                         <div className="listing-mid-div">
                             <h2 className="users-spot-header ushead2">Your active listings</h2>
                             <AddSpotFormModal />
                         </div>
-                        <div className="container">
-                            {userSpots?.map(({ id, previewImage, avgRating, price, name }) => (
-                                <div key={id} className="listings-spot-container">
-                                    <div className="listing-details" onClick={() => history.push(`/spots/${id}`)}>
-                                        <p className="listing-name">{name}</p>
-                                        <img src={previewImage} alt="Listing" className="listing-images" />
-                                        <div className="listing-body">
-                                            <p className="l-p"><span className="listing-price">${price}</span> night </p>
-                                            <p className="listing-avgRating"><i className="fas fa-star" /> {avgRating ? avgRating : 0}</p>
-                                        </div>
-                                    </div>
-                                    <div className="buttons-container">
-                                        <EditSpotFormModal userSpot={userSpots.find(spot => spot.id === id)} />
-                                        <button className="delete" onClick={() => deleteSpot(id)} >Delete</button>
+                    </div>
+                    <div className="user-spots-container">
+                        {userSpots?.map(({ id, previewImage, avgRating, price, name }) => (
+                            <div key={id} className="listings-spot-container">
+                                <div className="listing-details" onClick={() => history.push(`/spots/${id}`)}>
+                                    <p className="listing-name">{name}</p>
+                                    <img src={previewImage} alt="Listing" className="listing-images" />
+                                    <div className="listing-body">
+                                        <p className="l-p"><span className="listing-price">${price}</span> night </p>
+                                        <p className="listing-avgRating"><i className="fas fa-star" /> {avgRating ? avgRating : 0}</p>
                                     </div>
                                 </div>
-                            ))}
-                        </div>
+                                <div className="buttons-container">
+                                    <EditSpotFormModal userSpot={userSpots.find(spot => spot.id === id)} />
+                                    <button className="delete" onClick={() => deleteSpot(id)} >Delete</button>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
-            )}
+            )
+            }
         </>
     )
 }
