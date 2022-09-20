@@ -130,12 +130,11 @@ function EditSpotForm({ userSpot, setShowModal }) {
                 </div>
                 <div>
                     <label className="spot-labels" htmlFor="description">Description:</label>
-                    <input
+                    <textarea
                         className='textbox'
-                        type='text'
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}>
-                    </input>
+                    </textarea>
                 </div>
                 <div className='edit-spot-buttons'>
                     <button className='listing-submit' type="submit">Submit Changes</button>

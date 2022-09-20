@@ -91,13 +91,14 @@ function AddReview({ setShowModal }) {
             </div>
             <div>
                 <label htmlFor="review" />
-                <input
+                <textarea
                     className='review-textbox'
-                    type="type"
+                    rows="5"
+                    cols="51"
                     value={review}
                     placeholder="Type Review here"
                     onChange={(e) => setReview(e.target.value)}>
-                </input>
+                </textarea>
             </div>
             <button className='Submit-Review' type="submit">Submit Review</button>
         </form>

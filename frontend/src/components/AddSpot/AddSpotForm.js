@@ -141,12 +141,11 @@ function AddSpotForm({ setShowModal }) {
                     </div>
                     <div>
                         <label className="spot-labels" htmlFor="description">Description:</label>
-                        <input
+                        <textarea
                             className='textbox'
-                            type='text'
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}>
-                        </input>
+                        </textarea>
                     </div>
                     <div className="add-spot-button-div">
                         <button className="add-spot-submit" type="submit">Submit</button>

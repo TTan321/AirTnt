@@ -1,4 +1,5 @@
 .Add-Review {
+    border: none;
     height: 30px;
     width: 12%;
     border-radius: 20px;
@@ -52,13 +53,10 @@
     font-size: 20px;
 }
 
-.review-textbox {
-    height: 100px;
-    width: 100%;
-    padding-bottom: 80px;
-}
+
 
 .Submit-Review {
+    border: none;
     margin-top: 25px;
     height: 30px;
     width: 100%;
