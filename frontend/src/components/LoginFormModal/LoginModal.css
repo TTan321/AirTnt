@@ -62,7 +62,8 @@
 .login {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    height: 40%;
+    border-bottom: none;
+    height: 30px;
     width: 100%;
 }
 
@@ -70,7 +71,7 @@
     align-self: flex-start;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    height: 40%;
+    height: 30px;
     width: 100%;
 }
 
