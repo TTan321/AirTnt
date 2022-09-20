@@ -12,7 +12,6 @@ function AddReview({ setShowModal }) {
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(0);
     const { spotId } = useParams();
-    // console.log(spotId)
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -41,33 +40,13 @@ function AddReview({ setShowModal }) {
                 <input
                     className='star-inputs'
                     type="radio"
-                    id="r1"
+                    id="r5"
                     name="stars"
-                    value={1}
+                    value={5}
                     onChange={(e) => setStars(e.target.value)}
-                    checked={stars >= 1 ? true : false}
+                    checked={+stars === 5 ? true : false}
                 />
-                <label className='star-label' htmlFor="r1">&#9733;</label>
-                <input
-                    className='star-inputs'
-                    type="radio"
-                    id="r2"
-                    name="stars"
-                    value={2}
-                    onChange={(e) => setStars(e.target.value)}
-                    checked={stars >= 2 ? true : false}
-                />
-                <label className='star-label' htmlFor="r2">&#9733;</label>
-                <input
-                    className='star-inputs'
-                    type="radio"
-                    id="r3"
-                    name="stars"
-                    value={3}
-                    onChange={(e) => setStars(e.target.value)}
-                    checked={stars >= 3 ? true : false}
-                />
-                <label className='star-label' htmlFor="r3">&#9733;</label>
+                <label className='star-label' htmlFor="r5">&#9733;</label>
                 <input
                     className='star-inputs'
                     type="radio"
@@ -75,19 +54,39 @@ function AddReview({ setShowModal }) {
                     name="stars"
                     value={4}
                     onChange={(e) => setStars(e.target.value)}
-                    checked={stars >= 4 ? true : false}
+                    checked={+stars >= 4 ? true : false}
                 />
                 <label className='star-label' htmlFor="r4">&#9733;</label>
                 <input
                     className='star-inputs'
                     type="radio"
-                    id="r5"
+                    id="r3"
                     name="stars"
-                    value={5}
+                    value={3}
                     onChange={(e) => setStars(e.target.value)}
-                    checked={stars === 5 ? true : false}
+                    checked={+stars >= 3 ? true : false}
                 />
-                <label className='star-label' htmlFor="r5">&#9733;</label>
+                <label className='star-label' htmlFor="r3">&#9733;</label>
+                <input
+                    className='star-inputs'
+                    type="radio"
+                    id="r2"
+                    name="stars"
+                    value={2}
+                    onChange={(e) => setStars(e.target.value)}
+                    checked={+stars >= 2 ? true : false}
+                />
+                <label className='star-label' htmlFor="r2">&#9733;</label>
+                <input
+                    className='star-inputs'
+                    type="radio"
+                    id="r1"
+                    name="stars"
+                    value={1}
+                    onChange={(e) => setStars(e.target.value)}
+                    checked={+stars >= 1 ? true : false}
+                />
+                <label className='star-label' htmlFor="r1">&#9733;</label>
             </div>
             <div>
                 <label htmlFor="review" />

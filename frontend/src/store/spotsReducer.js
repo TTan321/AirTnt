@@ -93,8 +93,6 @@ export const getAUsersSpots = () => async (dispatch) => {
 // CREATE A SPOT THUNK
 export const createSpot = spot => async (dispatch) => {
     const { name, address, city, state, country, lat, lng, description, price, ownerId, previewImageUrl } = spot;
-    console.log("spot ", spot)
-    console.log("About to post new spot to server")
     const response = await csrfFetch("/api/spots", {
         method: "POST",
         body: JSON.stringify({
@@ -103,19 +101,13 @@ export const createSpot = spot => async (dispatch) => {
     });
     const spotData = await response.json();
     const imageData = await dispatch(createImage({ ...spotData, previewImageUrl }));
-    console.log("DATA  ",)
     dispatch(addSpot({ ...spotData, ...imageData }));
-    console.log("SPOT HAS BEEN CREATED")
     return ({ ...spotData, ...imageData });
 };
 
 // THUNK TO ADD IMAGE TO DB - CALLBACK FOR CREATE SPOT THUNK AND UPDATE SPOT THUNK
-export const createImage = image => async (dispatch) => {
-    console.log("Data param passed to createImage: ", image)
+export const createImage = image => async () => {
     const { id, previewImageUrl } = image;
-    console.log("type of ID ", typeof id)
-    console.log("image is: ", image)
-    console.log("ABOUT TO POST IMAGE TO SERVER")
     const response = await csrfFetch(`/api/spots/${id}/images`, {
         method: "POST",
         body: JSON.stringify({
@@ -123,7 +115,6 @@ export const createImage = image => async (dispatch) => {
         }),
     });
     const data = await response.json();
-    console.log("IMAGE HAS BEEN ADDED")
     return data;
 };
 
@@ -154,8 +145,6 @@ export const updateSpot = spot => async (dispatch) => {
 
 // DELETE SPOT THUNK
 export const deleteSpotAtId = (spotId) => async dispatch => {
-    console.log('spot to be deleted id ', spotId)
-    console.log("SPOT IS ABOUT TO BE DELETED")
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE',
     });
@@ -163,7 +152,6 @@ export const deleteSpotAtId = (spotId) => async dispatch => {
     if (response.ok) {
         const { id: deletedSpotId } = await response.json();
         dispatch(deleteSpot(deletedSpotId));
-        console.log("SPOT HAS BEEN DELETED")
         return deletedSpotId;
     }
 
@@ -189,27 +177,17 @@ const spotsReducer = (state = initialState, action) => {
             return newState;
         }
         case ADD_SPOT: {
-            console.log('Previous spot state - state : ', state)
-            console.log('New Spot - ACTION.SPOT: ', action.spot)
-
-            // For CREATING a new spot
             const newSpot = {};
             newSpot[action.spot.id] = action.spot
             const newState = { ...state, ...newSpot };
-            console.log('NEW SPOT HAS BEEN MADE - newState: ', newState)
             return newState;
         }
         case EDIT_SPOT: {
-            // For UPDATING an existing spot
-            console.log('Previous spot state - state : ', state);
-            console.log('New Spot - ACTION.SPOT: ', action.spot);
-
             const newState = { ...state };
             newState[action.spot.id] = action.spot
             return newState;
         }
         case DELETE_SPOT: {
-            console.log(state)
             const newState = { ...state }
             delete newState[action.id];
             return newState;
