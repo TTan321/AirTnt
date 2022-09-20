@@ -5,6 +5,7 @@
     justify-content: flex-end;
     width: 50%;
     gap: 70px;
+    font-family: sans-serif;
 }
 
 .profile-button {

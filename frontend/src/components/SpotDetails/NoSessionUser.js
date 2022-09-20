@@ -55,7 +55,7 @@ function NoUserSpotDetails() {
                             </div>
                             <div className='bookings'>
                                 <div className='booking-description'>
-                                    <p className="price"><span className="price">${spot.price}</span> night</p>
+                                    <p><span className="price">${spot.price}</span> night</p>
                                     <p className="d1">
                                         <span className="all-spots-star"><i className="fas fa-star" /> </span>
                                         {!!spot.avgRating ? spot.avgRating.toFixed(2) : "0"} - {reviews.length} Reviews

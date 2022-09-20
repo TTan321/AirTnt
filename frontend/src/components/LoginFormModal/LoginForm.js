@@ -31,40 +31,46 @@ function LoginForm({ setShowModal, setShowMenu }) {
 
     return (
         <>
-            <div className="header-div">
-                <p className="cancel-button" onClick={() => setShowModal(false)}> <i className="fas fa-times" /></p>
-                <h1 className="h1">Log In</h1>
-            </div>
-            <form className="form" onSubmit={handleSubmit}>
-                <h2 className="h2">Welcome to AirTnT</h2>
-                <div className="login-input-container">
-                    {!!errors.length && (
-                        <div className="login-errors-container">
-                            {errors.map((error, idx) => (
-                                <p className="login-errors" key={idx}>! {error}</p>
-                            ))}
-                        </div>
-                    )}
-                    <input
-                        className="login"
-                        type="text"
-                        value={credential}
-                        onChange={(e) => setCredential(e.target.value)}
-                        placeholder="Username or Email"
-                        required
-                    />
-                    <input
-                        className="password"
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password"
-                        required
-                    />
+            <form className="login-form" onSubmit={handleSubmit}>
+                <i className="fas fa-times cancel" onClick={() => setShowModal(false)} />
+                <div className="login-form-top">
+                    <div className="header-div">
+                        <h1 className="h1">Log In</h1>
+                    </div>
                 </div>
-                <div className="login-button-container">
-                    <button className="submit" type="submit" >Log In</button>
-                    <button className="demo-user" onClick={logInDemo} >Demo User</button>
+                <div className="login-form-mid-header">
+                    <h2 className="h2">Welcome to AirTnT</h2>
+                </div>
+                <div className="login-form-bottom">
+                    <div className="login-input-container">
+                        {!!errors.length && (
+                            <div className="login-errors-container">
+                                {errors.map((error, idx) => (
+                                    <p className="login-errors" key={idx}>! {error}</p>
+                                ))}
+                            </div>
+                        )}
+                        <input
+                            className="login"
+                            type="text"
+                            value={credential}
+                            onChange={(e) => setCredential(e.target.value)}
+                            placeholder="Username or Email"
+                            required
+                        />
+                        <input
+                            className="password"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Password"
+                            required
+                        />
+                        <div className="login-button-container">
+                            <button className="submit" type="submit" >Log In</button>
+                            <button className="demo-user" onClick={logInDemo} >Demo User</button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </>

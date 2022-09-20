@@ -1,18 +1,24 @@
-.form {
+.login-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     height: 400px;
     width: 520px;
-    padding: 5%;
+    font-family: sans-serif;
+}
+
+
+.cancel {
+    margin-top: 5px;
+    margin-left: 5px;
 }
 
 .header-div {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 38%;
+    width: 100%;
     border-bottom: 1px solid black;
-    width: 100%
+    font-family: sans-serif;
 }
 
 .h1 {
@@ -20,9 +26,22 @@
     font-size: 1em;
 }
 
+.login-form-mid-header {
+    display: flex;
+    padding-left: 10px;
+}
+
 .h2 {
     align-self: flex-start;
     font-size: 22px;
+}
+
+.login-form-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
 }
 
 .login-errors-container {
@@ -32,11 +51,10 @@
 }
 
 .login-input-container {
-    align-self: flex-start;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    height: 39%;
+
     width: 90%;
 }
 
@@ -44,7 +62,7 @@
 .login {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    height: 33%;
+    height: 40%;
     width: 100%;
 }
 
@@ -52,15 +70,15 @@
     align-self: flex-start;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    height: 33%;
+    height: 40%;
     width: 100%;
 }
 
 
 .login-button-container {
     align-self: flex-start;
-    height: 26%;
-    width: 90%;
+
+    width: 100%;
     margin-top: 5%;
 }
 
@@ -73,7 +91,7 @@
     align-self: flex-start;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    height: 50%;
+    height: 30%;
     width: 100%;
     background-color: rgb(227, 28, 95);
     color: white;
@@ -86,7 +104,7 @@
     align-self: flex-start;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    height: 50%;
+    height: 30%;
     width: 100%;
     background-color: rgb(227, 28, 95);
     color: white;

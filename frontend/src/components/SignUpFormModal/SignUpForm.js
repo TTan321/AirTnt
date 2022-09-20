@@ -35,13 +35,13 @@ function SignUpForm({ setShowModal, setShowMenu }) {
     };
 
     return (
-        <>
+        <form className="signup-form" onSubmit={handleSubmit}>
+            <i className="fas fa-times signup-cancel" onClick={() => setShowModal(false)} />
             <div className="signup-header">
-                <p className="cancel-button" onClick={() => setShowModal(false)} ><i className="fas fa-times" /></p>
                 <h1 className="h1-signup">Sign Up</h1>
             </div>
             <h2 className="h2-signup">Welcome to AirTnT</h2>
-            <form className="form" onSubmit={handleSubmit}>
+            <div className="signup-form-inner-div">
                 <input
                     className="first-name"
                     type="text"
@@ -63,7 +63,7 @@ function SignUpForm({ setShowModal, setShowMenu }) {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="email"
+                    placeholder="Email"
                     required
                 />
                 <input
@@ -94,8 +94,8 @@ function SignUpForm({ setShowModal, setShowMenu }) {
                     {errors.map((error, idx) => <p className="errors" key={idx}>! {error}</p>)}
                 </div>
                 <button className="submit-button" type="submit">Submit</button>
-            </form>
-        </>
+            </div>
+        </form>
     );
 }
 
