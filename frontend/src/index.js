@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { ModalProvider } from "./context/Modal";
+import LoginProvider from "./context/LoginFormContext";
 
 import configureStore from "./store";
 import { restoreCSRF, csrfFetch } from "./store/csrf";
@@ -24,9 +25,11 @@ function Root() {
   return (
     <Provider store={store}>
       <ModalProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <LoginProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </LoginProvider>
       </ModalProvider>
     </Provider>
   );

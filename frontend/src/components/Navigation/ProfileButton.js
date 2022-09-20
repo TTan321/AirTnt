@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
+import { useLogin } from "../../context/LoginFormContext";
 import LoginFormModal from "../LoginFormModal/LoginModal";
 import SignUpFormModel from "../SignUpFormModal/SignUpFormModel";
-import UserReviews from "../UserReviews/UserReviews";
 import './ProfileButton.css'
 
 function ProfileButton({ user }) {
     const history = useHistory();
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
+    const { setShowModal } = useLogin();
 
     // const openMenu = () => {
     //     if (showMenu) return;
@@ -50,7 +51,7 @@ function ProfileButton({ user }) {
     if (user) {
         return (
             <div className="profile-container">
-                <p onClick={() => history.push(user ? "/hostspot" : "/login")}>Become a host</p>
+                <p onClick={user ? () => history.push('/hostspot') : () => setShowModal(true)}>Become a host</p>
                 <button className="profile-button" onClick={() => setShowMenu(showMenu === false ? true : false)}>
                     <i className="fas fa-bars" />
                     <i className="fas fa-user-circle fa-2x" />
@@ -59,7 +60,7 @@ function ProfileButton({ user }) {
                     <ul className="profile-dropdown">
                         <li>{user.username}</li>
                         <li className="user-email">{user.email}</li>
-                        <li onClick={reviews}>Your Reviews</li>
+                        <li className="user-reviews-menu" onClick={reviews}>Your Reviews</li>
                         <li onClick={hostspot}>Your Active Listings</li>
                         <li>
                             <button className="logout-button" onClick={logout}>Log Out</button>
@@ -71,7 +72,7 @@ function ProfileButton({ user }) {
     } else {
         return (
             <div className="profile-container">
-                <p onClick={() => history.push(user ? "/hostspot" : "/login")}>Become a host</p>
+                <p onClick={user ? () => history.push('/hostspot') : () => setShowModal(true)}>Become a host</p>
                 <button className="profile-button" onClick={() => setShowMenu(showMenu === false ? true : false)}>
                     <i className="fas fa-bars" />
                     <i className="fas fa-user-circle fa-2x" />

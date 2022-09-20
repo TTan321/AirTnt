@@ -6,6 +6,11 @@
     font-family: sans-serif;
 }
 
+/* on drop down menu */
+.Login-menu {
+    font-weight: bold;
+}
+
 
 .cancel {
     margin-top: 5px;
@@ -21,9 +26,11 @@
     font-family: sans-serif;
 }
 
-.h1 {
+.h1-login {
     align-self: center;
-    font-size: 1em;
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 18px;
 }
 
 .login-form-mid-header {
@@ -32,7 +39,7 @@
 }
 
 .h2 {
-    align-self: flex-start;
+    padding-left: 18px;
     font-size: 22px;
 }
 
@@ -78,7 +85,6 @@
 
 .login-button-container {
     align-self: flex-start;
-
     width: 100%;
     margin-top: 5%;
 }

@@ -35,7 +35,7 @@ function LoginForm({ setShowModal, setShowMenu }) {
                 <i className="fas fa-times cancel" onClick={() => setShowModal(false)} />
                 <div className="login-form-top">
                     <div className="header-div">
-                        <h1 className="h1">Log In</h1>
+                        <h1 className="h1-login">Log In</h1>
                     </div>
                 </div>
                 <div className="login-form-mid-header">
