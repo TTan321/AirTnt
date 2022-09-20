@@ -34,7 +34,11 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    font-size: 18;
+    font-size: 15;
+}
+
+.allSpotsP1 {
+    font-weight: bold;
 }
 
 .allSpotsP2 {
@@ -47,6 +51,9 @@
     padding-right: 3;
 }
 
+.allSpotsP3 {
+    font-size: 15;
+}
 
 .price {
     font-weight: bold;

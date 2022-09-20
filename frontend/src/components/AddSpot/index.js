@@ -46,7 +46,7 @@ function UserSpots() {
                                     <img src={previewImage} alt="Listing" className="listing-images" />
                                     <div className="listing-body">
                                         <p className="l-p"><span className="listing-price">${price}</span> night </p>
-                                        <p className="listing-avgRating"><i className="fas fa-star" /> {avgRating ? avgRating : 0}</p>
+                                        <p className="listing-avgRating"><i className="fas fa-star" /> {avgRating ? avgRating.toFixed(2) : "0"}</p>
                                     </div>
                                 </div>
                                 <div className="buttons-container">

@@ -51,7 +51,7 @@ function ProfileButton({ user }) {
     if (user) {
         return (
             <div className="profile-container">
-                <p onClick={user ? () => history.push('/hostspot') : () => setShowModal(true)}>Become a host</p>
+                <p className="become-a-host" onClick={user ? () => history.push('/hostspot') : () => setShowModal(true)}>Become a host</p>
                 <button className="profile-button" onClick={() => setShowMenu(showMenu === false ? true : false)}>
                     <i className="fas fa-bars" />
                     <i className="fas fa-user-circle fa-2x" />
@@ -61,7 +61,7 @@ function ProfileButton({ user }) {
                         <li>{user.username}</li>
                         <li className="user-email">{user.email}</li>
                         <li className="user-reviews-menu" onClick={reviews}>Your Reviews</li>
-                        <li onClick={hostspot}>Your Active Listings</li>
+                        <li className="user-listings-menu" onClick={hostspot}>Your Active Listings</li>
                         <li>
                             <button className="logout-button" onClick={logout}>Log Out</button>
                         </li>
@@ -72,7 +72,7 @@ function ProfileButton({ user }) {
     } else {
         return (
             <div className="profile-container">
-                <p onClick={user ? () => history.push('/hostspot') : () => setShowModal(true)}>Become a host</p>
+                <p className="become-a-host" onClick={user ? () => history.push('/hostspot') : () => setShowModal(true)}>Become a host</p>
                 <button className="profile-button" onClick={() => setShowMenu(showMenu === false ? true : false)}>
                     <i className="fas fa-bars" />
                     <i className="fas fa-user-circle fa-2x" />

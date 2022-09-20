@@ -9,6 +9,7 @@
     align-self: flex-start;
     padding-left: 5px;
     padding-top: 5px;
+    cursor: pointer;
 }
 
 .signup-header {
@@ -119,4 +120,5 @@
     background-color: rgb(227, 28, 95);
     color: white;
     font-family: sans-serif;
+    cursor: pointer;
 }

@@ -5,6 +5,7 @@
     background-color: rgb(227, 28, 95);
     color: white;
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    cursor: pointer;
 }
 
 .review-form {
@@ -27,6 +28,7 @@
 
 .cancel-button {
     padding-bottom: 40px;
+    cursor: pointer;
 }
 
 .star-container {
@@ -64,4 +66,5 @@
     background-color: rgb(227, 28, 95);
     color: white;
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    cursor: pointer;
 }

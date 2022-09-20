@@ -71,4 +71,5 @@
     background-color: rgb(227, 28, 95);
     color: white;
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    cursor: pointer;
 }

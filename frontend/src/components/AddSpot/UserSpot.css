@@ -34,6 +34,7 @@
     background-color: rgb(227, 28, 95);
     color: white;
     font-family: sans-serif;
+    cursor: pointer;
 }
 
 .user-spots-container {
@@ -55,6 +56,7 @@
     height: 400px;
     padding: 0 10px;
     font-family: sans-serif;
+    cursor: pointer;
 }
 
 .listing-details {
@@ -108,6 +110,7 @@
     border-radius: 10px;
     background-color: rgb(227, 28, 95);
     color: white;
+    cursor: pointer;
 }
 
 .delete {
@@ -117,4 +120,5 @@
     border-radius: 10px;
     background-color: rgb(227, 28, 95);
     color: white;
+    cursor: pointer;
 }

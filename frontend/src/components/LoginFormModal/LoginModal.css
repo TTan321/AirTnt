@@ -15,6 +15,7 @@
 .cancel {
     margin-top: 5px;
     margin-left: 5px;
+    cursor: pointer;
 }
 
 .header-div {
@@ -86,7 +87,7 @@
 .login-button-container {
     align-self: flex-start;
     width: 100%;
-    margin-top: 5%;
+    margin-top: 10%;
 }
 
 .submit {
@@ -103,7 +104,7 @@
     background-color: rgb(227, 28, 95);
     color: white;
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
-    ;
+    cursor: pointer;
 }
 
 .demo-user {
@@ -116,6 +117,7 @@
     background-color: rgb(227, 28, 95);
     color: white;
     font-family: CirCircular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    cursor: pointer;
 }
 
 .SignUp-button {
