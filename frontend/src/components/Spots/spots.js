@@ -24,8 +24,8 @@ function Spots() {
                         <div className="spotsDescription">
                             <p className="allSpotsP1">{city}, {state}</p>
                             <p className="allSpotsP2">
-                                <span className="all-spots-star"><i className="fas fa-star" />
-                                </span> {!!avgRating ? avgRating.toFixed(2) : "0"}
+                                <span className="all-spots-star"> &#9733;</span>
+                                &nbsp;{!!avgRating ? avgRating.toFixed(2) : "0"}
                             </p>
                         </div>
                         <p className="allSpotsP3"><span className="price">${price}</span> night</p>
