@@ -33,7 +33,7 @@ function NoUserSpotDetails() {
                         <h1 className='header'>{spot.name}</h1>
                         <div className="description-container">
                             <p className="d1">
-                                <span className="all-spots-star"><i className="fas fa-star" /> </span>
+                                <span className="spot-details-star">&#9733;</span>
                                 {!!spot.avgRating ? spot.avgRating.toFixed(2) : "0"} - {reviews.length} Reviews
                             </p>
                             <p className="d2">{spot.city}, {spot.state}, {spot.country} </p>
@@ -56,8 +56,8 @@ function NoUserSpotDetails() {
                             <div className='bookings'>
                                 <div className='booking-description'>
                                     <p><span className="price">${spot.price}</span> night</p>
-                                    <p className="d1">
-                                        <span className="all-spots-star"><i className="fas fa-star" /> </span>
+                                    <p className="spot-details-d1">
+                                        <span className="all-spots-star">&#9733;</span>
                                         {!!spot.avgRating ? spot.avgRating.toFixed(2) : "0"} - {reviews.length} Reviews
                                     </p>
                                 </div>
@@ -86,7 +86,7 @@ function NoUserSpotDetails() {
                         <div className='reviews-container'>
                             <div className='reviews-header'>
                                 <h3>
-                                    <span className="all-spots-star"><i className="fas fa-star" /> </span>
+                                    <span className="spot-details-reviews-star">&#9733; </span>
                                     {!!spot.avgRating ? spot.avgRating.toFixed(2) : "0"} - {reviews.length} Reviews
                                 </h3>
                                 {user && user.id !== spot.ownerId && (<AddReviewModal />)}

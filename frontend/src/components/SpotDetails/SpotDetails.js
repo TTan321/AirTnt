@@ -1,13 +1,12 @@
-import { useHistory, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import { deleteSpotAtId } from "../../store/spotsReducer";
-import AddSpotFormModal from "../AddSpot/AddSpotFormModal";
 import { getASpot } from "../../store/spotsReducer";
 import { deleteAReview, getSpotsReviews } from "../../store/ReviewsReducer";
 import AddReviewModal from "../AddReview/AddReviewModal";
-import './SpotDetails.css'
 import EditSpotFormModal from "../EditSpot/EditSpotFromModal";
+import './SpotDetails.css'
 
 const SpotDetails = () => {
     const dispatch = useDispatch();
@@ -18,9 +17,6 @@ const SpotDetails = () => {
     const spot = useSelector((state) => (state.spots[spotId]));
     const allReviews = useSelector((state) => (state.reviews))
     const reviews = Object.values(allReviews);
-
-    console.log("SPOT ", spot)
-    // console.log("REVIEWS", reviews);
 
     let count = reviews.length
 
