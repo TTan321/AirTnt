@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
@@ -9,13 +9,17 @@ import './AddReview.css'
 
 
 function AddReview({ setShowModal }) {
-    const [review, setReview] = useState('');
-    const [stars, setStars] = useState(1);
-    const { spotId } = useParams();
-
-
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const [review, setReview] = useState('');
+    const [stars, setStars] = useState(0);
+    const { spotId } = useParams();
+
+    useEffect(() => {
+        console.log("STARS: ", stars)
+        console.log("Type of stars: ", typeof stars)
+    }, [stars])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -32,6 +36,10 @@ function AddReview({ setShowModal }) {
         history.push(`/spots/${spotId}`);
     }
 
+    const onChange1 = () => {
+
+    }
+
     return (
         <form onSubmit={onSubmit} className="review-form">
             <div className='review-form-header'>
@@ -41,7 +49,7 @@ function AddReview({ setShowModal }) {
             <div className='star-container'>
                 <input
                     className='star-inputs'
-                    type="radio"
+                    type="checkbox"
                     id="r5"
                     name="stars"
                     value={5}
@@ -61,7 +69,7 @@ function AddReview({ setShowModal }) {
                 <label className='star-label' htmlFor="r4">&#9733;</label>
                 <input
                     className='star-inputs'
-                    type="radio"
+                    type="checkbox"
                     id="r3"
                     name="stars"
                     value={3}
@@ -71,7 +79,7 @@ function AddReview({ setShowModal }) {
                 <label className='star-label' htmlFor="r3">&#9733;</label>
                 <input
                     className='star-inputs'
-                    type="radio"
+                    type="checkbox"
                     id="r2"
                     name="stars"
                     value={2}
@@ -81,10 +89,10 @@ function AddReview({ setShowModal }) {
                 <label className='star-label' htmlFor="r2">&#9733;</label>
                 <input
                     className='star-inputs'
-                    type="radio"
+                    type="checkbox"
                     id="r1"
                     name="stars"
-                    value={1}
+                    value={Number(1)}
                     onChange={(e) => setStars(e.target.value)}
                     checked={+stars >= 1 ? true : false}
                 />

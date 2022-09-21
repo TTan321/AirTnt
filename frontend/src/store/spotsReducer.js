@@ -7,8 +7,6 @@ const GET_A_USERS_SPOTS = "spots/getAUsersSpots"
 const ADD_SPOT = "spots/addSpot";
 const EDIT_SPOT = "spot/editSpot";
 const DELETE_SPOT = "spots/deleteSpot";
-const ADD_IMAGE = "images/add_image";
-
 
 
 export const loadSpots = (spots) => {
@@ -36,13 +34,6 @@ export const addSpot = (spot) => {
     return {
         type: ADD_SPOT,
         spot
-    };
-};
-
-export const addImage = (image) => {
-    return {
-        type: ADD_IMAGE,
-        image
     };
 };
 
@@ -99,23 +90,21 @@ export const createSpot = spot => async (dispatch) => {
             name, address, city, state, country, lat, lng, description, price, ownerId
         }),
     });
-    const spotData = await response.json();
-    const imageData = await dispatch(createImage({ ...spotData, previewImageUrl }));
-    dispatch(addSpot({ ...spotData, ...imageData }));
-    return ({ ...spotData, ...imageData });
-};
 
-// THUNK TO ADD IMAGE TO DB - CALLBACK FOR CREATE SPOT THUNK AND UPDATE SPOT THUNK
-export const createImage = image => async () => {
-    const { id, previewImageUrl } = image;
-    const response = await csrfFetch(`/api/spots/${id}/images`, {
-        method: "POST",
-        body: JSON.stringify({
-            "url": previewImageUrl
-        }),
-    });
-    const data = await response.json();
-    return data;
+    if (response.ok) {
+        const spotData = await response.json();
+        const { id } = spotData;
+        const imgResponse = await csrfFetch(`/api/spots/${id}/images`, {
+            method: "POST",
+            body: JSON.stringify({
+                "url": previewImageUrl
+            }),
+        });
+        const imageData = await imgResponse.json();
+        dispatch(addSpot({ ...spotData, ...imageData }));
+        return ({ ...spotData, ...imageData });
+
+    }
 };
 
 // UPDATE SPOT THUNK
