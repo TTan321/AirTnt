@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
-import { useLogin } from "../../context/LoginFormContext";
 import LoginFormModal from "../LoginFormModal/LoginModal";
 import SignUpFormModel from "../SignUpFormModal/SignUpFormModel";
 import './ProfileButton.css'
+import HostLoginModal from "../AddSpot/HostLoginModal";
 
 function ProfileButton({ user }) {
     const history = useHistory();
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
-    const { setShowModal } = useLogin();
 
     // const openMenu = () => {
     //     if (showMenu) return;
@@ -51,7 +50,7 @@ function ProfileButton({ user }) {
     if (user) {
         return (
             <div className="profile-container">
-                <p className="become-a-host" onClick={user ? () => history.push('/hostspot') : () => setShowModal(true)}>Become a host</p>
+                <p className="become-a-host" onClick={() => history.push('/hostspot')}>Become a host</p>
                 <button className="profile-button" onClick={() => setShowMenu(showMenu === false ? true : false)}>
                     <i className="fas fa-bars" />
                     <i className="fas fa-user-circle fa-2x" />
@@ -72,7 +71,7 @@ function ProfileButton({ user }) {
     } else {
         return (
             <div className="profile-container">
-                <p className="become-a-host" onClick={user ? () => history.push('/hostspot') : () => setShowModal(true)}>Become a host</p>
+                <HostLoginModal />
                 <button className="profile-button" onClick={() => setShowMenu(showMenu === false ? true : false)}>
                     <i className="fas fa-bars" />
                     <i className="fas fa-user-circle fa-2x" />

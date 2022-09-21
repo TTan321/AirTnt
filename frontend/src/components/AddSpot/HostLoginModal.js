@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import LoginForm from './LoginForm';
-import './LoginModal.css';
+import HostLoginForm from './HostLoginForm';
+import '../LoginFormModal/LoginModal.css';
 
-function LoginFormModal({ setShowMenu }) {
+function HostLoginModal() {
     const [showModal, setShowModal] = useState(false);
 
     return (
         <>
-            <p className='Login-menu' onClick={() => setShowModal(true)}>Log In</p>
+            <p className='host-spot-login' onClick={() => setShowModal(true)}>Become a host</p>
             {showModal && (
                 <Modal contentClassName="modal" onClose={() => setShowModal(false)} >
-                    <LoginForm setShowModal={setShowModal} setShowMenu={setShowMenu} />
+                    <HostLoginForm setShowModal={setShowModal} />
                 </Modal>
             )}
         </>
     );
 }
 
-export default LoginFormModal;
+export default HostLoginModal;
