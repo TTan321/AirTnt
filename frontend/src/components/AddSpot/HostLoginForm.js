@@ -14,12 +14,13 @@ function HostLoginForm({ setShowModal }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        return await dispatch(sessionActions.login({ credential, password })).catch(
+        await dispatch(sessionActions.login({ credential, password })).catch(
             async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
             }
         );
+        return history.push('/hostspot');
     };
 
     const logInDemo = async (e) => {
