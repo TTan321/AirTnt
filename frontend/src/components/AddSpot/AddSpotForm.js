@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createSpot, getAUsersSpots } from "../../store/spotsReducer";
 import LoginFormModal from "../LoginFormModal/LoginForm";
 import './AddSpotForm.css'
@@ -21,6 +21,12 @@ function AddSpotForm({ setShowModal }) {
     const [ownerId, setOwnerId] = useState(sessionUser.id);
     const [errors, setErrors] = useState([]);
 
+    useEffect(() => {
+        const validateErrors = [];
+        if (name.length > 50) validateErrors.push("Name must be less than 50 characters");
+        setErrors(validateErrors);
+    }, [name])
+
 
     if (!sessionUser) {
         return <LoginFormModal />
@@ -36,11 +42,10 @@ function AddSpotForm({ setShowModal }) {
         if (country.length === 0) validateErrors.push("Country is required");
         if (name.length > 50) validateErrors.push("Name must be less than 50 characters");
         if (description.length === 0) validateErrors.push("Description is required");
-        if (price === null) validateErrors.push("Price per day is required");
-        if (lat === null) validateErrors.push("Latitude is required")
-        if (lng === null) validateErrors.push("Longitude is required")
+        if (price === null || price === 0) validateErrors.push("Price cannot be 0 or empty");
+        if (lat === null || lat === 0) validateErrors.push("Latitude cannot be 0 or empty")
+        if (lng === null || lng === 0) validateErrors.push("Longitude cannot be 0 or empty")
         setErrors(validateErrors);
-
 
         const payload = {
             name, address, city, country, state, lat, lng, description, price, ownerId, previewImageUrl
@@ -162,7 +167,7 @@ function AddSpotForm({ setShowModal }) {
                         </textarea>
                     </div>
                     <div className="add-spot-button-div">
-                        <button className="add-spot-submit" type="submit">Submit</button>
+                        <button className="add-spot-submit" type="submit" disabled={!!errors.length}>Submit</button>
                     </div>
                 </div>
             </form>
