@@ -39,7 +39,9 @@ function NoUserSpotDetails() {
                             <p className="d2">{spot.city}, {spot.state}, {spot.country} </p>
                         </div>
                         <div className='image-container'>
-                            <img src={spot.previewImage} alt={"Preview Spot"} className="i1" />
+                            <div className='main-image-container'>
+                                <img src={spot.previewImage} alt={"Preview Spot"} className="i1" />
+                            </div>
                             <div className='other-image-container'>
                                 <img src={spot.previewImage} alt={"Preview Spot"} className="i2" />
                                 <img src={spot.previewImage} alt={"Preview Spot"} className="i3" />
