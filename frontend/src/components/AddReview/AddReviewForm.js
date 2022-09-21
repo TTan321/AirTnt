@@ -54,12 +54,12 @@ function AddReview({ setShowModal }) {
                     name="stars"
                     value={5}
                     onChange={(e) => setStars(e.target.value)}
-                    checked={+stars === 5 ? true : false}
+                    checked={+stars >= 5 ? true : false}
                 />
                 <label className='star-label' htmlFor="r5">&#9733;</label>
                 <input
                     className='star-inputs'
-                    type="radio"
+                    type="checkbox"
                     id="r4"
                     name="stars"
                     value={4}
