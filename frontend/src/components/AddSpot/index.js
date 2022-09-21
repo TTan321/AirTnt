@@ -39,14 +39,17 @@ function UserSpots() {
                         </div>
                     </div>
                     <div className="user-spots-container">
-                        {userSpots?.map(({ id, previewImage, avgRating, price, name }) => (
+                        {userSpots?.map(({ id, previewImage, avgRating, price, name, description, city, state, country }) => (
                             <div key={id} className="listings-spot-container">
                                 <div className="listing-details" onClick={() => history.push(`/spots/${id}`)}>
                                     <p className="listing-name">{name}</p>
                                     <img src={previewImage} alt="Listing" className="listing-images" />
                                     <div className="listing-body">
+                                        <p className="l-p"><span className="edit-location">{city}, {state ? state : country} </span></p>
                                         <p className="l-p"><span className="listing-price">${price}</span> night </p>
-                                        <p className="listing-avgRating"><i className="fas fa-star" /> {avgRating ? avgRating.toFixed(2) : "0"}</p>
+                                    </div>
+                                    <div className="edit-description">
+                                        <p>{description}</p>
                                     </div>
                                 </div>
                                 <div className="buttons-container">
