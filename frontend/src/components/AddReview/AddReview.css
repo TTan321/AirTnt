@@ -11,26 +11,42 @@
 
 .review-form {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
     flex-direction: column;
-    height: 240px;
+    min-height: 240px;
     width: 400px;
     border-radius: 20px;
     padding: 10px;
 }
 
+.cancel-button {
+    align-self: flex-start;
+    padding: 0;
+    cursor: pointer;
+}
+
 .review-form-header {
     display: flex;
     align-items: center;
-    height: 30%;
+    justify-content: center;
+    height: 25%;
     width: 100%;
     gap: 60px;
+    padding-bottom: 10px;
 }
 
-.cancel-button {
-    padding-bottom: 40px;
-    cursor: pointer;
+.review-errors-div {
+    width: 98.5%;
+    color: red;
+    font-weight: bold;
+    font-size: 14px;
 }
+
+.review-title {
+    margin: 0;
+}
+
 
 .star-container * {
     float: right;
@@ -50,6 +66,11 @@
 
 .star-label {
     font-size: 22px;
+}
+
+.review-div {
+    display: flex;
+    justify-content: center;
 }
 
 

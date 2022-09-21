@@ -10,41 +10,45 @@ import './AddReview.css'
 
 function AddReview({ setShowModal }) {
     const dispatch = useDispatch();
-    const history = useHistory();
+    const { spotId } = useParams();
 
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(0);
-    const { spotId } = useParams();
+    const [errors, setErrors] = useState([]);
 
-    useEffect(() => {
-        console.log("STARS: ", stars)
-        console.log("Type of stars: ", typeof stars)
-    }, [stars])
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
+        const validateErrors = [];
+        if (stars === 0) validateErrors.push("Star rating is required.");
+        if (review.length === 0) validateErrors.push("Review cannot be empty.");
+        if (review.length < 30) validateErrors.push("Review be atleast 30 characters long.");
+        await setErrors(validateErrors);
+
         const payload = {
             review, stars, spotId
         }
-        console.log(stars)
 
-        await dispatch(addAReview(payload));
-        await dispatch(getSpotsReviews(payload.spotId));
-        await dispatch(getASpot(payload.spotId));
-        setShowModal(false)
-        history.push(`/spots/${spotId}`);
-    }
-
-    const onChange1 = () => {
-
-    }
+        console.log(errors.length)
+        if (review.length > 29) {
+            await dispatch(addAReview(payload));
+            await dispatch(getSpotsReviews(payload.spotId));
+            await dispatch(getASpot(payload.spotId));
+            setShowModal(false);
+        };
+    };
 
     return (
         <form onSubmit={onSubmit} className="review-form">
+            <i className="fas fa-times cancel-button" onClick={() => setShowModal(false)} />
             <div className='review-form-header'>
-                <p className="cancel-button" onClick={() => setShowModal(false)}> <i className="fas fa-times" /></p>
-                <h2>Add your review here</h2>
+                <h2 className='review-title'>Add your review here</h2>
+            </div>
+            <div className='review-errors-div'>
+                {errors.map((error, idx) => (
+                    <p key={idx} >{error}</p>
+                ))}
             </div>
             <div className='star-container'>
                 <input
@@ -98,7 +102,7 @@ function AddReview({ setShowModal }) {
                 />
                 <label className='star-label' htmlFor="r1">&#9733;</label>
             </div>
-            <div>
+            <div className='review-div'>
                 <label htmlFor="review" />
                 <textarea
                     className='review-textbox'

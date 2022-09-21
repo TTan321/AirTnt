@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createSpot, getAUsersSpots } from "../../store/spotsReducer";
 import LoginFormModal from "../LoginFormModal/LoginForm";
 import './AddSpotForm.css'
@@ -20,12 +20,6 @@ function AddSpotForm({ setShowModal }) {
     const [previewImageUrl, setPreviewImageUrl] = useState('');
     const [ownerId, setOwnerId] = useState(sessionUser.id);
     const [errors, setErrors] = useState([]);
-
-    useEffect(() => {
-        const validateErrors = [];
-        if (name.length > 50) validateErrors.push("Name must be less than 50 characters");
-        setErrors(validateErrors);
-    }, [name])
 
 
     if (!sessionUser) {
@@ -51,9 +45,11 @@ function AddSpotForm({ setShowModal }) {
             name, address, city, country, state, lat, lng, description, price, ownerId, previewImageUrl
         }
 
-        await dispatch(createSpot(payload));
-        await dispatch(getAUsersSpots());
-        setShowModal(false);
+        if (name.length < 50) {
+            await dispatch(createSpot(payload));
+            await dispatch(getAUsersSpots());
+            setShowModal(false);
+        }
         // console.log("NEW SPOT IS :", newSpot)
     }
 
@@ -167,7 +163,7 @@ function AddSpotForm({ setShowModal }) {
                         </textarea>
                     </div>
                     <div className="add-spot-button-div">
-                        <button className="add-spot-submit" type="submit" disabled={!!errors.length}>Submit</button>
+                        <button className="add-spot-submit" type="submit" >Submit</button>
                     </div>
                 </div>
             </form>
