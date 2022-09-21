@@ -19,14 +19,27 @@ function AddSpotForm({ setShowModal }) {
     const [price, setPrice] = useState(0);
     const [previewImageUrl, setPreviewImageUrl] = useState('');
     const [ownerId, setOwnerId] = useState(0);
+    const [errors, setErrors] = useState([]);
+
 
     if (!sessionUser) {
         return <LoginFormModal />
     }
 
-
     const onSumbit = async (e) => {
         e.preventDefault();
+
+        const validateErrors = [];
+        if (address.length === 0) validateErrors.push("Street address is required");
+        if (city.length === 0) validateErrors.push("City is required");
+        if (state.length === 0) validateErrors.push("State is required");
+        if (country.length === 0) validateErrors.push("Country is required");
+        if (name.length > 50) validateErrors.push("Name must be less than 50 characters");
+        if (description.length === 0) validateErrors.push("Description is required");
+        if (price === null) validateErrors.push("Price per day is required");
+        if (lat === null) validateErrors.push("Latitude is required")
+        if (lng === null) validateErrors.push("Longitude is required")
+        setErrors(validateErrors);
 
         setOwnerId(sessionUser.id)
 
@@ -49,6 +62,11 @@ function AddSpotForm({ setShowModal }) {
                     <div className="add-spot-header">
                         <h1 className="h1">Add new listing</h1>
                     </div>
+                    <div className="add-spot-errors">
+                        {errors.map((error, idx) => (
+                            <p key={idx} >{error}</p>
+                        ))}
+                    </div>
                     <label className="spot-labels" htmlFor="name">Name:</label><br />
                     <input
                         className='edit-spot-inputs'
@@ -56,7 +74,6 @@ function AddSpotForm({ setShowModal }) {
                         value={name}
                         onChange={(e) => setName(e.target.value)}>
                     </input>
-
                     <div className='location-div'>
                         <div className='address-div'>
                             <label className="spot-labels" htmlFor="address">Address:</label>
