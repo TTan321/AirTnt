@@ -18,7 +18,7 @@ function AddSpotForm({ setShowModal }) {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
     const [previewImageUrl, setPreviewImageUrl] = useState('');
-    const [ownerId, setOwnerId] = useState(0);
+    const [ownerId, setOwnerId] = useState(sessionUser.id);
     const [errors, setErrors] = useState([]);
 
 
@@ -41,7 +41,6 @@ function AddSpotForm({ setShowModal }) {
         if (lng === null) validateErrors.push("Longitude is required")
         setErrors(validateErrors);
 
-        setOwnerId(sessionUser.id)
 
         const payload = {
             name, address, city, country, state, lat, lng, description, price, ownerId, previewImageUrl

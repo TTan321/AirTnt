@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateSpot, getAUsersSpots } from '../../store/spotsReducer';
 import "./EditSpot.css"
@@ -18,6 +18,21 @@ function EditSpotForm({ userSpot, setShowModal }) {
     const [description, setDescription] = useState(userSpot.description);
     const [price, setPrice] = useState(userSpot.price);
     const [previewImageUrl, setPreviewImageUrl] = useState(userSpot.previewImage);
+    const [errors, setErrors] = useState([]);
+
+    useEffect(() => {
+        const validateErrors = [];
+        if (address.length === 0) validateErrors.push("Street address is required");
+        if (city.length === 0) validateErrors.push("City is required");
+        if (state.length === 0) validateErrors.push("State is required");
+        if (country.length === 0) validateErrors.push("Country is required");
+        if (name.length > 50) validateErrors.push("Name must be less than 50 characters");
+        if (description.length === 0) validateErrors.push("Description is required");
+        if (price === null) validateErrors.push("Price per day is required");
+        if (lat === null) validateErrors.push("Latitude is required")
+        if (lng === null) validateErrors.push("Longitude is required")
+        setErrors(validateErrors);
+    }, [address, city, state, country, name, lat, lng, description, price])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -27,10 +42,11 @@ function EditSpotForm({ userSpot, setShowModal }) {
             "id": userSpot.id, name, address, city, country, state, lat, lng, description, price, ownerId, previewImageUrl
         }
 
-        const editedSpot = await dispatch(updateSpot(payload));
-        console.log("EDITED SPOT DATA ", editedSpot);
+
+        await dispatch(updateSpot(payload));
         await dispatch(getAUsersSpots());
         setShowModal(false);
+
     }
 
     return (
@@ -39,6 +55,11 @@ function EditSpotForm({ userSpot, setShowModal }) {
             <div className='edit-spot-form-container'>
                 <div className='edit-spot-header'>
                     <h1 className='spot-header'>Edit listing for {userSpot.name}</h1>
+                </div>
+                <div className="edit-spot-errors">
+                    {errors.map((error, idx) => (
+                        <p key={idx} >{error}</p>
+                    ))}
                 </div>
                 <label className="spot-labels" htmlFor="name">Name:</label><br />
                 <input
@@ -137,7 +158,7 @@ function EditSpotForm({ userSpot, setShowModal }) {
                     </textarea>
                 </div>
                 <div className='edit-spot-buttons'>
-                    <button className='listing-submit' type="submit">Submit Changes</button>
+                    <button className='listing-submit' type="submit" disabled={!!errors.length} >Submit Changes</button>
                 </div>
             </div>
         </form>
