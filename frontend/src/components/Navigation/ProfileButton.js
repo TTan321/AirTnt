@@ -59,9 +59,9 @@ function ProfileButton({ user }) {
                     <ul className="profile-dropdown">
                         <li>{user.username}</li>
                         <li className="user-email">{user.email}</li>
-                        <li className="user-reviews-menu" onClick={reviews}>Your Reviews</li>
-                        <li className="user-listings-menu" onClick={hostspot}>Your Active Listings</li>
-                        <li>
+                        <li className="user-reviews-menu" onClick={reviews}>My Reviews</li>
+                        <li className="user-listings-menu" onClick={hostspot}>My Active Listings</li>
+                        <li className="menu-logout">
                             <button className="logout-button" onClick={logout}>Log Out</button>
                         </li>
                     </ul>
