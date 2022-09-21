@@ -53,25 +53,27 @@
 }
 
 .login-errors-container {
-    width: 89%;
+    height: 60px;
+    width: 99%;
     color: red;
     font-weight: bold;
+    font-size: 16px;
 }
 
 .login-input-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-
     width: 90%;
 }
 
 
 .login {
+    margin-top: 10px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom: none;
-    height: 30px;
+    height: 40px;
     width: 100%;
 }
 
@@ -79,15 +81,16 @@
     align-self: flex-start;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    height: 30px;
+    height: 40px;
     width: 100%;
 }
 
 
 .login-button-container {
     align-self: flex-start;
+    justify-content: flex-end;
+    height: 80px;
     width: 100%;
-    margin-top: 10%;
 }
 
 .submit {
@@ -95,11 +98,11 @@
     border-left: none;
     border-right: none;
     border-bottom: 1px solid white;
-    margin-top: 10%;
+    margin-top: 5%;
     align-self: flex-start;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    height: 30%;
+    height: 40%;
     width: 100%;
     background-color: rgb(227, 28, 95);
     color: white;
@@ -112,22 +115,10 @@
     align-self: flex-start;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    height: 30%;
+    height: 40%;
     width: 100%;
     background-color: rgb(227, 28, 95);
     color: white;
     font-family: CirCircular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
     cursor: pointer;
-}
-
-.SignUp-button {
-    border: none;
-    align-self: flex-start;
-    border-radius: 10px;
-    height: 13%;
-    width: 90%;
-    background-color: rgb(227, 28, 95);
-    color: white;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
-    margin-top: 8%;
 }

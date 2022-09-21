@@ -10,8 +10,9 @@ import './AddReview.css'
 
 function AddReview({ setShowModal }) {
     const [review, setReview] = useState('');
-    const [stars, setStars] = useState(0);
+    const [stars, setStars] = useState(1);
     const { spotId } = useParams();
+
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -22,6 +23,7 @@ function AddReview({ setShowModal }) {
         const payload = {
             review, stars, spotId
         }
+        console.log(stars)
 
         await dispatch(addAReview(payload));
         await dispatch(getSpotsReviews(payload.spotId));

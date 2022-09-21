@@ -1,5 +1,5 @@
 .signup-form {
-    height: 400px;
+    height: 450px;
     width: 520px;
     font-family: sans-serif;
 }
@@ -51,7 +51,7 @@
 }
 
 .first-name {
-    margin-top: 20px;
+    margin-top: 0px;
     align-self: center;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -103,17 +103,19 @@
 
 .error-container {
     margin-top: 2%;
+    height: 100px;
     width: 90%;
-    margin-right: 9%;
+    margin-left: 5%;
     color: red;
     font-weight: bold;
     font-family: sans-serif;
+    font-size: 12px;
 }
 
 .submit-button {
     align-self: center;
     border: none;
-    margin-top: 7%;
+    margin-top: .5%;
     height: 30px;
     width: 80%;
     border-radius: 10px;

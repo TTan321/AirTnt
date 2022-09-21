@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import airtnt from '../../images/airtnt-logo.png';
@@ -7,7 +7,6 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector((state) => (state.session.user));
-    const history = useHistory();
 
     let sessionLinks;
     if (sessionUser) {

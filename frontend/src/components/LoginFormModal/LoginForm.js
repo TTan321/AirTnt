@@ -11,7 +11,6 @@ function LoginForm({ setShowModal, setShowMenu }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setShowMenu(false)
         setErrors([]);
         return dispatch(sessionActions.login({ credential, password })).catch(
             async (res) => {
@@ -41,13 +40,6 @@ function LoginForm({ setShowModal, setShowMenu }) {
                 </div>
                 <div className="login-form-bottom">
                     <div className="login-input-container">
-                        {!!errors.length && (
-                            <div className="login-errors-container">
-                                {errors.map((error, idx) => (
-                                    <p className="login-errors" key={idx}>! {error}</p>
-                                ))}
-                            </div>
-                        )}
                         <input
                             className="login"
                             type="text"
@@ -64,6 +56,12 @@ function LoginForm({ setShowModal, setShowMenu }) {
                             placeholder="Password"
                             required
                         />
+                        <div className="login-errors-container">
+                            {errors.map((error, idx) => (
+                                <p className="login-errors" key={idx}>{error}</p>
+                            ))
+                            }
+                        </div>
                         <div className="login-button-container">
                             <button className="submit" type="submit" >Log In</button>
                             <button className="demo-user" onClick={logInDemo} >Demo User</button>
