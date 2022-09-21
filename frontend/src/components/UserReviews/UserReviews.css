@@ -55,6 +55,7 @@
 .review-body {
     margin-top: 10px;
     height: 42%;
+    overflow-wrap: break-word;
 }
 
 .delete-review-container {
