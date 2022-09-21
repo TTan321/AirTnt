@@ -1,5 +1,5 @@
 .signup-form {
-    height: 450px;
+    min-height: 400px;
     width: 520px;
     font-family: sans-serif;
 }
@@ -103,8 +103,6 @@
 
 .error-container {
     margin-top: 2%;
-    height: 100px;
-    width: 90%;
     margin-left: 5%;
     color: red;
     font-weight: bold;
@@ -115,7 +113,7 @@
 .submit-button {
     align-self: center;
     border: none;
-    margin-top: .5%;
+    margin-top: 4%;
     height: 30px;
     width: 80%;
     border-radius: 10px;
