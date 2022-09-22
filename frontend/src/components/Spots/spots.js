@@ -18,11 +18,11 @@ function Spots() {
     return (
         <div className="outer-spots-container">
             <div className="all-spots-container">
-                {spots.map(({ id, previewImage, city, state, avgRating, price }) => (
+                {spots.map(({ id, previewImage, city, state, avgRating, price, country }) => (
                     <div onClick={() => history.push(`/spots/${id}`)} key={id} className="spot-container">
                         <img src={previewImage} alt={"Preview Spot"} className="images" />
                         <div className="spotsDescription">
-                            <p className="allSpotsP1">{city}, {state}</p>
+                            <p className="allSpotsP1">{city}, {state ? state : country}</p>
                             <p className="allSpotsP2">
                                 <span className="all-spots-star"> &#9733;</span>
                                 &nbsp;{!!avgRating ? avgRating.toFixed(2) : "0"}

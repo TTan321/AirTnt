@@ -17,9 +17,6 @@ function NoUserSpotDetails() {
     const allReviews = useSelector((state) => (state.reviews))
     const reviews = Object.values(allReviews);
 
-    // console.log(spot)
-    // console.log(reviews)
-
     useEffect(() => {
         dispatch(getSpotsReviews(spotId));
         dispatch(getASpot(spotId));
@@ -36,7 +33,7 @@ function NoUserSpotDetails() {
                                 <span className="spot-details-star">&#9733;</span>
                                 {!!spot.avgRating ? spot.avgRating.toFixed(2) : "0"} - {reviews.length} Reviews
                             </p>
-                            <p className="d2">{spot.city}, {spot.state}, {spot.country} </p>
+                            <p className="d2">{spot.city}, {spot.state ? `${spot.state}, ${spot.country}` : spot.country} </p>
                         </div>
                         <div className='image-container'>
                             <div className='main-image-container'>
