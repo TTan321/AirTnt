@@ -42,10 +42,9 @@
 .profile-dropdown li {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     height: 30px;
     width: 100%;
-    padding-left: 25px;
 }
 
 .user-email {
