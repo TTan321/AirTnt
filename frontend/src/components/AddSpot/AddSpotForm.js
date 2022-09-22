@@ -157,6 +157,8 @@ function AddSpotForm({ setShowModal }) {
                     <div>
                         <label className="spot-labels" htmlFor="description">Description:</label>
                         <textarea
+                            rows="5"
+                            cols="51"
                             className='textbox'
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}>
