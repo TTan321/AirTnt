@@ -72,6 +72,41 @@ module.exports = {
         spotId: 10,
         reviewId: null,
         userId: 5
+      },
+      {
+        url: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        previewImage: true,
+        spotId: 11,
+        reviewId: null,
+        userId: 5
+      },
+      {
+        url: 'https://images.pexels.com/photos/262405/pexels-photo-262405.jpeg?auto=compress&cs=tinysrgb&w=1600',
+        previewImage: true,
+        spotId: 12,
+        reviewId: null,
+        userId: 4
+      },
+      {
+        url: 'https://images.pexels.com/photos/463734/pexels-photo-463734.jpeg?auto=compress&cs=tinysrgb&w=1600',
+        previewImage: true,
+        spotId: 13,
+        reviewId: null,
+        userId: 3
+      },
+      {
+        url: 'https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        previewImage: true,
+        spotId: 14,
+        reviewId: null,
+        userId: 2
+      },
+      {
+        url: 'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        previewImage: true,
+        spotId: 15,
+        reviewId: null,
+        userId: 1
       }
     ])
   },
