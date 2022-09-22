@@ -39,7 +39,7 @@ function UserSpots() {
                         </div>
                     </div>
                     <div className="user-spots-container">
-                        {userSpots?.map(({ id, previewImage, avgRating, price, name, description, city, state, country }) => (
+                        {userSpots?.map(({ id, previewImage, price, name, description, city, state, country }) => (
                             <div key={id} className="listings-spot-container">
                                 <div className="listing-details" onClick={() => history.push(`/spots/${id}`)}>
                                     <p className="listing-name">{name}</p>
