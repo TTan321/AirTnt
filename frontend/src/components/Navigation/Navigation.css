@@ -10,13 +10,18 @@
 }
 
 .inner-nav-container {
-    width: 88%;
+    width: 83.5%;
     display: flex;
     align-items: center;
 }
 
 .home-container {
     width: 50%;
+}
+
+#logo {
+    height: 54px;
+    width: 80px;
 }
 
 .sessionLinks {

@@ -27,7 +27,7 @@ function Navigation({ isLoaded }) {
         <div className='navBar'>
             <div className='inner-nav-container'>
                 <div className='home-container'>
-                    <NavLink exact to="/" className="home" ><img src={airtnt} alt="Home" /></NavLink>
+                    <NavLink exact to="/" className="home" ><img id="logo" src={airtnt} alt="Home" /></NavLink>
                 </div>
                 <div className='profile-container'>
                     {isLoaded && sessionLinks}
