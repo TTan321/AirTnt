@@ -19,11 +19,13 @@
 }
 
 .spot-name {
+    font-size: 18;
     margin: 0;
     margin-top: 10px;
 }
 
 .review-address {
+    font-size: 15;
     margin: 0;
     margin-bottom: 10px;
 }

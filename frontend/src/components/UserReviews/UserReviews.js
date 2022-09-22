@@ -40,7 +40,7 @@ function UserReviews() {
                             < div className="review-container" key={id} >
                                 <div className="user-review-header">
                                     <h2 className="spot-name">{name}</h2>
-                                    <p className="review-address">{city} {state}, {country}</p>
+                                    <p className="review-address">{city}, {state ? `${state}, ${country}` : country}</p>
                                 </div>
                                 <div className="review-rating">
                                     <span>
