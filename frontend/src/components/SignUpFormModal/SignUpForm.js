@@ -90,7 +90,7 @@ function SignUpForm({ setShowModal, setShowMenu }) {
                     required
                 />
                 <div className="error-container">
-                    {errors.map((error, idx) => <p className="errors" key={idx}>! {error}</p>)}
+                    {errors.map((error, idx) => <p className="errors" key={idx}>{error}</p>)}
                 </div>
                 <button className="submit-button" type="submit">Submit</button>
             </div>
