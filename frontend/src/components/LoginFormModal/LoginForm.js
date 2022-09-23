@@ -29,9 +29,9 @@ function LoginForm({ setShowModal, setShowMenu }) {
     return (
         <>
             <form className="login-form" onSubmit={handleSubmit}>
-                <i className="fas fa-times cancel" onClick={() => setShowModal(false)} />
                 <div className="login-form-top">
                     <div className="header-div">
+                        <i className="fas fa-times cancel" onClick={() => setShowModal(false)} />
                         <h1 className="h1-login">Log In</h1>
                     </div>
                 </div>
