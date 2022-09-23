@@ -12,20 +12,20 @@
 }
 
 
-.cancel {
-    padding-top: 20px;
-    cursor: pointer;
-}
-
 .header-div {
+    border-bottom: 1px solid lightgray;
     display: flex;
     align-items: flex-start;
     height: 55px;
     width: 100%;
     gap: 35%;
-    border-bottom: 1px solid black;
     font-family: sans-serif;
+}
+
+.cancel {
+    padding-top: 20px;
     padding-left: 28px;
+    cursor: pointer;
 }
 
 .h1-login {

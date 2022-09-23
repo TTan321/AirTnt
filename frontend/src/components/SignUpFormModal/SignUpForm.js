@@ -35,8 +35,8 @@ function SignUpForm({ setShowModal, setShowMenu }) {
 
     return (
         <form className="signup-form" onSubmit={handleSubmit}>
-            <i className="fas fa-times signup-cancel" onClick={() => setShowModal(false)} />
             <div className="signup-header">
+                <i className="fas fa-times signup-cancel" onClick={() => setShowModal(false)} />
                 <h1 className="h1-signup">Sign Up</h1>
             </div>
             <h2 className="h2-signup">Welcome to AirTnT</h2>

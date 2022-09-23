@@ -1,30 +1,32 @@
 .signup-form {
-    min-height: 400px;
+    min-height: 450px;
     width: 520px;
     font-family: sans-serif;
 }
 
 
-.signup-cancel {
-    align-self: flex-start;
-    padding-left: 10px;
-    padding-top: 10px;
-    cursor: pointer;
-}
 
 .signup-header {
     display: flex;
+    height: 45px;
     width: 100%;
-    border-bottom: 1px solid black;
-    justify-content: center;
-    gap: 38%;
+    border-bottom: 1px solid lightgray;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 35%;
     font-family: sans-serif;
+}
+
+.signup-cancel {
+    align-self: flex-start;
+    margin-top: 13px;
+    margin-left: 28px;
+    cursor: pointer;
 }
 
 .h1-signup {
     font-size: 16px;
     margin: 0;
-    margin-bottom: 5px;
 }
 
 .h2-signup {
@@ -51,53 +53,54 @@
 }
 
 .first-name {
+    border: 1px solid lightgray;
+    border-bottom: 1px solid rgb(211, 211, 211, 0.5);
     margin-top: 0px;
     align-self: center;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    height: 30px;
+    height: 45px;
     width: 90%;
-    border-bottom: none;
 }
 
 .last-name {
-    border: 2px solid black;
-    border-bottom: none;
+    border: 1px solid lightgray;
+    border-bottom: 1px solid rgb(211, 211, 211, 0.5);
     align-self: center;
-    height: 30px;
+    height: 45px;
     width: 90%;
 }
 
 .email {
-    border: 2px solid black;
-    border-bottom: none;
+    border: 1px solid lightgray;
+    border-bottom: 1px solid rgb(211, 211, 211, 0.5);
     align-self: center;
-    height: 30px;
+    height: 45px;
     width: 90%;
 }
 
 .username {
-    border: 2px solid black;
-    border-bottom: none;
+    border: 1px solid lightgray;
+    border-bottom: 1px solid rgb(211, 211, 211, 0.5);
     align-self: center;
-    height: 30px;
+    height: 45px;
     width: 90%;
 }
 
 .signup-password {
-    border: 2px solid black;
-    border-bottom: none;
+    border: 1px solid lightgray;
+    border-bottom: 1px solid rgb(211, 211, 211, 0.5);
     align-self: center;
-    height: 30px;
+    height: 45px;
     width: 90%;
 }
 
 .confirm-password {
-    border: 2px solid black;
+    border: 1px solid lightgray;
     align-self: center;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    height: 30px;
+    height: 45px;
     width: 90%;
 }
 
@@ -107,18 +110,20 @@
     color: red;
     font-weight: bold;
     font-family: sans-serif;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .submit-button {
     align-self: center;
     border: none;
     margin-top: 6%;
-    height: 30px;
-    width: 80%;
+    height: 40px;
+    width: 90%;
     border-radius: 10px;
     background-color: rgb(227, 28, 95);
     color: white;
     font-family: sans-serif;
     cursor: pointer;
+    font-size: 15;
+    font-weight: bold;
 }
