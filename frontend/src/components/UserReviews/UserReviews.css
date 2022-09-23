@@ -8,7 +8,6 @@
     display: flex;
     justify-content: center;
     border-bottom: 1px solid rgb(227, 28, 95);
-    ;
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
@@ -42,9 +41,9 @@
     padding-top: 10px;
     display: flex;
     flex-direction: column;
-    border-radius: 20px;
+    border-radius: 10px;
     width: 300px;
-    height: 225px;
+    height: 245px;
     padding: 0 10px;
     border: 1px solid lightgrey;
 }
@@ -63,14 +62,14 @@
 .delete-review-container {
     display: flex;
     justify-content: center;
-    height: 8%;
+    height: 15%;
 }
 
 .delete-review-button {
     height: 100%;
-    width: 50%;
+    width: 100%;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: rgb(227, 28, 95);
     color: white;
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
