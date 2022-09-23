@@ -53,8 +53,8 @@
 .i1 {
     height: 100%;
     width: 100%;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .other-image-container {
@@ -78,13 +78,13 @@
 .i4 {
     height: 195px;
     width: 100%;
-    border-top-right-radius: 20px;
+    border-top-right-radius: 10px;
 }
 
 .i5 {
     height: 195px;
     width: 100%;
-    border-bottom-right-radius: 20px;
+    border-bottom-right-radius: 10px;
 }
 
 .bottom-container {
@@ -107,6 +107,7 @@
     border-radius: 10px;
     width: 25%;
     padding: 0 5%;
+    box-shadow: 0px 3px 5px 5px rgba(173, 173, 173, 0.238);
 }
 
 .booking-description {
@@ -148,8 +149,8 @@
 
 .reviews-header {
     display: flex;
-    flex-direction: column;
-    gap: 35%;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 30px;
     padding-bottom: 5px;
     border-bottom: 1px solid black;
@@ -164,6 +165,7 @@
     display: flex;
     flex-wrap: wrap;
     padding-top: 5px;
+    padding-bottom: 25px;
     column-gap: 1%;
     row-gap: 5px;
 }

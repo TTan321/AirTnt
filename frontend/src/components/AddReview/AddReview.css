@@ -1,12 +1,14 @@
 .Add-Review {
     border: none;
-    height: 30px;
-    width: 12%;
-    border-radius: 20px;
+    height: 45px;
+    width: 35%;
+    border-radius: 5px;
     background-color: rgb(227, 28, 95);
     color: white;
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
     cursor: pointer;
+    font-size: 14;
+    font-weight: bold;
 }
 
 .review-form {
