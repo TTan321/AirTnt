@@ -13,10 +13,10 @@ function AddSpotForm({ setShowModal }) {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
-    const [lat, setLat] = useState(0);
-    const [lng, setLng] = useState(0);
+    const [lat, setLat] = useState("");
+    const [lng, setLng] = useState("");
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState("");
     const [previewImageUrl, setPreviewImageUrl] = useState('');
     const [ownerId, setOwnerId] = useState(sessionUser.id);
     const [errors, setErrors] = useState([]);
@@ -59,9 +59,10 @@ function AddSpotForm({ setShowModal }) {
                 <div className="add-spot-form-container">
                     <div className="add-spot-header">
                         <i className="fas fa-times add-spot-cancel" onClick={() => setShowModal(false)} />
-                        <h1 className="h1">Add new listing</h1>
+                        <h1 className="add-spot-title">Add new listing</h1>
                     </div>
                     <input
+                        id="name-field"
                         className='edit-spot-inputs'
                         type='text'
                         value={name}
@@ -81,6 +82,7 @@ function AddSpotForm({ setShowModal }) {
                         <div className='location-div2'>
                             <div className='city'>
                                 <input
+                                    id="city"
                                     className='edit-spot-inputs'
                                     type='text'
                                     value={city}

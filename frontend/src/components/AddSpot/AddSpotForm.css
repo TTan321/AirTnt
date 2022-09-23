@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 550px;
+    min-height: 490px;
     width: 450px;
     padding: 10px;
     font-family: sans-serif;
@@ -10,6 +10,8 @@
 
 
 .add-spot-form-container {
+    display: flex;
+    flex-direction: column;
     width: 90%;
     font-style: sans-serif;
 }
@@ -20,22 +22,24 @@
     justify-content: flex-start;
     border-bottom: 1px solid lightgray;
     width: 100%;
+    font-size: 15px;
     margin-bottom: 15px;
     font-style: sans-serif;
-    gap: 28%;
+    gap: 32%;
 }
 
 .add-spot-cancel {
     cursor: pointer;
     padding-top: 5px;
+    padding-bottom: 5px;
 }
 
-.h1 {
+.add-spot-title {
     font-style: sans-serif;
-    font-size: x-large;
+    font-size: 18px;
     margin: 0;
     margin-top: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .add-spot-errors {
@@ -43,6 +47,12 @@
     font-family: sans-serif;
     font-weight: bold;
     font-size: 13px;
+}
+
+#name-field {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom: 1px solid rgb(211, 211, 211, 0.1);
 }
 
 .location-div {
@@ -56,39 +66,34 @@
 .location-div2 {
     display: flex;
     flex-wrap: wrap;
-    gap: 2%;
 }
 
 .city {
-    font-style: sans-serif;
     width: 100%;
     height: 5%;
 }
 
 .state {
-    font-style: sans-serif;
-    width: 49%;
+    width: 50%;
     height: 5%;
 }
 
 .country {
-    width: 49%;
+    width: 50%;
     height: 5%;
 }
 
 .lat-long-div {
     display: flex;
-    flex-wrap: wrap;
-    gap: 2%;
 }
 
 .lat {
-    width: 49%;
-    height: 10%;
+    width: 50%;
+    height: 5%;
 }
 
 .long {
-    width: 49%;
+    width: 50%;
     height: 5%;
 }
 
@@ -106,14 +111,17 @@
 .edit-spot-inputs {
     font-family: sans-serif;
     align-self: flex-start;
-    height: 20;
+    height: 40px;
     width: 100%;
-    margin-bottom: 5px;
+    border: 1px solid rgb(211, 211, 211, 1);
 }
 
 .textbox {
     height: 20%;
     width: 100%;
+    border: 1px solid rgb(211, 211, 211, 1);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .add-spot-button-div {
@@ -129,7 +137,7 @@
     height: 45px;
     width: 100%;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     background-color: rgb(227, 28, 95);
     color: white;
     cursor: pointer;
