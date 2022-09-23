@@ -19,23 +19,23 @@
     min-height: 240px;
     width: 400px;
     border-radius: 20px;
-    padding: 10px;
-}
-
-.cancel-button {
-    align-self: flex-start;
-    padding: 0;
-    cursor: pointer;
+    padding: 20px;
+    font-family: sans-serif;
 }
 
 .review-form-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 25%;
+    justify-content: flex-start;
+    height: 35%;
     width: 100%;
-    gap: 60px;
-    padding-bottom: 10px;
+    gap: 65px;
+    margin-bottom: 15px;
+}
+
+.cancel-button {
+    align-self: flex-start;
+    cursor: pointer;
 }
 
 .review-errors-div {
@@ -48,7 +48,6 @@
 .review-title {
     margin: 0;
 }
-
 
 .star-container * {
     float: right;
@@ -75,16 +74,21 @@
     justify-content: center;
 }
 
-
+.review-textbox {
+    border-radius: 10px;
+    border-color: lightgray;
+}
 
 .Submit-Review {
     border: none;
     margin-top: 30px;
-    height: 30px;
+    height: 45px;
     width: 100%;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: rgb(227, 28, 95);
     color: white;
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
     cursor: pointer;
+    font-size: 14;
+    font-weight: bold;
 }

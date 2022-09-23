@@ -41,14 +41,9 @@ function AddReview({ setShowModal }) {
 
     return (
         <form onSubmit={onSubmit} className="review-form">
-            <i className="fas fa-times cancel-button" onClick={() => setShowModal(false)} />
             <div className='review-form-header'>
+                <i className="fas fa-times cancel-button" onClick={() => setShowModal(false)} />
                 <h2 className='review-title'>Add your review here</h2>
-            </div>
-            <div className='review-errors-div'>
-                {errors.map((error, idx) => (
-                    <p key={idx} >{error}</p>
-                ))}
             </div>
             <div className='star-container'>
                 <input
@@ -112,6 +107,11 @@ function AddReview({ setShowModal }) {
                     placeholder="Type Review here"
                     onChange={(e) => setReview(e.target.value)}>
                 </textarea>
+            </div>
+            <div className='review-errors-div'>
+                {errors.map((error, idx) => (
+                    <p key={idx} >{error}</p>
+                ))}
             </div>
             <button className='Submit-Review' type="submit">Submit Review</button>
         </form>
