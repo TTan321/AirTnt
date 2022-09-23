@@ -28,13 +28,16 @@
 }
 
 .add-spot-button {
-    height: 30px;
+    height: 40px;
+    width: 200px;
     border: none;
     border-radius: 10px;
     background-color: rgb(227, 28, 95);
     color: white;
     font-family: sans-serif;
     cursor: pointer;
+    font-size: 14;
+    font-weight: bold;
 }
 
 .user-spots-container {
@@ -51,9 +54,9 @@
     padding-top: 20px;
     display: flex;
     flex-direction: column;
-    border-radius: 20px;
+    border-radius: 10px;
     width: 320px;
-    height: 450px;
+    height: 480px;
     padding: 0 10px;
     font-family: sans-serif;
     cursor: pointer;
@@ -73,7 +76,7 @@
 .listing-images {
     height: 250px;
     width: 100%;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .listing-body {
@@ -113,29 +116,34 @@
 
 .buttons-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    height: 10%;
+    height: 15%;
     width: 100%;
-    gap: 1px;
+    gap: 5px;
 }
 
 .edit {
     height: 50%;
-    width: 50%;
+    width: 100%;
     border: none;
     border-right: white;
     border-radius: 10px;
     background-color: rgb(227, 28, 95);
     color: white;
     cursor: pointer;
+    font-size: 14;
+    font-weight: bold;
 }
 
 .delete {
     height: 50%;
-    width: 50%;
+    width: 100%;
     border: none;
     border-radius: 10px;
     background-color: rgb(227, 28, 95);
     color: white;
     cursor: pointer;
+    font-size: 14;
+    font-weight: bold;
 }
