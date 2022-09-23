@@ -50,65 +50,59 @@ function AddSpotForm({ setShowModal }) {
             await dispatch(getAUsersSpots());
             setShowModal(false);
         }
-        // console.log("NEW SPOT IS :", newSpot)
     }
 
 
     return (
         <>
             <form className="add-spot-form" onSubmit={onSumbit}>
-                <i className="fas fa-times cancel" onClick={() => setShowModal(false)} />
                 <div className="add-spot-form-container">
                     <div className="add-spot-header">
+                        <i className="fas fa-times add-spot-cancel" onClick={() => setShowModal(false)} />
                         <h1 className="h1">Add new listing</h1>
                     </div>
-                    <div className="add-spot-errors">
-                        {errors.map((error, idx) => (
-                            <p key={idx} >{error}</p>
-                        ))}
-                    </div>
-                    <label className="spot-labels" htmlFor="name">Name:</label><br />
                     <input
                         className='edit-spot-inputs'
                         type='text'
                         value={name}
+                        placeholder="Name"
                         onChange={(e) => setName(e.target.value)}>
                     </input>
                     <div className='location-div'>
                         <div className='address-div'>
-                            <label className="spot-labels" htmlFor="address">Address:</label>
                             <input
                                 className='edit-spot-inputs'
                                 type='text'
                                 value={address}
+                                placeholder="Address"
                                 onChange={(e) => setAddress(e.target.value)}>
                             </input>
                         </div>
                         <div className='location-div2'>
                             <div className='city'>
-                                <label className="spot-labels" htmlFor="city">City:</label><br />
                                 <input
                                     className='edit-spot-inputs'
                                     type='text'
                                     value={city}
+                                    placeholder="City"
                                     onChange={(e) => setCity(e.target.value)}>
                                 </input>
                             </div>
                             <div className='state'>
-                                <label className="spot-labels" htmlFor="state">State:</label>
                                 <input
                                     className='edit-spot-inputs'
                                     type='text'
                                     value={state}
+                                    placeholder="State"
                                     onChange={(e) => setState(e.target.value)}>
                                 </input>
                             </div>
                             <div className='country'>
-                                <label className="spot-labels" htmlFor="country">Country:</label>
                                 <input
                                     className='edit-spot-inputs'
                                     type='text'
                                     value={country}
+                                    placeholder="Country"
                                     onChange={(e) => setCountry(e.target.value)}>
                                 </input>
                             </div>
@@ -116,53 +110,58 @@ function AddSpotForm({ setShowModal }) {
                     </div>
                     <div className='lat-long-div'>
                         <div className='lat'>
-                            <label className="spot-labels" htmlFor="lat">Latitude:</label>
                             <input
                                 className='edit-spot-inputs'
                                 type='number'
                                 value={lat}
+                                placeholder="Latitude"
                                 onChange={(e) => setLat(e.target.value)}>
                             </input>
                         </div>
                         <div className='long'>
-                            <label className="spot-labels" htmlFor="lng">Longitude:</label>
                             <input
                                 className='edit-spot-inputs'
                                 type='number'
                                 value={lng}
+                                placeholder="Longitude"
                                 onChange={(e) => setLng(e.target.value)}>
                             </input>
                         </div>
                     </div>
                     <div className='price-div'>
                         <div className='price-field'>
-                            <label className="spot-labels" htmlFor="price">Price:</label><br />
                             <input
                                 className='edit-spot-inputs'
                                 type='number'
                                 value={price}
+                                placeholder="Price"
                                 onChange={(e) => setPrice(e.target.value)}>
                             </input>
                         </div>
                     </div>
                     <div>
-                        <label className="spot-labels" htmlFor="previewImageUrl">Image Url for Preview:</label>
                         <input
                             className='edit-spot-inputs'
                             type='text'
                             value={previewImageUrl}
+                            placeholder="Image Url for Preview"
                             onChange={(e) => setPreviewImageUrl(e.target.value)}>
                         </input>
                     </div>
                     <div>
-                        <label className="spot-labels" htmlFor="description">Description:</label>
                         <textarea
                             rows="5"
                             cols="51"
                             className='textbox'
                             value={description}
+                            placeholder="Description"
                             onChange={(e) => setDescription(e.target.value)}>
                         </textarea>
+                    </div>
+                    <div className="add-spot-errors">
+                        {errors.map((error, idx) => (
+                            <p key={idx} >{error}</p>
+                        ))}
                     </div>
                     <div className="add-spot-button-div">
                         <button className="add-spot-submit" type="submit" >Submit</button>
