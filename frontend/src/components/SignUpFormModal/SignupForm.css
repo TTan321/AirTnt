@@ -4,7 +4,11 @@
     font-family: sans-serif;
 }
 
-
+/* Drop down menu*/
+.SignUp-menu {
+    margin: 0;
+    font-size: 14;
+}
 
 .signup-header {
     display: flex;

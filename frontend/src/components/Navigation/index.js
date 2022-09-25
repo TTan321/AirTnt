@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import LoginFormModal from '../LoginFormModal/LoginModal';
+import SignUpFormModel from '../SignUpFormModal/SignUpFormModel';
 import airtnt from '../../images/airtnt-logo.png';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector((state) => (state.session.user));
+    const [showLogin, setShowLogin] = useState(false);
+    const [showSignUp, setShowSignUp] = useState(false);
 
     let sessionLinks;
     if (sessionUser) {
@@ -18,7 +22,9 @@ function Navigation({ isLoaded }) {
     } else {
         sessionLinks = (
             <div className='sessionLinks'>
-                <ProfileButton user={sessionUser} />
+                <ProfileButton user={sessionUser} setShowLogin={setShowLogin} setShowSignUp={setShowSignUp} />
+                <LoginFormModal showLogin={showLogin} setShowLogin={setShowLogin} />
+                <SignUpFormModel showSignUp={showSignUp} setShowSignUp={setShowSignUp} />
             </div>
         );
     }

@@ -32,7 +32,7 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     top: 45px;
     border: 1px solid rgb(211, 211, 211, 0.2);
@@ -45,33 +45,63 @@
 .profile-dropdown li {
     display: flex;
     align-items: center;
-    justify-content: center;
     height: 30px;
     width: 100%;
 }
 
-.user-email {
+#username-menu {
+    padding-left: 15px;
+}
+
+.user-email-li {
     border-bottom: 1px solid black;
     padding-bottom: 5px;
 }
 
+#user-email {
+    padding-left: 15px;
+}
+
 .user-reviews-menu {
-    padding-top: 5px;
+    width: 100%;
+    margin-top: 5px;
     cursor: pointer;
+}
+
+.user-reviews-menu:hover {
+    background-color: lightgray;
+}
+
+#my-review {
+    padding-left: 15px;
 }
 
 .user-listings-menu {
     cursor: pointer;
 }
 
+.user-listings-menu:hover {
+    background-color: lightgray;
+}
+
+#My-Active-Listings {
+    padding-left: 15px;
+}
+
+.menu-logout {
+    display: flex;
+    justify-content: center;
+}
+
 .logout-button {
     margin-top: 7px;
-    height: 25px;
-    width: 153px;
+    height: 30px;
+    width: 85%;
     border: none;
-    border-radius: 20px;
+    border-radius: 7px;
     background-color: rgb(227, 28, 95);
     color: white;
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
     cursor: pointer;
+    font-weight: bold;
 }

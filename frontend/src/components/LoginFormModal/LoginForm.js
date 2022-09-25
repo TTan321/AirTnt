@@ -3,7 +3,7 @@ import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import './LoginModal.css';
 
-function LoginForm({ setShowModal, setShowMenu }) {
+function LoginForm({ setShowLogin, setShowMenu }) {
     const dispatch = useDispatch();
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
@@ -31,7 +31,7 @@ function LoginForm({ setShowModal, setShowMenu }) {
             <form className="login-form" onSubmit={handleSubmit}>
                 <div className="login-form-top">
                     <div className="header-div">
-                        <i className="fas fa-times cancel" onClick={() => setShowModal(false)} />
+                        <i className="fas fa-times cancel" onClick={() => setShowLogin(false)} />
                         <h1 className="h1-login">Log In</h1>
                     </div>
                 </div>

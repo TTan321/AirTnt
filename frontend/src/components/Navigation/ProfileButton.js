@@ -1,33 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
-import LoginFormModal from "../LoginFormModal/LoginModal";
-import SignUpFormModel from "../SignUpFormModal/SignUpFormModel";
 import './ProfileButton.css'
 import HostLoginModal from "../AddSpot/HostLoginModal";
 
-function ProfileButton({ user }) {
+function ProfileButton({ user, setShowLogin, setShowSignUp }) {
     const history = useHistory();
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
 
-    // const openMenu = () => {
-    //     if (showMenu) return;
-    //     setShowMenu(true);
-    // };
+    const openMenu = () => {
+        if (showMenu) return;
+        setShowMenu(true);
+    };
 
-    // useEffect(() => {
-    //     if (!showMenu) return;
+    useEffect(() => {
+        if (!showMenu) return;
 
-    //     const closeMenu = () => {
-    //         setShowMenu(false);
-    //     };
+        const closeMenu = () => {
+            setShowMenu(false);
+        };
 
-    //     document.addEventListener('click', closeMenu);
+        document.addEventListener('click', closeMenu);
 
-    //     return () => document.removeEventListener("click", closeMenu);
-    // }, [showMenu]);
+        return () => document.removeEventListener("click", closeMenu);
+    }, [showMenu]);
 
     const reviews = (e) => {
         e.preventDefault();
@@ -57,10 +55,10 @@ function ProfileButton({ user }) {
                 </button>
                 {showMenu && (
                     <ul className="profile-dropdown">
-                        <li>{user.username}</li>
-                        <li className="user-email">{user.email}</li>
-                        <li className="user-reviews-menu" onClick={reviews}>My Reviews</li>
-                        <li className="user-listings-menu" onClick={hostspot}>My Active Listings</li>
+                        <li className="username-menu-li"><span id="username-menu">{user.username}</span></li>
+                        <li className="user-email-li"><span id="user-email">{user.email}</span></li>
+                        <li className="user-reviews-menu" onClick={reviews}><span id="my-review">My Reviews</span></li>
+                        <li className="user-listings-menu" onClick={hostspot}><span id="My-Active-Listings">My Active Listings</span></li>
                         <li className="menu-logout">
                             <button className="logout-button" onClick={logout}>Log Out</button>
                         </li>
@@ -78,8 +76,8 @@ function ProfileButton({ user }) {
                 </button>
                 {showMenu && (
                     <ul className="profile-dropdown">
-                        <li><LoginFormModal setShowMenu={setShowMenu} /></li>
-                        <li><SignUpFormModel setShowMenu={setShowMenu} /></li>
+                        <p className='Login-menu' onClick={() => setShowLogin(true)}>Log In</p>
+                        <p className='SignUp-menu' onClick={() => setShowSignUp(true)} >Sign Up</p>
                     </ul>
                 )}
             </div>

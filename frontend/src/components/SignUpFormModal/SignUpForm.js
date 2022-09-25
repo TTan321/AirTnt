@@ -4,9 +4,8 @@ import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { useHistory } from 'react-router-dom'
 import './SignupForm.css'
-import LoginFormModal from "../LoginFormModal/LoginModal";
 
-function SignUpForm({ setShowModal, setShowMenu }) {
+function SignUpForm({ setShowSignUp, setShowMenu }) {
     let history = useHistory();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
@@ -36,7 +35,7 @@ function SignUpForm({ setShowModal, setShowMenu }) {
     return (
         <form className="signup-form" onSubmit={handleSubmit}>
             <div className="signup-header">
-                <i className="fas fa-times signup-cancel" onClick={() => setShowModal(false)} />
+                <i className="fas fa-times signup-cancel" onClick={() => setShowSignUp(false)} />
                 <h1 className="h1-signup">Sign Up</h1>
             </div>
             <h2 className="h2-signup">Welcome to AirTnT</h2>
