@@ -76,8 +76,8 @@ function ProfileButton({ user, setShowLogin, setShowSignUp }) {
                 </button>
                 {showMenu && (
                     <ul className="profile-dropdown">
-                        <p className='Login-menu' onClick={() => setShowLogin(true)}>Log In</p>
-                        <p className='SignUp-menu' onClick={() => setShowSignUp(true)} >Sign Up</p>
+                        <p className='Login-menu' onClick={() => setShowLogin(true)}><span id='login'>Log In</span></p>
+                        <p className='SignUp-menu' onClick={() => setShowSignUp(true)} ><span id='signup'>Sign Up</span></p>
                     </ul>
                 )}
             </div>

@@ -6,8 +6,20 @@
 
 /* Drop down menu*/
 .SignUp-menu {
+    display: flex;
+    align-items: center;
     margin: 0;
     font-size: 14;
+    height: 30px;
+    cursor: pointer;
+}
+
+.SignUp-menu:hover {
+    background-color: rgb(241, 241, 241);
+}
+
+#signup {
+    padding-left: 15px;
 }
 
 .signup-header {
