@@ -28,9 +28,6 @@ function App() {
           <Route exact path='/'>
             <Spots />
           </Route>
-          <Route exact path="/login">
-            <LoginForm />
-          </Route>
           <Route exact path="/hostspot">
             <UserSpots />
           </Route>
@@ -39,9 +36,6 @@ function App() {
           </Route>
           <Route exact path="/spots/:spotId">
             <NoUserSpotDetails />
-          </Route>
-          <Route exact path="/spots/:spotId/edit">
-            <EditSpot />
           </Route>
         </Switch>
       )}
