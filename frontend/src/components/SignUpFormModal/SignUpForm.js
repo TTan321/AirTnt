@@ -13,21 +13,25 @@ function SignUpForm({ setShowSignUp }) {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         setErrors([]);
+
         if (password !== confirmPassword) {
             setErrors(['Confirm Password field must be the same as the Password field']);
+            return
         }
-        await dispatch(sessionActions.signup({ firstName, lastName, email, username, password })).catch(
+
+        const newUser = await dispatch(sessionActions.signup({ firstName, lastName, email, username, password })).catch(
             async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
             });
 
-        if (!errors.length) {
-            console.log("errors: ", errors.length)
+        if (newUser) {
+            console.log("Sign up form is now closing")
             setShowSignUp(false)
         }
     };
