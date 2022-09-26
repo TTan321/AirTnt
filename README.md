@@ -27,6 +27,25 @@ AirTnt is built with:
 * Has a navigation bar for returning to home page, button for creating a spot, button that opens menu for logging in or signing up
 ![Home page](https://github.com/TTan321/API-project/blob/main/backend/assets/AirTnt%20homepage.PNG)
 
+### Spot Details Page
+* Displays details of a spot
+* User can add a review if user is logged in and not the owner of the spot
+![Spot Details](https://github.com/TTan321/API-project/blob/main/backend/assets/Spots-Detail-page.PNG)
+
+### Add a Review Form
+* Users review will be added to the bottom of the form after submission
+![Add Review](https://github.com/TTan321/API-project/blob/main/backend/assets/add-review.PNG)
+
+### User's Reviews Page
+* All users submitted reviews displayed here
+* Reviews can be deleted here
+![User Reviews](https://github.com/TTan321/API-project/blob/main/backend/assets/users-reviews-page.PNG)
+
+### User's Spots Page
+* All user's created spots displayed here
+* Spots can be created, edited, and or deleted here
+![User Spots](https://github.com/TTan321/API-project/blob/main/backend/assets/users-listings0page.PNG)
+
 ## Current Features of AirTnt
 ### Spots
 * Create a spot (listing) after logging in or creating an user and filling out the add spot form. 
