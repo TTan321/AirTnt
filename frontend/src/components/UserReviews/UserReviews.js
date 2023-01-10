@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { deleteAReview, getUserReviews } from "../../store/ReviewsReducer";
+import EditReviewModal from "../AddReview/EditReviewModal";
 import "./UserReviews.css";
 
 function UserReviews() {
@@ -12,6 +13,7 @@ function UserReviews() {
     const userReviews = useSelector(state => state.reviews);
     const reviewsArray = Object.values(userReviews);
     // console.log("userReviews: ", reviewsArray[0].Images[0].url)
+    console.log("reviewsArray: ", reviewsArray)
 
 
     useEffect(() => {
@@ -30,13 +32,13 @@ function UserReviews() {
     // else if (reviewsArray && !reviewsArray[0].Spot) return null;
     return (
         <>
-            {reviewsArray && (
+            {reviewsArray.length > 0 && (
                 <div className="user-reviews-page">
                     <div className="reviews-title">
                         <h1>Your past reviews</h1>
                     </div>
                     <div className="user-reviews">
-                        {reviewsArray.map(({ id, review, stars, createdAt, Spot: { name, city, state, country } }) => (
+                        {reviewsArray.map(({ id, review, stars, createdAt, Spot, Spot: { name, city, state, country } }) => (
                             < div className="review-container" key={id} >
                                 <div className="user-review-header">
                                     <h2 className="spot-name">{name}</h2>
@@ -49,7 +51,8 @@ function UserReviews() {
                                     {createdAt.slice(0, 10)}
                                 </div>
                                 <div className="review-body">{review}</div>
-                                <div className="delete-review-container">
+                                <div className="delete-review-container ">
+                                    <EditReviewModal id={id} review={review} stars={stars} spotId={Spot.id} />
                                     <button className="delete-review-button" onClick={() => deleteReview(id)}>Delete</button>
                                 </div>
                             </div>

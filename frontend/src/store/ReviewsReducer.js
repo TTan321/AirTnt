@@ -4,30 +4,38 @@ import { csrfFetch } from "./csrf";
 const GET_USER_REVIEWS = "reviews/getUserReviews";
 const GET_REVIEWS = "reviews/getReviews";
 const ADD_REVIEW = "review/addReview";
+const EDIT_REVIEW = "review/editReview"
 const DELETE_REVIEW = "review/deleteReview";
 
-export const loadUserReviews = (reviews) => {
+const loadUserReviews = (reviews) => {
     return {
         type: GET_USER_REVIEWS,
         reviews
     };
 };
 
-export const loadReviews = (reviews) => {
+const loadReviews = (reviews) => {
     return {
         type: GET_REVIEWS,
         reviews
     };
 };
 
-export const addReview = (review) => {
+const addReview = (review) => {
     return {
         type: ADD_REVIEW,
         review
     };
 };
 
-export const deleteReview = (review) => {
+const editReview = review => {
+    return {
+        type: EDIT_REVIEW,
+        review
+    }
+}
+
+const deleteReview = (review) => {
     return {
         type: DELETE_REVIEW,
         review
@@ -62,6 +70,22 @@ export const addAReview = (newReview) => async (dispatch) => {
     return data;
 }
 
+export const updateReview = (payload) => async (dispatch) => {
+    const { id, review, stars } = payload;
+    const response = await csrfFetch(`/api/reviews/${payload.reviewId}`, {
+        method: "PUT",
+        body: JSON.stringify({
+            "reviewId": id,
+            "review": review,
+            "stars": stars
+        }),
+    })
+    const data = await response.json();
+    console.log("Edited Review Data: ", data)
+    dispatch(editReview(data));
+    return data;
+}
+
 export const deleteAReview = reviewToBeDeleted => async (dispatch) => {
     const response = await csrfFetch(`/api/reviews/${reviewToBeDeleted}`, {
         method: "DELETE",
@@ -89,6 +113,15 @@ const reviewsReducer = (state = initialState, action) => {
             const newReview = {};
             newReview[action.review.id] = { ...action.review }
             const newState = { ...state, ...newReview }
+            return newState;
+        }
+        case EDIT_REVIEW: {
+            console.log("action.review: ", action.review)
+            const newState = { ...state };
+            console.log("newstate: ", newState)
+            console.log("newstate.id b4: ", newState[action.review.id])
+            newState[action.review.id] = action.review
+            console.log("newstate.id: ", newState[action.review.id])
             return newState;
         }
         case DELETE_REVIEW: {

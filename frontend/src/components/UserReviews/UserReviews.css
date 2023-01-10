@@ -46,7 +46,7 @@
     flex-direction: column;
     border-radius: 10px;
     width: 300px;
-    height: 245px;
+    height: 275px;
     padding: 0 10px;
     border: 1px solid lightgrey;
 }
@@ -65,8 +65,10 @@
 
 .delete-review-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    height: 15%;
+    height: 20%;
+    row-gap: 5px;
 }
 
 .delete-review-button {
