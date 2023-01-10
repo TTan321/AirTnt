@@ -1,0 +1,12 @@
+.editBooking {
+    height: 200px;
+    width: 300px;
+    padding: 15px;
+}
+
+.editBookButton {
+    height: 55px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
