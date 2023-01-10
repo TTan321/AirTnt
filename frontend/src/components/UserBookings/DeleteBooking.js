@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux"
 import { removeBooking } from "../../store/bookings"
 import { loadUsersBookings } from "../../store/sessionBooking"
+import "./DeleteBooking.css"
 
 function DeleteBooking({ id, setShowModal }) {
     const dispatch = useDispatch()
@@ -17,10 +18,12 @@ function DeleteBooking({ id, setShowModal }) {
     }
 
     return (
-        <div>
-            <span>Are you sure you want to cancel your booking?</span>
-            <button onClick={deleteBooking}>Yes</button>
-            <button onClick={() => setShowModal(false)}>cancel</button>
+        <div className="DeleteBooking">
+            <span className="deleteText">Are you sure you want to cancel your booking?</span>
+            <div className="DeleteButtons">
+                <button onClick={deleteBooking} className="edit" >Yes</button>
+                <button onClick={() => setShowModal(false)} className="edit" >cancel</button>
+            </div>
         </div>
     )
 }
