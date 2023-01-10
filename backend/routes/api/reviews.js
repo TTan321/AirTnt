@@ -127,6 +127,7 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
         });
     };
     const { review, stars } = req.body;
+
     if (!review || !stars) {
         res.status(400);
         return res.json({
@@ -142,8 +143,57 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
         review: review,
         stars: stars
     });
+
+    const user = await User.findOne({ where: { id: findReview.userId } });
+    let userData = {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName
+    };
+
+    const spot = await Spot.findOne({ where: { id: findReview.spotId } });
+    let spotData = {
+        id: spot.id,
+        ownerId: spot.ownerId,
+        address: spot.address,
+        city: spot.city,
+        state: spot.state,
+        country: spot.country,
+        lat: spot.lat,
+        lng: spot.lng,
+        name: spot.name,
+        description: spot.description,
+    };
+
+    const images = await Image.findAll({ where: { reviewId: findReview.id } });
+    let imagesDataArray = [];
+    if (images[0]) {
+        let image = images[i];
+        let imageData = {
+            id: image.id,
+            imageableId: image.reviewId,
+            url: image.url
+        }
+        imagesDataArray.push(imageData);
+    } else {
+        imagesDataArray.push("No images for this review.")
+    }
+
+    let reviewData = {
+        id: findReview.id,
+        userId: findReview.userId,
+        spotId: findReview.spotId,
+        review: findReview.review,
+        stars: findReview.stars,
+        createdAt: findReview.createdAt,
+        updatedAt: findReview.updatedAt,
+        User: userData,
+        Spot: spotData,
+        Images: imagesDataArray
+    };
+
     res.status(200);
-    return res.json(findReview);
+    return res.json(reviewData);
 });
 
 // Delete a review
