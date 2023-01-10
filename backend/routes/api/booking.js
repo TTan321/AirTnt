@@ -103,11 +103,10 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
         });
     }
     else if (booking.userId === req.user.id) {
-        let { startDate, endDate } = req.body;
+        let { startDate, endDate } = req.body.payload;
         startDate = new Date(startDate);
         endDate = new Date(endDate);
         let currentDate = new Date();
-        console.log(startDate, '    ', endDate);
         let bookingStartMonth = (booking.startDate.getMonth() + 1);
         let bookingEndMonth = (booking.endDate.getMonth() + 1);
         let bookingStartDate = (booking.startDate.getDate() + 1);
@@ -125,6 +124,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
         }
 
         if (currentDate > booking.endDate) {
+            console.log("Error 127")
             res.status(403);
             return res.json({
                 "message": "Past bookings can't be modified",
@@ -137,6 +137,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
                     let dateRange = [];
                     dateRange.push(i);
                     if (dateRange.includes(currentDate.getDate() + 1)) {
+                        console.log("Error 133")
                         res.status(403);
                         return res.json({
                             "message": "Sorry, this spot is already booked for the specified dates",
@@ -151,13 +152,14 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
             }
         }
         booking.update({
-            startDate: new Date(req.body.startDate),
-            endDate: new Date(req.body.endDate)
+            startDate: new Date(req.body.payload.startDate),
+            endDate: new Date(req.body.payload.endDate)
         });
         res.status(200);
         return res.json(booking)
     };
     res.status(403);
+    console.log("Error 162")
     return res.json({
         "message": "Forbidden",
         "status": 403

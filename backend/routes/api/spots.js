@@ -576,6 +576,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 
 // Create a Booking from a Spot based on the Spot's id
 router.post('/:spotId/bookings', requireAuth, async (req, res) => {
+    console.log("req params: ", req.params.spotId)
     const spot = await Spot.findByPk(req.params.spotId);
     if (!spot) {
         res.status(404);
@@ -584,7 +585,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             "statusCode": 404
         });
     };
-    let { startDate, endDate } = req.body;
+    let { startDate, endDate } = req.body.payload;
     startDate = new Date(startDate);
     endDate = new Date(endDate);
     if (req.user.id !== spot.ownerId) {
