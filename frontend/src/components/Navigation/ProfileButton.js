@@ -34,6 +34,12 @@ function ProfileButton({ user, setShowLogin, setShowSignUp }) {
         return history.push('/hostspot')
     }
 
+    const bookings = (e) => {
+        e.preventDefault();
+        setShowMenu(showMenu === false ? true : false);
+        return history.push('/bookings')
+    }
+
     const logout = (e) => {
         e.preventDefault();
         dispatch(sessionActions.logout());
@@ -54,6 +60,7 @@ function ProfileButton({ user, setShowLogin, setShowSignUp }) {
                         <li className="user-email-li"><span id="user-email">{user.email}</span></li>
                         <li className="user-reviews-menu" onClick={reviews}><span id="my-review">My Reviews</span></li>
                         <li className="user-listings-menu" onClick={hostspot}><span id="My-Active-Listings">My Active Listings</span></li>
+                        <li className="user-listings-menu" onClick={bookings}><span id="My-Active-Listings">My Bookings</span></li>
                         <li className="menu-logout">
                             <button className="logout-button" onClick={logout}>Log Out</button>
                         </li>

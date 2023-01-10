@@ -1,3 +1,5 @@
+import { csrfFetch } from './csrf';
+
 // Types
 const GET_BOOKINGS = "booking/GET_BOOKINGS"
 const ADD_BOOKINGS = "booking/ADD_BOOKINGS"
@@ -57,7 +59,7 @@ export const createBooking = payload => async (dispatch) => {
 };
 
 export const updateBooking = payload => async (dispatch) => {
-    const response = await csrfFetch(`/api/bookings/${payload.bookingId}}`, {
+    const response = await csrfFetch(`/api/bookings/${payload.bookingId}`, {
         method: "PUT",
         body: JSON.stringify({ payload }),
     });
@@ -66,10 +68,14 @@ export const updateBooking = payload => async (dispatch) => {
         dispatch(editBooking({ data }));
         return ({ data });
     }
+    else {
+        const data = await response.json()
+        console.log(data)
+    }
 };
 
 export const removeBooking = payload => async (dispatch) => {
-    const response = await csrfFetch(`/api/bookings/${payload}}`, {
+    const response = await csrfFetch(`/api/bookings/${payload}`, {
         method: "DELETE",
         body: JSON.stringify({ payload }),
     });
@@ -77,6 +83,10 @@ export const removeBooking = payload => async (dispatch) => {
         const data = await response.json();
         dispatch(deleteBooking({ payload }));
         return ({ data });
+    }
+    else {
+        const data = await response.json()
+        console.log(data)
     }
 };
 

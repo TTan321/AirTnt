@@ -1,11 +1,12 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getSpotsReviews } from '../../store/ReviewsReducer';
 import { getASpot } from '../../store/spotsReducer';
 import AddReviewModal from '../AddReview/AddReviewModal';
-import MakeBooking from '../Bookings/MakeBookings';
+import { createBooking, loadBookings } from '../../store/bookings';
 import './SpotDetails.css'
+import { loadUsersBookings } from '../../store/sessionBooking';
 
 function NoUserSpotDetails() {
     const dispatch = useDispatch();
@@ -18,19 +19,42 @@ function NoUserSpotDetails() {
     const allReviews = useSelector((state) => (state.reviews))
     const reviews = Object.values(allReviews);
 
-    const [value, setValue] = useState();
+    let currentDate = new Date();
+    let month;
+    if (currentDate.getMonth() < 9) {
+        month = `0${currentDate.getMonth() + 1}`
+    }
+    else {
+        month = `${currentDate.getMonth() + 1}`
+    }
+    const date = `${currentDate.getDate()}`
+    const year = `${currentDate.getFullYear()}`
 
-    const onChange = useCallback(
-        (value) => {
-            setValue(value);
-        },
-        [setValue],
-    );
+    const [startdate, setStartDate] = useState(`${year}-${month}-${date}`)
+    const [endDate, setEndDate] = useState(`${year}-${month}-${date}`)
 
     useEffect(() => {
         dispatch(getSpotsReviews(spotId));
         dispatch(getASpot(spotId));
     }, [dispatch, spotId])
+
+    const onSubmit = async (e) => {
+        e.preventDefault()
+
+        const payload = {
+            "spotId": spot.id,
+            "startDate": startdate,
+            "endDate": endDate
+        }
+
+        await dispatch(createBooking(payload))
+        await dispatch(loadBookings())
+        await dispatch(loadUsersBookings())
+    }
+
+    let nights = ((new Date(endDate) - new Date(startdate)) / 86400000)
+
+    console.log("nights: ", nights)
 
     return (
         <>
@@ -43,7 +67,7 @@ function NoUserSpotDetails() {
                                 <span className="spot-details-star">&#9733;</span>
                                 {!!spot.avgRating ? spot.avgRating.toFixed(2) : "0"} - {reviews.length} Reviews
                             </p>
-                            <p className="d2">{spot.city}, {spot.state ? `${spot.state}, ${spot.country}` : spot.country} </p>
+                            <p className="d2">{spot.city}, {spot.state ? `${spot.state}, ${spot.country} ` : spot.country} </p>
                         </div>
                         <div className='image-container'>
                             <div className='main-image-container'>
@@ -63,34 +87,54 @@ function NoUserSpotDetails() {
                                 <p className='spot-description'>{spot.description} </p>
                             </div>
                             <div className='bookings'>
-                                <MakeBooking />
-                                <div className='booking-description'>
-                                    <p><span className="price">${spot.price}</span> night</p>
-                                    <p className="spot-details-d1">
-                                        <span className="all-spots-star">&#9733;</span>
-                                        {!!spot.avgRating ? spot.avgRating.toFixed(2) : "0"} - {reviews.length} Reviews
-                                    </p>
-                                </div>
-                                <div className='calculation'>
-                                    <div className='left'>
-                                        <p className='b-p'> ${spot.price} x 5 nights</p>
-                                        <p className='b-p'>Cleaning Fee</p>
-                                        <p className='b-p'>Service Fee</p>
+                                <form onSubmit={onSubmit}>
+                                    <div className="CheckIn">
+                                        <label>
+                                            Check In
+                                            <input
+                                                type={"date"}
+                                                value={startdate}
+                                                min={`${year}-${month}-${date}`}
+                                                onChange={(e) => setStartDate(e.target.value)}
+                                            />
+                                        </label>
                                     </div>
-                                    <div className='right'>
-                                        <p className='b-p'> ${spot.price * 5} </p>
-                                        <p className='b-p'>$150</p>
-                                        <p className='b-p'>$260</p>
+                                    <div className="CheckOut">
+                                        <label>
+                                            Check Out
+                                            <input
+                                                type={"date"}
+                                                value={endDate}
+                                                min={`${year}-${month}-${date}`}
+                                                onChange={(e) => setEndDate(e.target.value)}
+                                            />
+                                        </label>
                                     </div>
-                                </div>
-                                <div className='total'>
-                                    <div>
-                                        <p>Total before taxes</p>
+                                    <div className='booking-description'>
+                                        <p><span className="price">${spot.price}</span> night</p>
+                                        <p className="spot-details-d1">
+                                            <span className="all-spots-star">&#9733;</span>
+                                            {!!spot.avgRating ? spot.avgRating.toFixed(2) : "0"} - {reviews.length} Reviews
+                                        </p>
                                     </div>
-                                    <div>
-                                        <p>${spot.price * 5 + 150 + 260}</p>
+                                    <div className='calculation'>
+                                        <div className='left'>
+                                            <p className='b-p'> ${spot.price} x {nights} nights</p>
+                                        </div>
+                                        <div className='right'>
+                                            <p className='b-p'> ${spot.price * nights} </p>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div className='total'>
+                                        <div>
+                                            <p>Total</p>
+                                        </div>
+                                        <div>
+                                            <p>${spot.price * nights}</p>
+                                        </div>
+                                    </div>
+                                    <button type='submit' className='submitBooking'>Book</button>
+                                </form>
                             </div>
                         </div>
                         <div className='reviews-container'>
