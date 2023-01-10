@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getSpotsReviews } from '../../store/ReviewsReducer';
 import { getASpot } from '../../store/spotsReducer';
 import AddReviewModal from '../AddReview/AddReviewModal';
+import MakeBooking from '../Bookings/MakeBookings';
 import './SpotDetails.css'
 
 function NoUserSpotDetails() {
@@ -16,6 +17,15 @@ function NoUserSpotDetails() {
 
     const allReviews = useSelector((state) => (state.reviews))
     const reviews = Object.values(allReviews);
+
+    const [value, setValue] = useState();
+
+    const onChange = useCallback(
+        (value) => {
+            setValue(value);
+        },
+        [setValue],
+    );
 
     useEffect(() => {
         dispatch(getSpotsReviews(spotId));
@@ -53,6 +63,7 @@ function NoUserSpotDetails() {
                                 <p className='spot-description'>{spot.description} </p>
                             </div>
                             <div className='bookings'>
+                                <MakeBooking />
                                 <div className='booking-description'>
                                     <p><span className="price">${spot.price}</span> night</p>
                                     <p className="spot-details-d1">
