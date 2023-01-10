@@ -47,7 +47,7 @@ export const loadBookings = (payload) => async (dispatch) => {
 };
 
 export const createBooking = payload => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${payload.spotId}/booking}`, {
+    const response = await csrfFetch(`/api/spots/${payload.spotId}/bookings`, {
         method: "POST",
         body: JSON.stringify({ payload }),
     });
@@ -75,7 +75,7 @@ export const updateBooking = payload => async (dispatch) => {
 };
 
 export const removeBooking = payload => async (dispatch) => {
-    const response = await csrfFetch(`/api/bookings/${payload}`, {
+    const response = await csrfFetch(`/api/bookings/${payload.bookingId}`, {
         method: "DELETE",
         body: JSON.stringify({ payload }),
     });

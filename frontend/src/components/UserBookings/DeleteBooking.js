@@ -1,7 +1,9 @@
+import { useDispatch } from "react-redux"
 import { removeBooking } from "../../store/bookings"
 import { loadUsersBookings } from "../../store/sessionBooking"
 
 function DeleteBooking({ id, setShowModal }) {
+    const dispatch = useDispatch()
 
     const payload = {
         "bookingId": id
@@ -9,9 +11,8 @@ function DeleteBooking({ id, setShowModal }) {
 
     const deleteBooking = async () => {
 
-        // await dispatch(removeBooking(payload))
-        // await dispatch(loadUsersBookings())
-        alert("Deleted your booking")
+        await dispatch(removeBooking(payload))
+        await dispatch(loadUsersBookings())
         setShowModal(false)
     }
 

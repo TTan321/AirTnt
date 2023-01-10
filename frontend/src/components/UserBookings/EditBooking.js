@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux"
 import { loadBookings, updateBooking } from "../../store/bookings"
 import { loadUsersBookings } from "../../store/sessionBooking"
 
-function EditBooking({ id, booking, setShowModal }) {
+function EditBooking({ booking, setShowModal }) {
     const dispatch = useDispatch();
 
     let currentDate = new Date();
@@ -30,14 +30,14 @@ function EditBooking({ id, booking, setShowModal }) {
             "endDate": checkOut
         }
 
+        setShowModal(false)
         await dispatch(updateBooking(payload))
         await dispatch(loadUsersBookings())
         await dispatch(loadBookings())
-        setShowModal(false)
     }
 
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={(e) => onSubmit(e)}>
             <div>
                 <label>
                     Check in

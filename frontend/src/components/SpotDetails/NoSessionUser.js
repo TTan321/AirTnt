@@ -5,8 +5,8 @@ import { getSpotsReviews } from '../../store/ReviewsReducer';
 import { getASpot } from '../../store/spotsReducer';
 import AddReviewModal from '../AddReview/AddReviewModal';
 import { createBooking, loadBookings } from '../../store/bookings';
-import './SpotDetails.css'
 import { loadUsersBookings } from '../../store/sessionBooking';
+import './SpotDetails.css'
 
 function NoUserSpotDetails() {
     const dispatch = useDispatch();
@@ -87,35 +87,37 @@ function NoUserSpotDetails() {
                                 <p className='spot-description'>{spot.description} </p>
                             </div>
                             <div className='bookings'>
-                                <form onSubmit={onSubmit}>
-                                    <div className="CheckIn">
-                                        <label>
-                                            Check In
-                                            <input
-                                                type={"date"}
-                                                value={startdate}
-                                                min={`${year}-${month}-${date}`}
-                                                onChange={(e) => setStartDate(e.target.value)}
-                                            />
-                                        </label>
-                                    </div>
-                                    <div className="CheckOut">
-                                        <label>
-                                            Check Out
-                                            <input
-                                                type={"date"}
-                                                value={endDate}
-                                                min={`${year}-${month}-${date}`}
-                                                onChange={(e) => setEndDate(e.target.value)}
-                                            />
-                                        </label>
-                                    </div>
+                                <form onSubmit={onSubmit} className="bookingForm">
                                     <div className='booking-description'>
                                         <p><span className="price">${spot.price}</span> night</p>
                                         <p className="spot-details-d1">
                                             <span className="all-spots-star">&#9733;</span>
                                             {!!spot.avgRating ? spot.avgRating.toFixed(2) : "0"} - {reviews.length} Reviews
                                         </p>
+                                    </div>
+                                    <div className='calendar'>
+                                        <div className="CheckIn">
+                                            <span style={{ paddingRight: '20px' }}>
+                                                Check In:
+                                            </span>
+                                            <input
+                                                type={"date"}
+                                                value={startdate}
+                                                min={`${year}-${month}-${date}`}
+                                                onChange={(e) => setStartDate(e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="CheckOut">
+                                            <span style={{ paddingRight: '8px' }}>
+                                                Check Out:
+                                            </span>
+                                            <input
+                                                type={"date"}
+                                                value={endDate}
+                                                min={`${year}-${month}-${date}`}
+                                                onChange={(e) => setEndDate(e.target.value)}
+                                            />
+                                        </div>
                                     </div>
                                     <div className='calculation'>
                                         <div className='left'>
