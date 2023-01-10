@@ -133,7 +133,10 @@ function NoUserSpotDetails() {
                                             <p>${spot.price * nights}</p>
                                         </div>
                                     </div>
-                                    <button type='submit' className='submitBooking'>Book</button>
+                                    {
+                                        user && user.id !== spot.ownerId &&
+                                        <button type='submit' className='submitBooking'>Book</button>
+                                    }
                                 </form>
                             </div>
                         </div>
