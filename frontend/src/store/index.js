@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import bookingReducer from './bookings';
 import reviewsReducer from './ReviewsReducer';
 import sessionReducer from './session';
 import spotsReducer from './spotsReducer';
@@ -7,7 +8,8 @@ import spotsReducer from './spotsReducer';
 const rootReducer = combineReducers({
   session: sessionReducer,
   spots: spotsReducer,
-  reviews: reviewsReducer
+  reviews: reviewsReducer,
+  bookings: bookingReducer
 });
 
 let enhancer;
