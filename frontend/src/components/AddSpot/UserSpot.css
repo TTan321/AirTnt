@@ -44,7 +44,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    column-gap: 15px;
+    gap: 15px;
     padding: 0 5%;
     padding-top: 2%;
 }
@@ -121,6 +121,7 @@
     height: 15%;
     width: 100%;
     gap: 5px;
+    padding-bottom: 10px;
 }
 
 .edit {

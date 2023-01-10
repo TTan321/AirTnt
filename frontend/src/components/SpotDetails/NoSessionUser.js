@@ -54,8 +54,6 @@ function NoUserSpotDetails() {
 
     let nights = ((new Date(endDate) - new Date(startdate)) / 86400000)
 
-    console.log("nights: ", nights)
-
     return (
         <>
             {spot && reviews && (

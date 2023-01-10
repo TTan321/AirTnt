@@ -17,20 +17,28 @@ function UserBookings() {
     }, [dispatch])
 
     return bookingsArr.length > 0 && (
-        <div>
-            <h1 style={{ paddingTop: "100px" }}>User BOOKINGS</h1>
-            <div>
+        <div className="user-spots-page-container">
+            <h1 style={{ paddingTop: "10px" }}>User BOOKINGS</h1>
+            <div className="user-spots-container">
                 {bookingsArr.map(booking => (
-                    <div key={booking.id}>
-                        <div>
-                            {booking.Spot.name}
-                            <img style={{ height: "350px", width: "300px" }} src={booking.Spot.previewImage} alt={"Spot"} />
-                            {booking.Spot.city} {booking.Spot.state}
-                            {booking.Spot.price} a night
-                            Check in {booking.startDate.slice(5, -14)}-{booking.startDate.slice(0, 4)}
-                            Check Out {booking.endDate.slice(5, -14)}-{booking.startDate.slice(0, 4)}
+                    <div key={booking.id} className="listings-spot-container">
+                        <div className="listing-details">
+                            <p className="listing-name">
+                                {booking.Spot.name}
+                            </p>
+                            <img src={booking.Spot.previewImage} alt={"Spot"} className="listing-images" />
+                            <p className="l-p"><span className="edit-location">{booking.Spot.city}, {booking.Spot.state ? booking.Spot.state : booking.Spot.country} </span></p>
+                            <p className="l-p"><span className="listing-price">${booking.Spot.price} </span>a night </p>
+                            <div style={{ paddingTop: "10px", display: "flex", flexDirection: "column", fontSize: "14px" }}>
+                                <span>
+                                    <span style={{ fontWeight: "bold" }}>Check in:</span> {booking.startDate.slice(5, -14)}-{booking.startDate.slice(0, 4)}
+                                </span>
+                                <span>
+                                    <span style={{ fontWeight: "bold" }}>Check Out:</span> {booking.endDate.slice(5, -14)}-{booking.startDate.slice(0, 4)}
+                                </span>
+                            </div>
                         </div>
-                        <div>
+                        <div className="buttons-container">
                             <EditBookingModal id={booking.id} booking={booking} />
                             <DeleteBookingModal id={booking.id} />
                         </div>

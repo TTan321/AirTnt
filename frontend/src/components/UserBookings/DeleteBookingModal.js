@@ -8,7 +8,7 @@ function DeleteBookingModal({ id }) {
 
     return (
         <>
-            <button className="Add-Review" onClick={() => setShowModal(true)}>Cancel Booking</button>
+            <button className="delete" onClick={() => setShowModal(true)}>Cancel Booking</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <DeleteBooking setShowModal={setShowModal} id={id} />
