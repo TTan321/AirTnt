@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getSpotsReviews } from '../../store/ReviewsReducer';
-import { getASpot } from '../../store/spotsReducer';
+import { getAllSpots } from '../../store/spotsReducer';
 import AddReviewModal from '../AddReview/AddReviewModal';
 import { createBooking, loadBookings } from '../../store/bookings';
 import { loadUsersBookings } from '../../store/sessionBooking';
@@ -12,7 +12,9 @@ function NoUserSpotDetails() {
     const dispatch = useDispatch();
     const { spotId } = useParams();
     const spotObject = useSelector((state) => (state.spots));
-    const spot = Object.values(spotObject)[0];
+    const spot = Object.values(spotObject).find(spot => spot.id === +spotId);
+
+    console.log("Spot Obj: ", spotObject)
 
     const user = useSelector(state => state.session.user)
 
@@ -35,7 +37,7 @@ function NoUserSpotDetails() {
 
     useEffect(() => {
         dispatch(getSpotsReviews(spotId));
-        dispatch(getASpot(spotId));
+        dispatch(getAllSpots());
     }, [dispatch, spotId])
 
     const onSubmit = async (e) => {
