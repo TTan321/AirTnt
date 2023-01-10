@@ -37,7 +37,6 @@ export const deleteReview = (review) => {
 export const getUserReviews = () => async (dispatch) => {
     const response = await csrfFetch(`/api/reviews/current`)
     const data = await response.json();
-    console.log("REVIEWS DATA: ", data)
     dispatch(loadUserReviews(data));
     return data;
 };
@@ -45,14 +44,12 @@ export const getUserReviews = () => async (dispatch) => {
 export const getSpotsReviews = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
     const data = await response.json();
-    console.log("REVIEWS DATA: ", data)
     dispatch(loadReviews(data));
     return data;
 };
 
 export const addAReview = (newReview) => async (dispatch) => {
     const { spotId, review, stars } = newReview;
-    console.log("ABOUT TO ADD NEW REVIEW")
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: "POST",
         body: JSON.stringify({
@@ -61,19 +58,15 @@ export const addAReview = (newReview) => async (dispatch) => {
         }),
     })
     const data = await response.json();
-    console.log("NEW REVIEW: ", data)
     dispatch(addReview(data));
     return data;
 }
 
 export const deleteAReview = reviewToBeDeleted => async (dispatch) => {
-    console.log("PARAM IS: ", typeof reviewToBeDeleted, reviewToBeDeleted)
-    console.log("ABOUT TO DELETE REVIEW")
     const response = await csrfFetch(`/api/reviews/${reviewToBeDeleted}`, {
         method: "DELETE",
     })
     const data = await response.json();
-    console.log("DELETED REVIEW ", data)
     dispatch(deleteReview(data));
     return data;
 }
@@ -93,13 +86,9 @@ const reviewsReducer = (state = initialState, action) => {
             return newState;
         }
         case ADD_REVIEW: {
-            console.log("case ADD REVIEW")
-            console.log("PREVIOUS STATE - state: ", state)
-            console.log("action.review: ", action.review)
             const newReview = {};
             newReview[action.review.id] = { ...action.review }
             const newState = { ...state, ...newReview }
-            console.log("newState: ", newState)
             return newState;
         }
         case DELETE_REVIEW: {

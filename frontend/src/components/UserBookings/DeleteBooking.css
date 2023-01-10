@@ -1,0 +1,21 @@
+.DeleteBooking {
+    height: 100px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.deleteText {
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 15px;
+}
+
+.DeleteButtons {
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    row-gap: 5px;
+    padding-top: 10px;
+}

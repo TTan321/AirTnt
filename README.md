@@ -24,8 +24,53 @@ AirTnt is built with:
 ## Features of AirTnt
 ### Home Page of AirTnt
 * Displays all the spots created for AirTnt
-* Has a navigation bar for returning to home page, button for creating a spot, button that opens menu for logging and signning up
-![Home page]()
+* Has a navigation bar for returning to home page, button for creating a spot, button that opens menu for logging in or signing up
+![Home page](https://github.com/TTan321/API-project/blob/main/backend/assets/AirTnt%20homepage.PNG)
+
+### Spot Details Page
+* Displays details of a spot
+* User can add a review if user is logged in and not the owner of the spot
+![Spot Details](https://github.com/TTan321/API-project/blob/main/backend/assets/Spots-Detail-page.PNG)
+
+### Add a Review Form
+* Users review will be added to the bottom of the form after submission
+![Add Review](https://github.com/TTan321/API-project/blob/main/backend/assets/add-review.PNG)
+
+### User's Reviews Page
+* All users submitted reviews displayed here
+* Reviews can be deleted here
+![User Reviews](https://github.com/TTan321/API-project/blob/main/backend/assets/users-reviews-page.PNG)
+
+### User's Spots Page
+* All user's created spots displayed here
+* Spots can be created, edited, and or deleted here
+![User Spots](https://github.com/TTan321/API-project/blob/main/backend/assets/users-listings0page.PNG)
+
+## Current Features of AirTnt
+### Spots
+* Create a spot (listing) after logging in or creating an user and filling out the add spot form. 
+* Get all spots, which are all the spots displayed in the homepage.
+* Get a spot, which displays the details of a spot after clicking on one in the homepage.
+* Edit a spot, by altering the details of spot using a form.
+* Delete a spot a user has previously made. 
+
+### Reviews
+* Create a review, if the user is not the owner of a spot, then the user can add a review for that spot.
+* Get a spot's reviews, spot's detail page will display all the reviews posted for that spot.
+* Get a user's reviews, user's reviews page will display all the user's reviews.
+* Delete a review, in the user's reviews page, the user can delete a previously written review. 
+
+## Future Features of AirTnt
+* Adding multiple images for a specific spot
+* Create bookings for a specific spot
+
+## Run AirTnt Locally
+* Clone the main repository of AirTnt
+* Open the project in the root directory and run the command npm install and npm install -D to install the required packages.
+* Create a .env file similar to the .env example located in the backend folder. 
+* Create the database in the backend by running npx dotenv sequelize db:migrate and then npx dotenv sequelize db:seed:all
+* Then enter the command npm start in two terminals, one for the backend and one for the frontend. 
+
 
 
 
