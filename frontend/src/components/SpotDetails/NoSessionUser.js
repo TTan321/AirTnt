@@ -14,10 +14,10 @@ function NoUserSpotDetails() {
     const spotObject = useSelector((state) => (state.spots));
     const spot = Object.values(spotObject).find(spot => spot.id === +spotId);
 
-    console.log("Spot Obj: ", spotObject)
 
     const user = useSelector(state => state.session.user)
-
+    const bookings = useSelector(state => state.bookings)
+    const spotsBookingsArr = Object.values(bookings)
     const allReviews = useSelector((state) => (state.reviews))
     const reviews = Object.values(allReviews);
 
@@ -38,6 +38,7 @@ function NoUserSpotDetails() {
     useEffect(() => {
         dispatch(getSpotsReviews(spotId));
         dispatch(getAllSpots());
+        dispatch(loadBookings(spotId))
     }, [dispatch, spotId])
 
     const onSubmit = async (e) => {
@@ -49,9 +50,13 @@ function NoUserSpotDetails() {
             "endDate": endDate
         }
 
+        // alert('Your reservation has been booked.')
         await dispatch(createBooking(payload))
         await dispatch(loadBookings())
         await dispatch(loadUsersBookings())
+
+        setStartDate(`yyyy-mm-dd`)
+        setEndDate(`yyyy-mm-dd`)
     }
 
     let nights = ((new Date(endDate) - new Date(startdate)) / 86400000)

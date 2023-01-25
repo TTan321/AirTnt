@@ -31,7 +31,6 @@ function SignUpForm({ setShowSignUp }) {
             });
 
         if (newUser) {
-            console.log("Sign up form is now closing")
             setShowSignUp(false)
         }
     };

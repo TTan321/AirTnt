@@ -110,7 +110,6 @@ export const createSpot = spot => async (dispatch) => {
 // UPDATE SPOT THUNK
 export const updateSpot = spot => async (dispatch) => {
     const { name, address, city, state, country, lat, lng, description, price, ownerId, previewImageUrl, imageId } = spot;
-    console.log(`About to UPDATE spot with id ${spot.id} to server`)
     // const deleteImageRes = await csrfFetch(`/api/images/${imageId}`, {
     //     method: "Delete",
     // });
@@ -121,11 +120,8 @@ export const updateSpot = spot => async (dispatch) => {
         }),
     });
     if (editSpotResponse.ok) {
-        console.log("Preview Image HAS BEEN DELETED")
         // const deletedImageData = await deleteImageRes.json();
         const editSpotData = await editSpotResponse.json();
-        console.log("DATA  ",)
-        console.log("SPOT HAS BEEN CREATED")
         // const imageData = await dispatch(createImage({ ...editSpotData, previewImageUrl }))
         dispatch(editSpot({ ...editSpotData }));
         return ({ ...editSpotData });

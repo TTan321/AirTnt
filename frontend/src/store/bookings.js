@@ -38,7 +38,7 @@ const deleteBooking = id => {
 
 // thunk
 export const loadBookings = (payload) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${payload.spotId}/bookings`);
+    const response = await csrfFetch(`/api/spots/${payload}/bookings`);
     if (response.ok) {
         const data = await response.json();
         dispatch(getBookings(data.Bookings))
@@ -55,6 +55,9 @@ export const createBooking = payload => async (dispatch) => {
         const data = await response.json();
         dispatch(addBooking({ data }));
         return ({ data });
+    } else {
+        const data = await response.body.json()
+        return data;
     }
 };
 
@@ -70,7 +73,6 @@ export const updateBooking = payload => async (dispatch) => {
     }
     else {
         const data = await response.json()
-        console.log(data)
     }
 };
 
@@ -86,7 +88,6 @@ export const removeBooking = payload => async (dispatch) => {
     }
     else {
         const data = await response.json()
-        console.log(data)
     }
 };
 
