@@ -26,7 +26,6 @@ export const loadImages = () => async (dispatch) => {
 };
 
 export const createImage = image => async (dispatch) => {
-    console.log("ABOUT TO POST IMAGE TO SERVER")
     const response = await csrfFetch("/api/spots/:spotId/images", {
         method: "POST",
         body: JSON.stringify(
@@ -35,7 +34,6 @@ export const createImage = image => async (dispatch) => {
     });
     const data = await response.json();
     dispatch(addSpot(data));
-    console.log("IMAGE HAS BEEN ADDED")
     return response;
 };
 

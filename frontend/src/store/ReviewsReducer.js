@@ -81,7 +81,6 @@ export const updateReview = (payload) => async (dispatch) => {
         }),
     })
     const data = await response.json();
-    console.log("Edited Review Data: ", data)
     dispatch(editReview(data));
     return data;
 }
@@ -116,12 +115,8 @@ const reviewsReducer = (state = initialState, action) => {
             return newState;
         }
         case EDIT_REVIEW: {
-            console.log("action.review: ", action.review)
             const newState = { ...state };
-            console.log("newstate: ", newState)
-            console.log("newstate.id b4: ", newState[action.review.id])
             newState[action.review.id] = action.review
-            console.log("newstate.id: ", newState[action.review.id])
             return newState;
         }
         case DELETE_REVIEW: {

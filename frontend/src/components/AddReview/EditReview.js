@@ -14,7 +14,6 @@ function EditReview({ setShowModal, id, review, stars, spotId }) {
     const [rating, setRating] = useState(stars);
     const [errors, setErrors] = useState([]);
 
-    console.log("id: ", id)
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -31,7 +30,6 @@ function EditReview({ setShowModal, id, review, stars, spotId }) {
             "stars": rating
         }
 
-        console.log(errors.length)
         if (review.length > 29) {
             await dispatch(updateReview(payload));
             await dispatch(getUserReviews())

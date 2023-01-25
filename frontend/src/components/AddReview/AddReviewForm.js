@@ -30,7 +30,6 @@ function AddReview({ setShowModal }) {
             review, stars, spotId
         }
 
-        console.log(errors.length)
         if (review.length > 29) {
             await dispatch(addAReview(payload));
             await dispatch(getSpotsReviews(payload.spotId));

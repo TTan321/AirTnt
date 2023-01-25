@@ -12,9 +12,6 @@ function UserReviews() {
     const user = useSelector(state => state.session.user);
     const userReviews = useSelector(state => state.reviews);
     const reviewsArray = Object.values(userReviews);
-    // console.log("userReviews: ", reviewsArray[0].Images[0].url)
-    console.log("reviewsArray: ", reviewsArray)
-
 
     useEffect(() => {
         dispatch(getUserReviews())
