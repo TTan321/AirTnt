@@ -611,11 +611,12 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 
             if (booking.startDate.getFullYear() === startDate.getFullYear() && booking.endDate.getFullYear() === endDate.getFullYear()) {
                 if (bookingStartMonth === startDate.getMonth() + 1 || bookingEndMonth === startDate.getMonth() + 1) {
-                    for (let i = bookingStartDate; i <= bookingEndDate; i++) {
+                    for (let i = bookingStartDate; i < bookingEndDate; i++) {
                         let dateRange = [];
                         dateRange.push(i);
                         if (dateRange.includes(startDate.getDate() + 1) || dateRange.includes(endDate.getDate() + 1)) {
                             res.status(403);
+                            console.log('date problem line 619')
                             return res.json({
                                 "message": "Sorry, this spot is already booked for the specified dates",
                                 "statusCode": 403,
@@ -636,6 +637,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
         return res.json(newBooking);
     } else {
         res.status(403);
+        console.log('auth problem line 640')
         return res.json({
             "message": "Owner cannot book own spot.",
             "status": 403

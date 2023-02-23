@@ -47,21 +47,28 @@ function NoUserSpotDetails() {
 
         if (spotsBookingsArr.length) {
             let errorArr = []
+            console.log('start thru end: ', `${startdate} - ${endDate}`)
             for (let i = 0; i < spotsBookingsArr.length; i++) {
                 let booking = spotsBookingsArr[i];
+                let bookingStartDate = `${booking.startDate.slice(5, 7)}-${booking.startDate.slice(8, 10)}-${booking.startDate.slice(0, 4)}`
+                let bookingEndDate = `${booking.endDate.slice(5, 7)}-${booking.endDate.slice(8, 10)}-${booking.endDate.slice(0, 4)}`
 
-                if (startdate >= booking.startDate && startdate <= booking.endDate) {
-                    errorArr.push(`The dates ${booking.startDate} thru ${booking.endDate} has already been booked.`)
+                let modStartDate = `${startdate.slice(5)}-${startdate.slice(0, 4)}`
+                let modEndDate = `${endDate.slice(5)}-${endDate.slice(0, 4)}`
+
+                if (modStartDate >= bookingStartDate && modStartDate < bookingEndDate) {
+                    console.log('if')
+                    errorArr.push(`The dates ${bookingStartDate} thru ${bookingEndDate} has already been booked.`)
                     setErrors(errorArr)
                     return
-                } else if (endDate >= booking.startDate && endDate <= booking.endDate) {
-                    errorArr.push(`The dates ${booking.startDate} thru ${booking.endDate} has already been booked.`)
+                } else if (modEndDate > bookingStartDate && modEndDate <= bookingEndDate) {
+                    console.log('else if')
+                    errorArr.push(`The dates ${bookingStartDate} thru ${bookingEndDate} has already been booked.`)
                     setErrors(errorArr)
                     return
                 }
             }
         }
-
 
         const payload = {
             "spotId": spot.id,
@@ -69,13 +76,16 @@ function NoUserSpotDetails() {
             "endDate": endDate
         }
 
-        // alert('Your reservation has been booked.')
+
         await dispatch(createBooking(payload))
         await dispatch(loadBookings())
         await dispatch(loadUsersBookings())
 
+
         setStartDate(`yyyy-mm-dd`)
         setEndDate(`yyyy-mm-dd`)
+        setErrors([])
+        alert('Your reservation has been booked.')
     }
 
     let nights = ((new Date(endDate) - new Date(startdate)) / 86400000)
@@ -162,7 +172,7 @@ function NoUserSpotDetails() {
                                             {
                                                 errors.length && (
                                                     errors.map((error, idx) => (
-                                                        <div key={idx}>
+                                                        <div key={idx} id="bookingError">
                                                             {error}
                                                         </div>
                                                     ))
