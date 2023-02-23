@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { getSpotsReviews } from '../../store/ReviewsReducer';
 import { getAllSpots } from '../../store/spotsReducer';
 import AddReviewModal from '../AddReview/AddReviewModal';
 import { createBooking, loadBookings } from '../../store/bookings';
-import { loadUsersBookings } from '../../store/sessionBooking';
+// import { loadUsersBookings } from '../../store/sessionBooking';
 import './SpotDetails.css'
 
 function NoUserSpotDetails() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { spotId } = useParams();
     const spotObject = useSelector((state) => (state.spots));
     const spot = Object.values(spotObject).find(spot => spot.id === +spotId);
@@ -42,7 +43,7 @@ function NoUserSpotDetails() {
         dispatch(loadBookings(spotId))
     }, [dispatch, spotId])
 
-    const onSubmit = async (e) => {
+    const onSubmit = (e) => {
         e.preventDefault()
 
         if (spotsBookingsArr.length) {
@@ -76,17 +77,18 @@ function NoUserSpotDetails() {
             "endDate": endDate
         }
 
-        alert('Your reservation has been booked.')
-        setErrors([])
-        await dispatch(createBooking(payload))
-        await dispatch(loadBookings())
-        await dispatch(loadUsersBookings())
 
 
-        setStartDate(`yyyy-mm-dd`)
-        setEndDate(`yyyy-mm-dd`)
+        dispatch(createBooking(payload))
+        return history.push('/bookings')
+        // dispatch(loadBookings(spotId))
+        // dispatch(loadUsersBookings())
 
+        // setErrors([])
+        // setStartDate(`yyyy-mm-dd`)
+        // setEndDate(`yyyy-mm-dd`)
 
+        // return history.push('/bookings')
     }
 
     let nights = ((new Date(endDate) - new Date(startdate)) / 86400000)

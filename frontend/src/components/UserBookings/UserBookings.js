@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { useHistory } from "react-router-dom"
 import { loadUsersBookings } from "../../store/sessionBooking"
 import DeleteBookingModal from "./DeleteBookingModal"
 import EditBookingModal from "./EditBookingModal"
@@ -7,7 +8,8 @@ import EditBookingModal from "./EditBookingModal"
 
 
 function UserBookings() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const history = useHistory();
     const bookings = useSelector(state => state.userBookings)
     const bookingsArr = Object.values(bookings)
 
@@ -22,7 +24,7 @@ function UserBookings() {
             <div className="user-spots-container">
                 {bookingsArr.reverse().map(booking => (
                     <div key={booking.id} className="listings-spot-container">
-                        <div className="listing-details">
+                        <div className="listing-details" onClick={() => history.push(`/spots/${booking.Spot.id}`)}>
                             <p className="listing-name">
                                 {booking.Spot.name}
                             </p>
