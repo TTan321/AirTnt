@@ -5,7 +5,7 @@ import { getSpotsReviews } from '../../store/ReviewsReducer';
 import { getAllSpots } from '../../store/spotsReducer';
 import AddReviewModal from '../AddReview/AddReviewModal';
 import { createBooking, loadBookings } from '../../store/bookings';
-// import { loadUsersBookings } from '../../store/sessionBooking';
+import { loadUsersBookings } from '../../store/sessionBooking';
 import './SpotDetails.css'
 
 function NoUserSpotDetails() {
@@ -80,9 +80,9 @@ function NoUserSpotDetails() {
 
 
         dispatch(createBooking(payload))
+        dispatch(loadUsersBookings())
         return history.push('/bookings')
         // dispatch(loadBookings(spotId))
-        // dispatch(loadUsersBookings())
 
         // setErrors([])
         // setStartDate(`yyyy-mm-dd`)
