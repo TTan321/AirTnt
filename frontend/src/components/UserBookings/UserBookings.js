@@ -20,7 +20,7 @@ function UserBookings() {
         <div className="user-spots-page-container">
             <h1 style={{ padding: "10px 0", fontFamily: "sans-serif", borderBottom: "1px solid black" }}>Your Reservations</h1>
             <div className="user-spots-container">
-                {bookingsArr.map(booking => (
+                {bookingsArr.reverse().map(booking => (
                     <div key={booking.id} className="listings-spot-container">
                         <div className="listing-details">
                             <p className="listing-name">

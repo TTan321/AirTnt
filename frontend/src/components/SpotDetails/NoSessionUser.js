@@ -33,7 +33,8 @@ function NoUserSpotDetails() {
     const year = `${currentDate.getFullYear()}`
 
     const [startdate, setStartDate] = useState(`${year}-${month}-${date}`)
-    const [endDate, setEndDate] = useState(`${year}-${month}-${date}`)
+    const [endDate, setEndDate] = useState(`${year}-${month}-${currentDate.getDate() + 1}`)
+    const [errors, setErrors] = useState([])
 
     useEffect(() => {
         dispatch(getSpotsReviews(spotId));
@@ -44,22 +45,67 @@ function NoUserSpotDetails() {
     const onSubmit = async (e) => {
         e.preventDefault()
 
+        if (spotsBookingsArr.length) {
+            let errorArr = []
+            console.log('start thru end: ', `${startdate} - ${endDate}`)
+            for (let i = 0; i < spotsBookingsArr.length; i++) {
+                let booking = spotsBookingsArr[i];
+                let bookingStartDate = `${booking.startDate.slice(5, 7)}-${booking.startDate.slice(8, 10)}-${booking.startDate.slice(0, 4)}`
+                let bookingEndDate = `${booking.endDate.slice(5, 7)}-${booking.endDate.slice(8, 10)}-${booking.endDate.slice(0, 4)}`
+
+                let modStartDate = `${startdate.slice(5)}-${startdate.slice(0, 4)}`
+                let modEndDate = `${endDate.slice(5)}-${endDate.slice(0, 4)}`
+
+                if (modStartDate >= bookingStartDate && modStartDate < bookingEndDate) {
+                    console.log('if')
+                    errorArr.push(`The dates ${bookingStartDate} thru ${bookingEndDate} has already been booked.`)
+                    setErrors(errorArr)
+                    return
+                } else if (modEndDate > bookingStartDate && modEndDate <= bookingEndDate) {
+                    console.log('else if')
+                    errorArr.push(`The dates ${bookingStartDate} thru ${bookingEndDate} has already been booked.`)
+                    setErrors(errorArr)
+                    return
+                }
+            }
+        }
+
         const payload = {
             "spotId": spot.id,
             "startDate": startdate,
             "endDate": endDate
         }
 
-        // alert('Your reservation has been booked.')
+        alert('Your reservation has been booked.')
+        setErrors([])
         await dispatch(createBooking(payload))
         await dispatch(loadBookings())
         await dispatch(loadUsersBookings())
 
+
         setStartDate(`yyyy-mm-dd`)
         setEndDate(`yyyy-mm-dd`)
+
+
     }
 
     let nights = ((new Date(endDate) - new Date(startdate)) / 86400000)
+
+    const getNewMin = () => {
+        let newStartDate = new Date(startdate)
+
+        let month;
+        if (currentDate.getMonth() < 9) {
+            month = `0${newStartDate.getMonth() + 1}`
+        }
+        else {
+            month = `${newStartDate.getMonth() + 1}`
+        }
+        const date = `${newStartDate.getDate() + 1}`
+        const year = `${newStartDate.getFullYear()}`
+        // setEndDate(`${year}-${month}-${date}`)
+        return `${year}-${month}-${date}`
+    }
 
     return (
         <>
@@ -118,10 +164,21 @@ function NoUserSpotDetails() {
                                             </span>
                                             <input
                                                 type={"date"}
-                                                value={endDate}
-                                                min={`${year}-${month}-${date}`}
+                                                value={endDate > startdate ? endDate : getNewMin()}
+                                                min={getNewMin()}
                                                 onChange={(e) => setEndDate(e.target.value)}
                                             />
+                                        </div>
+                                        <div>
+                                            {
+                                                !!errors.length && (
+                                                    errors.map((error, idx) => (
+                                                        <div key={idx} id="bookingError">
+                                                            {error}
+                                                        </div>
+                                                    ))
+                                                )
+                                            }
                                         </div>
                                     </div>
                                     <div className='calculation'>
