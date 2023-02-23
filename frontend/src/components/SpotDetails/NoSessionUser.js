@@ -33,7 +33,8 @@ function NoUserSpotDetails() {
     const year = `${currentDate.getFullYear()}`
 
     const [startdate, setStartDate] = useState(`${year}-${month}-${date}`)
-    const [endDate, setEndDate] = useState(`${year}-${month}-${date}`)
+    const [endDate, setEndDate] = useState(`${year}-${month}-${currentDate.getDate() + 1}`)
+    const [errors, setErrors] = useState([])
 
     useEffect(() => {
         dispatch(getSpotsReviews(spotId));
@@ -43,6 +44,24 @@ function NoUserSpotDetails() {
 
     const onSubmit = async (e) => {
         e.preventDefault()
+
+        if (spotsBookingsArr.length) {
+            let errorArr = []
+            for (let i = 0; i < spotsBookingsArr.length; i++) {
+                let booking = spotsBookingsArr[i];
+
+                if (startdate >= booking.startDate && startdate <= booking.endDate) {
+                    errorArr.push(`The dates ${booking.startDate} thru ${booking.endDate} has already been booked.`)
+                    setErrors(errorArr)
+                    return
+                } else if (endDate >= booking.startDate && endDate <= booking.endDate) {
+                    errorArr.push(`The dates ${booking.startDate} thru ${booking.endDate} has already been booked.`)
+                    setErrors(errorArr)
+                    return
+                }
+            }
+        }
+
 
         const payload = {
             "spotId": spot.id,
@@ -60,6 +79,22 @@ function NoUserSpotDetails() {
     }
 
     let nights = ((new Date(endDate) - new Date(startdate)) / 86400000)
+
+    const getNewMin = () => {
+        let newStartDate = new Date(startdate)
+
+        let month;
+        if (currentDate.getMonth() < 9) {
+            month = `0${newStartDate.getMonth() + 1}`
+        }
+        else {
+            month = `${newStartDate.getMonth() + 1}`
+        }
+        const date = `${newStartDate.getDate() + 1}`
+        const year = `${newStartDate.getFullYear()}`
+        // setEndDate(`${year}-${month}-${date}`)
+        return `${year}-${month}-${date}`
+    }
 
     return (
         <>
@@ -118,10 +153,21 @@ function NoUserSpotDetails() {
                                             </span>
                                             <input
                                                 type={"date"}
-                                                value={endDate}
-                                                min={`${year}-${month}-${date}`}
+                                                value={endDate > startdate ? endDate : getNewMin()}
+                                                min={getNewMin()}
                                                 onChange={(e) => setEndDate(e.target.value)}
                                             />
+                                        </div>
+                                        <div>
+                                            {
+                                                errors.length && (
+                                                    errors.map((error, idx) => (
+                                                        <div key={idx}>
+                                                            {error}
+                                                        </div>
+                                                    ))
+                                                )
+                                            }
                                         </div>
                                     </div>
                                     <div className='calculation'>
