@@ -175,7 +175,6 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
     }
     else if (booking.userId !== req.user.id) {
         res.status(403);
-        console.log('else if (booking.userId !== req.user.id)')
         return res.json({
             "message": "Forbidden",
             "status": 403
@@ -195,7 +194,6 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
                 dateRange.push(i);
                 if (dateRange.includes(currentDate.getDate() + 1)) {
                     res.status(403);
-                    console.log('Date problem')
                     return res.json({
                         "message": "Bookings that have been started can't be deleted",
                         "statusCode": 403
