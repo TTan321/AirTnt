@@ -76,7 +76,8 @@ function NoUserSpotDetails() {
             "endDate": endDate
         }
 
-
+        alert('Your reservation has been booked.')
+        setErrors([])
         await dispatch(createBooking(payload))
         await dispatch(loadBookings())
         await dispatch(loadUsersBookings())
@@ -84,8 +85,8 @@ function NoUserSpotDetails() {
 
         setStartDate(`yyyy-mm-dd`)
         setEndDate(`yyyy-mm-dd`)
-        setErrors([])
-        alert('Your reservation has been booked.')
+
+
     }
 
     let nights = ((new Date(endDate) - new Date(startdate)) / 86400000)
@@ -170,7 +171,7 @@ function NoUserSpotDetails() {
                                         </div>
                                         <div>
                                             {
-                                                errors.length && (
+                                                !!errors.length && (
                                                     errors.map((error, idx) => (
                                                         <div key={idx} id="bookingError">
                                                             {error}
