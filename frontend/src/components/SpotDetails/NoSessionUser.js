@@ -23,18 +23,33 @@ function NoUserSpotDetails() {
     const reviews = Object.values(allReviews);
 
     let currentDate = new Date();
-    let month;
-    if (currentDate.getMonth() < 9) {
-        month = `0${currentDate.getMonth() + 1}`
-    }
-    else {
-        month = `${currentDate.getMonth() + 1}`
-    }
-    const date = `${currentDate.getDate()}`
-    const year = `${currentDate.getFullYear()}`
+    const nextDate = new Date(currentDate.getTime() + 86400000)
 
-    const [startdate, setStartDate] = useState(`${year}-${month}-${date}`)
-    const [endDate, setEndDate] = useState(`${year}-${month}-${currentDate.getDate() + 1}`)
+    const getDate = (dateObj) => {
+        let month;
+        if (dateObj.getMonth() < 9) {
+            month = `0${dateObj.getMonth() + 1}`
+        }
+        else {
+            month = `${dateObj.getMonth() + 1}`
+        }
+
+        let date;
+        if (dateObj.getDate() < 10) {
+            date = `0${dateObj.getDate()}`
+        } else {
+            date = `${dateObj.getDate()}`
+        }
+
+        let year = dateObj.getFullYear()
+
+        return `${year}-${month}-${date}`
+    }
+
+
+
+    const [startdate, setStartDate] = useState(getDate(currentDate))
+    const [endDate, setEndDate] = useState(getDate(nextDate))
     const [errors, setErrors] = useState([])
 
     useEffect(() => {
@@ -48,7 +63,7 @@ function NoUserSpotDetails() {
 
         if (spotsBookingsArr.length) {
             let errorArr = []
-            console.log('start thru end: ', `${startdate} - ${endDate}`)
+
             for (let i = 0; i < spotsBookingsArr.length; i++) {
                 let booking = spotsBookingsArr[i];
                 let bookingStartDate = `${booking.startDate.slice(5, 7)}-${booking.startDate.slice(8, 10)}-${booking.startDate.slice(0, 4)}`
@@ -57,13 +72,19 @@ function NoUserSpotDetails() {
                 let modStartDate = `${startdate.slice(5)}-${startdate.slice(0, 4)}`
                 let modEndDate = `${endDate.slice(5)}-${endDate.slice(0, 4)}`
 
+                if (startdate === endDate) {
+                    errorArr.push(`Start date and end date cannot be the same day.`)
+                    setErrors(errorArr)
+                    return
+                }
+
                 if (modStartDate >= bookingStartDate && modStartDate < bookingEndDate) {
-                    console.log('if')
+                    // console.log('if')
                     errorArr.push(`The dates ${bookingStartDate} thru ${bookingEndDate} has already been booked.`)
                     setErrors(errorArr)
                     return
                 } else if (modEndDate > bookingStartDate && modEndDate <= bookingEndDate) {
-                    console.log('else if')
+                    // console.log('else if')
                     errorArr.push(`The dates ${bookingStartDate} thru ${bookingEndDate} has already been booked.`)
                     setErrors(errorArr)
                     return
@@ -90,24 +111,34 @@ function NoUserSpotDetails() {
 
         // return history.push('/bookings')
     }
-
+    // console.log(`Enddate: ${endDate}       startdate: ${startdate}`)
     let nights = ((new Date(endDate) - new Date(startdate)) / 86400000)
 
-    const getNewMin = () => {
-        let newStartDate = new Date(startdate)
+    // const getNewMin = () => {
+    //     let currStartDate = new Date(startdate)
+    //     let newStartDate = new Date(currStartDate.getTime() + (86400000 * 2))
 
-        let month;
-        if (currentDate.getMonth() < 9) {
-            month = `0${newStartDate.getMonth() + 1}`
-        }
-        else {
-            month = `${newStartDate.getMonth() + 1}`
-        }
-        const date = `${newStartDate.getDate() + 1}`
-        const year = `${newStartDate.getFullYear()}`
-        // setEndDate(`${year}-${month}-${date}`)
-        return `${year}-${month}-${date}`
-    }
+    //     // console.log(`newStartDate ${newStartDate}`)
+
+    //     let newMonth;
+    //     if (currentDate.getMonth() < 9) {
+    //         newMonth = `0${newStartDate.getMonth() + 1}`
+    //     }
+    //     else {
+    //         newMonth = `${newStartDate.getMonth() + 1}`
+    //     }
+    //     let newDate;
+    //     if (newStartDate.getDate() < 10) {
+    //         newDate = `0${newStartDate.getDate()}`
+    //     } else {
+    //         newDate = `${newStartDate.getDate()}`
+    //     }
+
+    //     let newYear = `${newStartDate.getFullYear()}`
+    //     // setEndDate(`${year}-${month}-${date}`)
+    //     // console.log(`${newYear}-${newMonth}-${newDate}`)
+    //     return `${newYear}-${newMonth}-${newDate}`
+    // }
 
     return (
         <>
@@ -156,7 +187,7 @@ function NoUserSpotDetails() {
                                             <input
                                                 type={"date"}
                                                 value={startdate}
-                                                min={`${year}-${month}-${date}`}
+                                                min={getDate(currentDate)}
                                                 onChange={(e) => setStartDate(e.target.value)}
                                             />
                                         </div>
@@ -166,8 +197,8 @@ function NoUserSpotDetails() {
                                             </span>
                                             <input
                                                 type={"date"}
-                                                value={endDate > startdate ? endDate : getNewMin()}
-                                                min={getNewMin()}
+                                                value={endDate}
+                                                min={getDate(nextDate)}
                                                 onChange={(e) => setEndDate(e.target.value)}
                                             />
                                         </div>
