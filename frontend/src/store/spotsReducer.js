@@ -83,7 +83,7 @@ export const getAUsersSpots = () => async (dispatch) => {
 
 // CREATE A SPOT THUNK
 export const createSpot = spot => async (dispatch) => {
-    const { name, address, city, state, country, lat, lng, description, price, ownerId, previewImageUrl } = spot;
+    const { name, address, city, state, country, lat, lng, description, price, ownerId, image } = spot;
     const response = await csrfFetch("/api/spots", {
         method: "POST",
         body: JSON.stringify({
@@ -96,8 +96,11 @@ export const createSpot = spot => async (dispatch) => {
         const { id } = spotData;
         const imgResponse = await csrfFetch(`/api/spots/${id}/images`, {
             method: "POST",
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
             body: JSON.stringify({
-                "url": previewImageUrl
+                "image": image
             }),
         });
         const imageData = await imgResponse.json();

@@ -17,7 +17,8 @@ function AddSpotForm({ setShowModal }) {
     const [lng, setLng] = useState("");
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState("");
-    const [previewImageUrl, setPreviewImageUrl] = useState('');
+    // const [previewImageUrl, setPreviewImageUrl] = useState('');
+    const [image, setImage] = useState(null);
     const [ownerId, setOwnerId] = useState(sessionUser.id);
     const [errors, setErrors] = useState([]);
 
@@ -42,7 +43,7 @@ function AddSpotForm({ setShowModal }) {
         setErrors(validateErrors);
 
         const payload = {
-            name, address, city, country, state, lat, lng, description, price, ownerId, previewImageUrl
+            name, address, city, country, state, lat, lng, description, price, ownerId, image
         }
 
         if (name.length < 50) {
@@ -51,6 +52,11 @@ function AddSpotForm({ setShowModal }) {
             setShowModal(false);
         }
     }
+
+    const updateFile = (e) => {
+        const file = e.target.files[0];
+        if (file) setImage(file);
+    };
 
 
     return (
@@ -142,13 +148,17 @@ function AddSpotForm({ setShowModal }) {
                         </div>
                     </div>
                     <div>
-                        <input
+                        {/* <input
                             className='edit-spot-inputs'
                             type='text'
                             value={previewImageUrl}
                             placeholder="Image Url for Preview"
                             onChange={(e) => setPreviewImageUrl(e.target.value)}>
-                        </input>
+                        </input> */}
+                        <input
+                            type="file"
+                            onChange={updateFile}
+                        />
                     </div>
                     <div>
                         <textarea
