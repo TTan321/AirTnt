@@ -90,18 +90,19 @@ export const createSpot = spot => async (dispatch) => {
             name, address, city, state, country, lat, lng, description, price, ownerId
         }),
     });
+    let formData = new FormData();
+    formData.append("image", image)
 
     if (response.ok) {
         const spotData = await response.json();
-        const { id } = spotData;
+        const { id } = spotData
+
         const imgResponse = await csrfFetch(`/api/spots/${id}/images`, {
             method: "POST",
             headers: {
                 "Content-Type": "multipart/form-data",
             },
-            body: JSON.stringify({
-                "image": image
-            }),
+            body: formData,
         });
         const imageData = await imgResponse.json();
         dispatch(addSpot({ ...spotData, ...imageData }));

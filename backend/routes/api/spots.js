@@ -329,7 +329,6 @@ router.post('/', requireAuth, async (req, res) => {
 
 // Add image to a spot at the specific spodId
 router.post('/:spotId/images', requireAuth, singleMulterUpload("image"), async (req, res) => {
-    console.log('REQ File: ', req.files)
     const spot = await Spot.findByPk(req.params.spotId);
     if (!spot) {
         res.status(404);
@@ -355,10 +354,10 @@ router.post('/:spotId/images', requireAuth, singleMulterUpload("image"), async (
     };
 
     const usersId = req.user.id;
-    const url = await singlePublicFileUpload(req.file);
+    const image = await singlePublicFileUpload(req.file);
 
     const newImage = await Image.create({
-        url, previewImage: true, spotId: req.params.spotId, reviewId, userId: usersId
+        url: image, previewImage: true, spotId: req.params.spotId, reviewId, userId: usersId
     });
 
     res.status(200)
