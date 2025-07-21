@@ -50,7 +50,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    options.tablename = 'Bookings'
+    options.tablename = 'Users'
     return queryInterface.bulkDelete(options, {});
   }
 };
