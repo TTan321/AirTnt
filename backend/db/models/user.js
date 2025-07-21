@@ -106,6 +106,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
+      schema: process.env.SCHEMA,
       modelName: "User",
       defaultScope: {
         attributes: {
