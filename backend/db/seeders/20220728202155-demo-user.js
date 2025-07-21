@@ -8,8 +8,8 @@ if (process.env.NODE_ENV === 'production') {
 const bcrypt = require("bcryptjs");
 
 module.exports = {
-  options.tablename = 'Users';
   up: async (queryInterface, Sequelize) => {
+    options.tablename = 'Users';
     return queryInterface.bulkInsert(options, [
       {
         firstName: 'Demo',
