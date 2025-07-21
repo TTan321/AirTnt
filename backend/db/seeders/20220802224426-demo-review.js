@@ -6,8 +6,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 module.exports = {
+  options.tablename = 'Reviews'
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Reviews', [
+    await queryInterface.bulkInsert(options, [
       {
         review: 'This house was perfect for my group. A/C was clutch during my stay.',
         stars: 4,
