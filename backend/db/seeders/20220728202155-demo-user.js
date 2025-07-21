@@ -8,9 +8,9 @@ if (process.env.NODE_ENV === 'production') {
 const bcrypt = require("bcryptjs");
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  async up(queryInterface, Sequelize) {
     options.tablename = 'Users';
-    return queryInterface.bulkInsert(options, [
+    await queryInterface.bulkInsert(options, [
       {
         firstName: 'Demo',
         lastName: 'lition',
@@ -49,8 +49,8 @@ module.exports = {
     ], {});
   },
 
-  down: async (queryInterface, Sequelize) => {
+  async down(queryInterface, Sequelize) => {
     options.tablename = 'Users'
-    return queryInterface.bulkDelete(options);
+    await queryInterface.bulkDelete(options);
   }
 };
