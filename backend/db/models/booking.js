@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     endDate: DataTypes.DATE
   }, {
     sequelize,
+    schema: process.env.SCHEMA,
     modelName: 'Booking',
   });
   return Booking;

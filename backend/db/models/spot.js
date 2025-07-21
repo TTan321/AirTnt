@@ -73,6 +73,7 @@ module.exports = (sequelize, DataTypes) => {
       noTimes: { attributes: { exclude: ['createdAt', 'updatedAt'] } }
     },
     sequelize,
+    schema: process.env.SCHEMA,
     modelName: 'Spot',
   });
   return Spot;
