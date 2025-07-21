@@ -6,8 +6,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 module.exports = {
-  options.tablename = 'Images'
   async up(queryInterface, Sequelize) {
+    options.tablename = 'Images'
     await queryInterface.bulkInsert(options, [
       {
         url: 'https://images.pexels.com/photos/439391/pexels-photo-439391.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
@@ -118,6 +118,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Images');
+    options.tablename = 'Images'
+    await queryInterface.bulkDelete(options);
   }
 };
